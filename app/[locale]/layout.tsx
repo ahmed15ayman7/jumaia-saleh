@@ -42,10 +42,10 @@ export default function RootLayout({
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <head>
         <link rel="icon" href="/images/favicon.ico" />
-        <title>{locale === 'ar' ? 'محامي جمعيه صالح' : 'lawyer Jumaia Saleh'}</title>
-        <meta name="description" content={locale === 'ar' ? 'محامي جمعيه صالح' : 'lawyer Jumaia Saleh'} />
-        <meta name="keywords" content={locale === 'ar' ? 'محامي جمعيه صالح' : 'lawyer Jumaia Saleh'} />
-        <meta name="author" content={locale === 'ar' ? 'محامي جمعيه صالح' : 'lawyer Jumaia Saleh'} />
+        <title>{locale === 'ar' ? 'محامي جميعه صالح' : 'lawyer Jumaia Saleh'}</title>
+        <meta name="description" content={locale === 'ar' ? 'محامي جميعه صالح' : 'lawyer Jumaia Saleh'} />
+        <meta name="keywords" content={locale === 'ar' ? 'محامي جميعه صالح' : 'lawyer Jumaia Saleh'} />
+        <meta name="author" content={locale === 'ar' ? 'محامي جميعه صالح' : 'lawyer Jumaia Saleh'} />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />

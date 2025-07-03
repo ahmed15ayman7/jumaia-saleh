@@ -91,11 +91,12 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
             width: { xs: "280px", md: "35vw" },
             zIndex: 0,
             pointerEvents: "none",
-            display: { xs: "none", sm: "block" },
+            display: { xs: "none", sm: "flex" },
+            justifyContent: locale === "ar" ? "flex-end" : "flex-start",
           }}
         >
           {/* /images/daco4065171.svg: rotates if ar */}
-          <Box sx={{ position: "relative", width: { xs: "150px", md: "265px" }, height: "100%", ml: "auto" }}>
+          <Box sx={{ position: "relative", width: { xs: "150px", md: "265px" }, height: "100%", ml: locale === "en" ? "auto" : 0, mr: locale === "en" ? 0 : "auto" }}>
             <motion.img
             src="/images/daco4065171.svg"
             alt="Decorative image"
@@ -107,7 +108,8 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                 width: "65%",
                 height: "100%",
                 bottom: 0,
-                left: "35%",
+                left:locale === "en" ? "auto" : "35%",
+                right:locale === "en" ? 0 : "auto",
                 objectFit: "cover",
                 transform: locale === "ar" ? "rotateY(180deg)" : undefined,
                 transition: "transform 0.3s",
@@ -124,7 +126,8 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                 width: "100%",
                 height: "94%",
                 bottom: "0%",
-                left: 0,
+                left: locale === "ar" ? "auto" : 0,
+                right: locale === "ar" ? 0 : "auto",
                 objectFit: "cover",
               }}
             />
@@ -216,7 +219,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
               </Stack>
 
                       {/* Social media icons */}
-                      <Stack direction="row" spacing={1.5}>
+                      <Box sx={{ display: "flex", flexDirection: "row", gap: 1.5 }}>
                 {socialMedia.map((social, index) => (
                   <IconButton
                     key={index}
@@ -232,7 +235,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     {social.icon}
                   </IconButton>
                 ))}
-              </Stack>
+              </Box>
             </Stack>
 
             {/* Divider & bottom bar */}
@@ -262,7 +265,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                   />
                 </Typography>
 
-                <Stack direction="row" spacing={3}>
+                <Box sx={{ display: "flex", flexDirection: "row", gap: 3 }}>
                   <Typography
                     variant="body2"
                     sx={{
@@ -289,7 +292,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                       isAdmin={isAdmin}
                     />
                   </Typography>
-                </Stack>
+                </Box>
               </Box>
             </Stack>
           </Stack>

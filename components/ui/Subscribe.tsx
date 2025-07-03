@@ -52,7 +52,7 @@ export default function NewsletterSection({ locale, isAdmin }: { locale: string;
           position: "absolute",
           bottom: 0,
           right: 0,
-          width: "22vw",
+          width: "190px",
           height: "50vh",
           zIndex: 1,
           pointerEvents: "none",

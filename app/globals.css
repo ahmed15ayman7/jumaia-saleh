@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+} */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.bounce-h {
+  animation: bounce-h 0.5s infinite;
+  animation-direction: alternate;
+}
+
+@keyframes bounce-h {
+  0% {
+    transform: translateX(25%);
+  }
+  50% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(25%);
+  }
+}
+
+.bounce-h2 {
+  animation: bounce-h2 0.7s ease-in-out infinite;
+  animation-direction: alternate;
+}
+.bounce-h3 {
+  animation: bounce-h2 0.7s ease-in-out  infinite;
+  animation-delay: 0.35s;
+  animation-direction: alternate;
+}
+
+@keyframes bounce-h2 {
+  0% {
+    transform: translateX(10%);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(10%);
+  }
+}
+.animate-scale{
+  animation: scale2 1.5s ease-in-out infinite;
+}
+@keyframes scale2 {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

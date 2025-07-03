@@ -1,0 +1,144 @@
+{
+  "home": {
+    "hero": "GET FIERCE LEGAL SUPPORT",
+    "subtitle": "We Provide The Best",
+    "subtitle2": "Legal Services",
+    "subtitle3": "Possible",
+    "description": "We Provide The Best Legal Services Possible",
+    "button": "Contact Us"
+  },
+  "navbar": {
+    "home": "Home",
+    "about": "About Us",
+    "practice": "Practice Area",
+    "blog": "Blog",
+    "contact": "Contact Us",
+    "services": {
+      "real_estate": "Real Estate Issues",
+      "legal_rep": "Legal Representation",
+      "contracts": "Contracts and Agreements Issues",
+      "labour": "Labour Issues",
+      "criminal": "Criminal Cases",
+      "family": "Family Law",
+      "civil": "Civil Cases"
+    },
+    "language": "العربية"
+  },
+  "ourPracticeAreas": {
+    "title": "Practice Areas",
+    "description": "We offer the best legal services.",
+    "area1": "Real Estate Issues",
+    "area2": "Contracts and Agreements",
+    "area3": "Legal Disputes",
+    "area4": "Family Law",
+    "area5": "Labour Issues",
+    "area6": "Criminal Cases"
+  },
+  "advocates": {
+    "title": "Advocates",
+    "description": "We offer the best legal services.",
+    "casesSolved": "Cases Solved",
+    "happyClients": "Happy Clients",
+    "loreumIpsum": "Loreum Ipsum",
+    "workingHours": "Working Hours"
+  },
+  "ourExperience": {
+    "title": "Our Experience",
+    "description": "At Judicioworks Advocates and Associates, we bring years of experience across various practice areas, ensuring you receive informed, effective, and personalized legal solutions. Our seasoned team, led by Founder Rishabh Malhotra (Advocate), is dedicated to understanding your unique needs and providing tailored advice and representation. Trust in our experience to navigate the complexities of the legal landscape and advocate fiercely on your behalf.",
+    "letOurExperience": "Let Our Experience",
+    "beYourGuide": "Be Your Guide",
+    "yourFirstAid": "YOUR FIRST AID",
+    "contactUs": "Contact Us"
+  },
+  "ourLawyers": {
+    "title": "Our Lawyers",
+    "description": "We offer the best legal services.",
+    "lawyer1": {
+      "name": "Rishabh Malhotra",
+      "title": "Founder"
+    },
+    "lawyer2": {
+      "name": "Rishabh Malhotra",
+      "title": "Founder"
+    },
+    "lawyer3": {
+      "name": "Rishabh Malhotra",
+      "title": "Founder"
+    }
+  },
+  "testimonials": {
+    "0": {
+      "description": "At Judicioworks Advocates and Associates, we bring years of experience across various practice areas, ensuring you receive informed, effective, and personalized legal solutions. Our seasoned team, led by Founder Rishabh Malhotra (Advocate), is dedicated to understanding your unique needs and providing tailored advice and representation. Trust in our experience to navigate the complexities of the legal landscape and advocate fiercely on your behalf."
+    },
+    "title": "TESTIMONIALS",
+    "description": "What Our Clients Are Saying",
+    "description2": "Trust in our experience to navigate the complexities of the legal landscape and advocate fiercely on your behalf.",
+    "name": "Ritesh",
+    "name2": "CEO, Loreum Ipsum",
+    "button": "Contact Us",
+    "tag": "TESTIMONIALS",
+    "role": "CEO, Loreum Ipsum",
+    "description_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "description_2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "description_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "name_1": "John Doe",
+    "name_2": "Jane Doe",
+    "name_3": "John Doe",
+    "role_1": "CEO, Loreum Ipsum",
+    "role_2": "CEO, Loreum Ipsum",
+    "role_3": "CEO, Loreum Ipsum"
+  },
+  "legalAdvisors": {
+    "header": {
+      "get": "Get legal",
+      "advisors": "advisors",
+      "description": "GET LEGAL CONSULTANTS FROM OUR BEST LAWYERS"
+    },
+    "contact": {
+      "phoneNumber": "+97122558866"
+    },
+    "divider": "OR",
+    "sendUs": {
+      "header": {
+        "send": "SEND",
+        "us": " US ",
+        "inquiry": "YOUR INQUIRY"
+      },
+      "description": "SEND US YOUR INQUIRY, WE WILL RESPOND WITHIN MINUTES"
+    },
+    "cta": "Get legal advice"
+    },"subscribe": {
+    "title": "Subscribe to our newsletter!",
+    "description": "Our culture nurtures and strives for innovation, creativity, legal expertise and client focus. Every day we strengthen our entrepreneurial environment to be flexible and supportive, allowing our lawyers to...",
+    "input": "Enter your name",
+    "cta": "Subscribe Now"
+  },"footer": {
+    "title": "Start your defense and future consultants now",
+    "about": "At Saeed Al Sharmi, we understand the seriousness... (your about text)",
+    "links": {
+      "aboutus": "About us",
+      "services": "Services",
+      "blog": "Blog",
+      "contactus": "Contact us",
+      "support": "Support",
+      "knowledge": "Knowledge base",
+      "livechat": "Live chat",
+      "jobs": "Jobs",
+      "team": "Our team",
+      "leadership": "Leadership",
+      "privacy": "Privacy Policy",
+      "nordicchair": "Nordic Chair",
+      "kruzoaero": "Kruzo Aero",
+      "ergonomic": "Ergonomic"
+    },
+    "social": {
+      "facebook": "Facebook",
+      "instagram": "Instagram",
+      "twitter": "Twitter",
+      "linkedin": "LinkedIn"
+    },
+    "copyright": "Copyright 2022 sybexdesigns@gmail.com. All Rights Reserved.",
+    "terms": "Terms & Conditions",
+    "privacy": "Privacy Policy"
+  }
+  }

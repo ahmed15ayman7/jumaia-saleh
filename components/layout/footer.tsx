@@ -84,7 +84,8 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
         <Box
           sx={{
             position: "absolute",
-            right: 0,
+            right: locale === "ar" ? "auto" : 0,
+            left: locale === "ar" ? 0 : "auto",
             bottom: "0",
             height: { xs: "230px", md: "46vh" },
             width: { xs: "280px", md: "35vw" },

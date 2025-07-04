@@ -17,6 +17,7 @@ import { motion, useInView } from "framer-motion";
 import EditableText from "../EditableText";
 import { updateMessage } from "@/lib/updateMessage";
 import { toast } from "sonner";
+import Image from "next/image";
 
 const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
   const t = useTranslations("ourPracticeAreas");
@@ -62,6 +63,11 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
       titleKey: "area6",
       image: "/images/rectangle-3.jpg",
     },
+    {
+      id: 0,
+      titleKey: "",
+      image: "",
+    },
   ];
 
   const scrollByItem = (direction: "left" | "right") => {
@@ -81,11 +87,11 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
       ref={sectionRef}
       sx={{
         width: "100%",
-        bgcolor: "#F9F7F5",
-        py: { xs: 8, md: 5 },
+        // bgcolor: "#F9F7F5",
+        py: { xs: 3, md: 5 },
       }}
     >
-      <Container maxWidth="lg">
+      <Box sx={{maxWidth: "100vw",px: 0}} className="bg-[#F9F7F5]">
         <HeadSections
           title={t("title")}
           description={t("description")}
@@ -104,13 +110,17 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
             "&": {
               scrollbarWidth: "none",
             },
-            mt: 4,
+            mt: {xs: 2,md: "65px"},
+            width: "100vw",
+            // transform: "translateX(-10%)",
             display: "flex",
-            overflowX: "auto",
+            overflowX: "scroll",
             overflowY: "hidden",
             scrollBehavior: "smooth",
-            gap: 3,
+            gap: {xs: "10px",md: "40px"},
             pb: 1,
+            pl: {xs: "10px",md: "92px"},
+            pr: {xs: "10px",md: "0px"},
           }}
         >
           {practiceAreas.map((area, index) => (
@@ -118,8 +128,9 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
               key={area.id}
               sx={{
                 flex: "0 0 auto",
+                backgroundColor: "transparent",
                 width: {
-                  xs: "100%",
+                  xs: "80%",
                   sm: "calc(50% - 12px)",
                   md: "calc(25% - 18px)",
                 },
@@ -133,23 +144,30 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
                   boxShadow: "none",
                   position: "relative",
                   padding: 0,
+                  backgroundColor: "transparent",
                 }}
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.6, ease: "easeOut" }}
               >
-                <Card sx={{ height: { xs: "auto", md: 480 },borderRadius: "25px",border: "none",boxShadow: "none", position: "relative",py: 0 }} >
-                  <CardMedia
+                <Box sx={{ height: { xs: "200px", md: 419 },borderRadius: "25px",border: "none",boxShadow: "none", position: "relative",py: 0,backgroundColor: "transparent" }} >
+                  {area.id !== 0 ? (
+                    <Image src={area.image} alt={t(area.titleKey)} width={100} height={100} className="w-full h-full object-cover bg-transparent rounded-2xl border-white border" />
+                  ) : (
+                    <div className="w-full h-full bg-transparent rounded-2xl"></div>
+                  )}
+                  {/* <CardMedia
                     component="img"
                     image={area.image}
                     alt={t(area.titleKey)}
                     sx={{ height: "100%", objectFit: "cover" }}
-                  />
-                  <CardContent
+                  /> */}
+                 {area.id !== 0 && <Box
                     sx={{
                       position: "absolute",
                       bottom: 80,
                       width: "100%",
+                      backgroundColor: "transparent",
                       padding: 0,
                       textAlign: "center",
                     }}
@@ -158,10 +176,10 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
                       value={t(area.titleKey)}
                       onSave={(value: string) => onSave(`ourPracticeAreas.${area.titleKey}`, value)}
                       isAdmin={isAdmin}
-                      className="text-center text-2xl font-semibold text-[#cf9425]"
+                      className="text-center text-xl md:text-2xl font-semibold text-[#cf9425] bg-transparent"
                     />
-                  </CardContent>
-                </Card>
+                  </Box>}
+                </Box>
               </motion.div>
             </Box>
           ))}
@@ -196,7 +214,7 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
             <ChevronRightIcon />
           </IconButton>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 };

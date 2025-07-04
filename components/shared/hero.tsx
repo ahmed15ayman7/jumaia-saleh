@@ -43,7 +43,7 @@ const Hero = ({
         ref={ref}
         sx={{
           position: 'relative',
-          height: '100vh',
+          height: {xs: '70vh',md: '100vh'},
           overflow: 'hidden',
           background:
             'linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)',
@@ -55,11 +55,11 @@ const Hero = ({
         <Box
           sx={{
             position: 'absolute',
-            top: 0,
+            bottom: 0,
             right: locale === 'en' ? '0%' : 'auto',
             left: locale === 'en' ? 'auto' : '0%',
-            width: { xs: '60%', sm: '40%', md: '40%' },
-            height: '100vh',
+            width: { xs: '30%', sm: '40%', md: '40%' },
+            height: {xs: '70vh',md: '100vh'},
             zIndex: 1,
           }}
         >
@@ -69,13 +69,14 @@ const Hero = ({
             initial={{ opacity: 0, x: 80 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
+            className="md:h-[90vh] h-auto"
             style={{
               position: 'absolute',
               bottom: '0%',
               transform:
                 locale === 'ar' ? 'rotateY(180deg) translateX(-20%)' : 'translateX(20%)',
               width: '100%',
-              height: '90vh',
+
               objectFit: 'contain',
             }}
           />
@@ -85,17 +86,17 @@ const Hero = ({
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 1 }}
+            className="md:h-[90vh] h-auto"
             style={{
               position: 'absolute',
               bottom: '0%',
               left: locale === 'en' ? '0%' : '-20%',
               right: locale === 'en' ? '-20%' : '0%',
               width: '120%',
-              height: '80vh',
+              height: 'auto',
               objectFit: 'contain',
               zIndex: 8,
             }}
-            className="md:block hidden"
           />
         </Box>
 
@@ -113,22 +114,23 @@ const Hero = ({
         />
 
         {/* Main Content */}
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
+        <Box  sx={{ position: 'relative',height: "100%",maxWidth: "xl",mx: "auto", zIndex: 2, px: {xs: 4,md: 10},display: 'flex', flexDirection: 'column',  justifyContent: 'center',alignItems:{xs: "center",md: "flex-start"} }}>
           {/* Title */}
           <motion.div
             key={isInView ? 'hero-title-visible' : 'hero-title-hidden'}
             initial={{ opacity: 0, y: 40 }}
+            className="text-center md:text-left"
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Typography variant="subtitle1" sx={{ color: 'primary.main' }}>
+            <Typography variant="subtitle1" sx={{ color: 'primary.main',fontFamily: 'Manrope',textAlign: {xs: "center",md: "left"} }}>
               <EditableText
                 value={t('hero')}
                 onSave={(value: string) => {
                   onSave('home.hero', value);
                 }}
                 isAdmin={isAdmin}
-                className="text-4xl font-bold mb-4"
+                className="text-[.8rem] md:text-[1.5rem] font-bold mb-4"
               />
             </Typography>
           </motion.div>
@@ -138,6 +140,7 @@ const Hero = ({
             key={isInView ? 'hero-subtitle-visible' : 'hero-subtitle-hidden'}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
+            className="text-center md:text-left"
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <Box sx={{ mt: 2 }}>
@@ -147,7 +150,8 @@ const Hero = ({
                   color: 'white',
                   lineHeight: 1.3,
                   fontWeight: 600,
-                  fontSize: { xs: '2rem', sm: '2.5rem', md: '3.2rem' },
+                  fontSize: { xs: '1.5rem', sm: '2.5rem', md: '3.2rem' },
+                  textAlign: {xs: "center",md: "left"}
                 }}
               >
                 <EditableText
@@ -191,8 +195,9 @@ const Hero = ({
               sx={{
                 color: 'white',
                 maxWidth: '600px',
+                textAlign: {xs: "center",md: "left"},
                 mt: 3,
-                fontSize: { xs: '1rem', md: '1.125rem' },
+                fontSize: { xs: '.9rem', md: '1.125rem' },
               }}
             >
               <EditableText
@@ -224,7 +229,7 @@ const Hero = ({
                 px: 4,
                 borderRadius: '25px',
                 py: 1.5,
-                fontSize: { xs: '0.9rem', md: '1rem' },
+                fontSize: { xs: '0.8rem', md: '1rem' },
                 '&:hover': {
                   bgcolor: 'primary.dark',
                 },
@@ -252,7 +257,7 @@ const Hero = ({
                         )}
             </Button>
           </motion.div>
-        </Container>
+        </Box>
       </Box>
     </div>
   );

@@ -22,10 +22,13 @@ export default  function HomePage({params}: {params: Promise<{locale: string}>})
 
   return (
     <main className="w-full min-h-screen bg-primary text-gold">
-      <div className='w-full h-[90vh]'>
+      <div className="bg-[#F9F7F5]">
+
+      <div className='w-full md:h-[90vh] h-[60vh]'>
       <Hero isAdmin={!isAdmin} t={t} locale={locale} />
       </div>
       <PracticeAreas locale={locale} isAdmin={!isAdmin} />
+      </div>
       <Advocates locale={locale} isAdmin={!isAdmin} />
       <OurExperience locale={locale} isAdmin={!isAdmin} />
       <OurLawyers locale={locale} isAdmin={!isAdmin} />

@@ -51,8 +51,10 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
   };
 
   return (
-    <MUIBox ref={ref} className="w-full" sx={{ position: "relative", maxWidth: "101vw", height: { xs: "auto", md: "623px" }, mx: "auto" }}>
-      <MUIBox sx={{ width: "100%", height: "100%", position: "relative" }}>
+    <MUIBox ref={ref} className="w-full" sx={{ position: "relative", maxWidth: "101vw", height: { xs: "70vh", md: "90vh" }, mx: "auto" }}>
+      <MUIBox sx={{ width: "100%", height: "100%", position: "relative",pt: {xs: 4,md: "120px"} }} >
+        <MUIBox sx={{width: "100%",maxWidth: {xs: "70vw",md: "50vw"},mx: "auto",mb: {xs: 4,md: "70px"}}}>
+
         <HeadSections
           title={t("title")}
           description={t("description")}
@@ -61,13 +63,13 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
           keyDescription="advocates.description"
           isAdmin={isAdmin}
         />
-
-        <Grid
+        </MUIBox>
+        <MUIBox className="flex justify-center items-center">
+<Grid
           container
           spacing={2}
           className="rtl:space-x-reverse"
           sx={{
-            position: { xs: "relative", md: "absolute" },
             top: { md: "348px" },
             left: { md: "246px" },
             width: { xs: "100%", md: "941px" },
@@ -75,7 +77,7 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
           }}
         >
           {statistics.map((stat, index) => (
-            <Grid component="div" size={{ xs: 12, md: 3 }} key={index} sx={{ textAlign: "center" }}>
+            <Grid component="div" size={{ xs: 6,sm: 6, md: 3 }} key={index} sx={{ textAlign: "center",borderLeft:index !== 0 ? {xs: "none",md: "1px solid #bababa"} : "none",pl: {xs: 0,md: 4} }}>
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
@@ -84,10 +86,10 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
                 <Typography
                   variant="h3"
                   sx={{
-                    fontFamily: "'Cormorant_Garamond-Regular', Helvetica",
+                    fontFamily: "Cormorant Garamond",
                     fontWeight: 400,
                     color: "#0c1c19",
-                    fontSize: { xs: "48px", md: "80px" },
+                    fontSize: { xs: "3rem", md: "4rem" },
                     letterSpacing: "-1.92px",
                   }}
                 >
@@ -103,13 +105,9 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
             </Grid>
           ))}
         </Grid>
-
-        {/* Decorative vertical lines for large screens */}
-        <MUIBox sx={{ display: { xs: "none", md: "block" } }}>
-          <MUIBox component="img" src={line1} alt="Line" sx={{ position: "absolute", width: "1px", height: "186px", top: "346px", left: "461px", objectFit: "cover" }} />
-          <MUIBox component="img" src={line2} alt="Line" sx={{ position: "absolute", width: "1px", height: "186px", top: "346px", left: "714px", objectFit: "cover" }} />
-          <MUIBox component="img" src={line3} alt="Line" sx={{ position: "absolute", width: "1px", height: "186px", top: "346px", left: "969px", objectFit: "cover" }} />
         </MUIBox>
+        
+
 
         {/* Left image */}
         <MUIBox
@@ -117,11 +115,12 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
           src={image9}
           alt="Image"
           sx={{
-            position: { xs: "relative", md: "absolute" },
-            width: "188px",
-            height: "359px",
-            top: { md: "264px" },
+            position: "absolute",
+            width: {xs: "100px",sm: "160px",md: "188px"},
+            height: "auto",
+            bottom: 0,
             left: 0,
+            zIndex: -1,
             objectFit: "cover",
             mt: { xs: 4, md: 0 },
           }}

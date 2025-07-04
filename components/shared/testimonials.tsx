@@ -25,10 +25,7 @@ const TestimonialSection = ({
   locale: string;
   isAdmin: boolean;
 }) => {
-  const phoneNumbers = [
-    { id: 1, number: "+97122558866", top: "5vh" },
-    { id: 2, number: "+97122558866", top: "13vh" },
-  ];
+
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const t = useTranslations("testimonials");
@@ -67,76 +64,59 @@ const TestimonialSection = ({
       ref={ref}
       sx={{
         width: "100%",
-        height: "80vh",
+        height: {xs: "80vh", sm: "80vh", md: "70vh"},
         position: "relative",
         bgcolor: "#f9f7f5",
-        padding: "2vh 5vw",
+        padding: {xs: "2vh 1vw", sm: "2vh 1vw", md: "10vh 5vw"},
+        display: "flex",
+        flexDirection: {xs: "column", sm: "column", md: "row"},
+        justifyContent: {xs: "space-between", sm: "space-between", md: "center"},
+        gap: {xs: "1rem", sm: "1rem", md: "4rem"},
       }}
     >
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={isInView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.6, delay: 0.2 }}
-      >
-        <Stack
-          direction="column"
-          spacing={2.25}
-          sx={{ position: "absolute", top: "5vh", left: "1vw", width: "4vw" }}
-        >
-          <Button sx={{ width: 40, height: 40 }}>
-            <Image
-              src="/images/whatsapp.svg"
-              alt="whatsapp"
-              width={40}
-              height={40}
-            />
-          </Button>
-          <Button sx={{ width: 40, height: 40 }}>
-            <Image src="/images/call.svg" alt="call" width={40} height={40} />
-          </Button>
-        </Stack>
-
-        {phoneNumbers.map((item) => (
-          <Paper
-            key={item.id}
-            sx={{
-              position: "absolute",
-              left: "6vw",
-              top: item.top,
-              width: "10vw",
-              height: "5vh",
-              bgcolor: "rgba(0, 0, 0, 0.15)",
-              borderRadius: "4px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              px: 1,
-            }}
-          >
-            <Typography
-              sx={{
-                fontFamily: "Manrope-Regular, Helvetica",
-                color: "white",
-                fontSize: "1.2vw",
-              }}
-            >
-              {item.number}
-            </Typography>
-          </Paper>
-        ))}
-      </motion.div>
-
+     
       <motion.div
         initial={{ opacity: 0, y: 50, x: 50 }}
         animate={isInView ? { opacity: 1, y: 0, x: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
+        className="flex flex-col justify-start gap-[.5rem] max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]"
       >
+       
+
+        <Typography
+          sx={{
+            fontFamily: "Manrope-Regular, Helvetica",
+            color: "#cf9425",
+            fontSize: {xs: ".7rem", sm: ".7rem", md: ".8rem"},
+            letterSpacing: "1px",
+          }}
+        >
+          <EditableText
+            value={t("tag")}
+            onSave={(val) => onSave("testimonials.tag", val)}
+            isAdmin={isAdmin}
+          />
+        </Typography>
+
+        <Typography
+          variant="h1"
+          sx={{
+            width: {xs: "100%", sm: "100%", md: "40vw"},
+            fontFamily: "Manrope-Bold, Helvetica",
+            color: "#0c1c19",
+            mb: {xs: ".7rem", sm: ".8rem", md: "1rem"},
+            fontSize: {xs: "2rem", sm: "3rem", md: "3.5rem"},
+          }}
+        >
+          <EditableText
+            value={t("title")}
+            onSave={(val) => onSave("testimonials.title", val)}
+            isAdmin={isAdmin}
+          />
+        </Typography>
         <Button
           variant="contained"
           sx={{
-            position: "absolute",
-            top: "55vh",
-            left: "7vw",
             width: "15vw",
             borderRadius: "100px",
             py: 1.5,
@@ -156,67 +136,30 @@ const TestimonialSection = ({
             {t("button")}
           </Typography>
         </Button>
-
-        <Typography
-          sx={{
-            position: "absolute",
-            top: "25vh",
-            left: "7vw",
-            fontFamily: "Manrope-Regular, Helvetica",
-            color: "#cf9425",
-            fontSize: "1vw",
-            letterSpacing: "1px",
-          }}
-        >
-          <EditableText
-            value={t("tag")}
-            onSave={(val) => onSave("testimonials.tag", val)}
-            isAdmin={isAdmin}
-          />
-        </Typography>
-
-        <Typography
-          variant="h1"
-          sx={{
-            position: "absolute",
-            width: "40vw",
-            top: "28vh",
-            left: "7vw",
-            fontFamily: "Manrope-Bold, Helvetica",
-            color: "#0c1c19",
-            fontSize: "3vw",
-          }}
-        >
-          <EditableText
-            value={t("title")}
-            onSave={(val) => onSave("testimonials.title", val)}
-            isAdmin={isAdmin}
-          />
-        </Typography>
       </motion.div>
 
       <AnimatePresence mode="wait">
+        <Box className="flex flex-col gap-16 max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]">
         <motion.div
           key={currentIndex}
           initial={{ x: locale === "ar" ? 100 : -100, opacity: 0 }}
           animate={isInView ? { x: 0, opacity: 1 } : {}}
           exit={isInView ? { x: locale === "ar" ? -100 : 100, opacity: 0 } : {}}
           transition={{ duration: 0.5 }}
+          className="w-full"
           style={{
-            position: "absolute",
+
             display: "flex",
             flexDirection: "column",
             alignItems: "flex-start",
-            justifyContent: "flex-start",
-            top: "28vh",
-            left: "50vw",
-            width: "40vw",
-            height: "40vh",
+            height: "100%",
+            justifyContent: "space-between",
+          
           }}
         >
           <Typography
             sx={{
-              fontSize: "1.2vw",
+              fontSize: {xs: ".8rem", sm: ".8rem", md: "1rem"},
               flexGrow: 1,
               display: "flex",
               alignItems: "flex-start",
@@ -226,7 +169,7 @@ const TestimonialSection = ({
             <EditableText
               value={testimonials[currentIndex].description}
               onSave={(val) =>
-                onSave(`testimonials.${currentIndex}.description`, val)
+                onSave(`testimonials.description_${currentIndex}`, val)
               }
               isAdmin={isAdmin}
             />
@@ -242,7 +185,7 @@ const TestimonialSection = ({
           >
             <EditableText
               value={testimonials[currentIndex].name}
-              onSave={(val) => onSave(`testimonials.${currentIndex}.name`, val)}
+              onSave={(val) => onSave(`testimonials.name_${currentIndex}`, val)}
               isAdmin={isAdmin}
             />
           </Typography>
@@ -250,30 +193,28 @@ const TestimonialSection = ({
           <Typography sx={{ mt: "1vh", fontSize: "1vw" }}>
             <EditableText
               value={testimonials[currentIndex].role}
-              onSave={(val) => onSave(`testimonials.${currentIndex}.role`, val)}
+              onSave={(val) => onSave(`testimonials.role_${currentIndex}`, val)}
               isAdmin={isAdmin}
             />
           </Typography>
         </motion.div>
-      </AnimatePresence>
-
-      <motion.div
+        <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ delay: 0.6, duration: 0.5 }}
       >
-        <Stack
-          direction="row"
-          spacing={2}
-          sx={{ position: "absolute", top: "68vh", left: "65vw" }}
+        <Box
+          className="flex justify-center gap-2"
         >
           {testimonials.map((_, index) => (
             <Box
               key={index}
               onClick={() => setCurrentIndex(index)}
+              className={`w-[10px] h-[10px] rounded-full cursor-pointer transition-all duration-300 ${index === currentIndex ? "bg-[#cf9425] animate-scale" : "bg-[#d9d9d9]"}`}
               sx={{
                 width: "10px",
                 height: "10px",
+                animationDuration: index === currentIndex ? "0.3s" : "none",
                 bgcolor: index === currentIndex ? "#cf9425" : "#d9d9d9",
                 borderRadius: "5px",
                 cursor: "pointer",
@@ -281,8 +222,12 @@ const TestimonialSection = ({
               }}
             />
           ))}
-        </Stack>
+        </Box>
       </motion.div>
+      </Box>
+      </AnimatePresence>
+
+      
     </Box>
   );
 };

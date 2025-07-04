@@ -57,7 +57,7 @@ const HeadSections = ({
               color: "primary.dark",
               fontFamily: "'Manrope-Bold', Helvetica",
               fontWeight: 700,
-              fontSize: "64px",
+              fontSize: {xs: "32px",md: "64px"},
               mb: 2,
             }}
           >
@@ -67,7 +67,7 @@ const HeadSections = ({
                 onSave(keyTitle, value);
               }}
               isAdmin={isAdmin}
-              className="text-4xl font-bold mb-4"
+              className="text-2xl md:text-5xl font-bold mb-4"
             />
           </Typography>
         </motion.div>
@@ -94,7 +94,7 @@ const HeadSections = ({
                 onSave(keyDescription, value);
               }}
               isAdmin={isAdmin}
-              className="text-2xl font-light mb-4"
+              className="text-sm md:text-2xl font-light mb-4"
             />
           </Typography>
         </motion.div>

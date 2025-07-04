@@ -35,7 +35,7 @@
     "area6": "Criminal Cases"
   },
   "advocates": {
-    "title": "Advocates",
+    "title": "We’re Advocates for Justice and Right",
     "description": "We offer the best legal services.",
     "casesSolved": "Cases Solved",
     "happyClients": "Happy Clients",
@@ -67,10 +67,7 @@
     }
   },
   "testimonials": {
-    "0": {
-      "description": "At Judicioworks Advocates and Associates, we bring years of experience across various practice areas, ensuring you receive informed, effective, and personalized legal solutions. Our seasoned team, led by Founder Rishabh Malhotra (Advocate), is dedicated to understanding your unique needs and providing tailored advice and representation. Trust in our experience to navigate the complexities of the legal landscape and advocate fiercely on your behalf."
-    },
-    "title": "TESTIMONIALS",
+    "title": "What Our Clients Are Saying",
     "description": "What Our Clients Are Saying",
     "description2": "Trust in our experience to navigate the complexities of the legal landscape and advocate fiercely on your behalf.",
     "name": "Ritesh",
@@ -79,14 +76,16 @@
     "tag": "TESTIMONIALS",
     "role": "CEO, Loreum Ipsum",
     "description_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "description_2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "description_2": "Working with Jumaia Saleh has been a pivotal moment for our company. From our initial formation to navigating complex commercial contracts, their legal advice has been invaluable. They are not just our lawyers; they are true strategic partners in our growth. Their professionalism and foresight are second to none.",
     "description_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "name_1": "John Doe",
-    "name_2": "Jane Doe",
+    "name_2": "Ritesh",
     "name_3": "John Doe",
     "role_1": "CEO, Loreum Ipsum",
     "role_2": "CEO, Loreum Ipsum",
-    "role_3": "CEO, Loreum Ipsum"
+    "role_3": "CEO, Loreum Ipsum",
+    "description_0": "Working with Jumaia Saleh has been a pivotal moment for our company. From our initial formation to navigating complex commercial contracts, their legal advice has been invaluable. They are not just our lawyers; they are true strategic partners in our growth. Their professionalism and foresight are second to none.",
+    "name_0": "Ritesh"
   },
   "legalAdvisors": {
     "header": {
@@ -107,12 +106,14 @@
       "description": "SEND US YOUR INQUIRY, WE WILL RESPOND WITHIN MINUTES"
     },
     "cta": "Get legal advice"
-    },"subscribe": {
+  },
+  "subscribe": {
     "title": "Subscribe to our newsletter!",
     "description": "Our culture nurtures and strives for innovation, creativity, legal expertise and client focus. Every day we strengthen our entrepreneurial environment to be flexible and supportive, allowing our lawyers to...",
     "input": "Enter your name",
     "cta": "Subscribe Now"
-  },"footer": {
+  },
+  "footer": {
     "title": "Start your defense and future consultants now",
     "about": "At Saeed Al Sharmi, we understand the seriousness... (your about text)",
     "links": {
@@ -141,4 +142,4 @@
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy"
   }
-  }
+}

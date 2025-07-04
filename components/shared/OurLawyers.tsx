@@ -16,6 +16,7 @@ import EditableText from "../EditableText";
 import { toast } from "sonner";
 import { updateMessage } from "@/lib/updateMessage";
 import { motion, useInView } from "framer-motion";
+import HeadSections from "../ui/HeadSections";
 
 let ellipse5 = "/images/ellipse-5.png";
 let ellipse6 = "/images/ellipse-6.png";
@@ -57,36 +58,15 @@ const OurLawyers = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =
 
   return (
     <Box ref={ref} className="flex flex-col items-center gap-10 py-10">
-      <Box className="flex flex-col w-full max-w-[90vw] items-center gap-20">
-        <Stack spacing={3} className="w-full max-w-[60vw] items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <Typography variant="h1" color="primary.dark" textAlign="center">
-              <EditableText
-                value={t("title")}
-                onSave={(val) => onSave("ourLawyers.title", val)}
-                isAdmin={isAdmin}
-              />
-            </Typography>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.6 }}
-          >
-            <Typography variant="body1" color="primary.dark" textAlign="center">
-              <EditableText
-                value={t("description")}
-                onSave={(val) => onSave("ourLawyers.description", val)}
-                isAdmin={isAdmin}
-              />
-            </Typography>
-          </motion.div>
-        </Stack>
+      <Box className="flex flex-col w-full max-w-[90vw] items-center gap-20 max-sm:gap-6">
+        <HeadSections
+          title={t("title")}
+          description={t("description")}
+          locale={locale}
+          keyTitle="ourLawyers.title"
+          keyDescription="ourLawyers.description"
+          isAdmin={isAdmin}
+        />
 
         <Grid container justifyContent="center" spacing={4}>
           {lawyerData.map((lawyer, index) => (
@@ -96,22 +76,22 @@ const OurLawyers = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ delay: 0.3 + index * 0.2, duration: 0.6 }}
               >
-                <Stack spacing={3} alignItems="center" className="w-[40vw] max-w-[330px]">
+                <Stack spacing={3} alignItems="center" className="w-[40vw] max-sm:w-[22vw] max-w-[330px] rounded-full ">
                   <Box
                     component="img"
                     src={lawyer.image}
                     alt="Lawyer profile"
-                    sx={{ width: "100%", height: "330px", objectFit: "cover" }}
+                    sx={{ width: "100%", height: {xs: "80px",md: "330px"}, objectFit: "cover",borderRadius: "100%" }}
                   />
                   <Stack spacing={0.5} alignItems="center">
-                    <Typography variant="subtitle2" color="primary" textAlign="center">
+                    <Typography variant="subtitle2" color="primary" textAlign="center" sx={{fontSize: {xs: ".6rem",md: "1rem"}}}>
                       <EditableText
                         value={t(lawyer.nameKey)}
                         onSave={(val) => onSave(`ourLawyers.${lawyer.nameKey}`, val)}
                         isAdmin={isAdmin}
                       />
                     </Typography>
-                    <Typography variant="body1" textAlign="center">
+                    <Typography variant="body1" textAlign="center" sx={{fontSize: {xs: ".6rem",md: "1rem"}}}>
                       <EditableText
                         value={t(lawyer.titleKey)}
                         onSave={(val) => onSave(`ourLawyers.${lawyer.titleKey}`, val)}

@@ -73,6 +73,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
         color: "white",
         overflow: "hidden",
         position: "relative",
+        textAlign: {xs: "center", sm: "center", md: "left"},
         background:
         'linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)',
       
@@ -144,7 +145,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
             spacing={{ xs: 4, md: 8 }}
             sx={{
               width: "100%",
-              maxWidth: "1108px",
+              maxWidth: "100vw",
               mx: "auto",
               py: { xs: "7vw", md: "7vh" },
               px: { xs: 2, md: 4 },
@@ -162,7 +163,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     fontWeight: 700,
                     color: "#cf9425",
                     maxWidth: { xs: "100%", md: "497px" },
-                    fontSize: { xs: "5vw", md: "2.2vw", lg: "1.6vw" },
+                    fontSize: { xs: "1.5rem", md: "1.5rem", lg: "2rem" },
                   }}
                 >
                   <EditableText
@@ -184,7 +185,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                       size={{xs: 12, sm: index === 0 ? 12 : 6, md: index === 0 ? 4 : 2}}
                     >
                       {column.aboutTextKey ? (
-                        <Typography variant="body2" sx={{ lineHeight: 1.5, fontSize: { xs: "3vw", md: "1vw" }, maxWidth: "370px" }}>
+                        <Typography variant="body2" sx={{ lineHeight: 1.5, fontSize: { xs: ".7rem", md: ".7rem" }, maxWidth: "100%" }}>
                           <EditableText
                             value={t(`about`)}
                             onSave={val => onSave(`footer.about`, val)}
@@ -192,7 +193,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                           />
                         </Typography>
                       ) : (
-                        <Stack spacing={1}>
+                        <Box className="flex flex-col gap-1 max-sm:text-center max-sm:items-center max-sm:gap-[.2rem] max-sm:flex-row max-sm:justify-between">
                           {column.links.map((linkKey, linkIndex) => (
                             <Typography
                               variant="body2"
@@ -201,7 +202,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                                 cursor: "pointer",
                                 "&:hover": { textDecoration: "underline" },
                                 lineHeight: 2,
-                                fontSize: { xs: "3vw", md: "1vw" },
+                                fontSize: { xs: ".7rem", md: ".7rem" },
                               }}
                             >
                               <EditableText
@@ -211,7 +212,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                               />
                             </Typography>
                           ))}
-                        </Stack>
+                        </Box>
                       )}
                     </Grid>
                   ))}
@@ -255,7 +256,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                 <Typography
                   variant="body2"
                   sx={{
-                    fontSize: { xs: "10px", sm: "13px" },
+                    fontSize: { xs: ".7rem", sm: ".7rem" },
                   }}
                 >
                   <EditableText

@@ -25,7 +25,7 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
       ref={sectionRef}
       sx={{
         width: "100vw",
-        height: "90vh",
+        height: {xs: "auto",md: "90vh"},
         bgcolor: "#0c1c19",
         overflow: "hidden",
         display: "flex",
@@ -39,22 +39,22 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
       <motion.div
         initial={{ opacity: 0 }}
         animate={isInView ? { opacity: 1 } : {}}
+        className="flex w-full h-full flex-row justify-between items-center max-sm:flex-col"
         transition={{ duration: 1 }}
-        style={{ display: "flex", width: "100%", height: "100%", flexDirection: "row" }}
       >
         {/* Left Image */}
         <motion.div
           initial={{ x: -100, opacity: 0 }}
           animate={isInView ? { x: 0, opacity: 1 } : {}}
           transition={{ delay: 0.2, duration: 0.8 }}
-          className="w-1/4 flex justify-start items-center"
+          className="w-1/4 max-sm:w-full flex justify-start items-center"
         >
           <Box
             component="img"
             src="/images/rectangle-12.svg"
             alt="Rectangle"
             sx={{
-              width: { xs: "40vw", md: "20vw" },
+              width: { xs: "100vw", md: "20vw" },
               zIndex: 1,
               borderRadius: "10px",
               height: { xs: "30vh", md: "60vh" },
@@ -68,14 +68,14 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
           initial={{ x: 100, opacity: 0 }}
           animate={isInView ? { x: 0, opacity: 1 } : {}}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="w-3/4 justify-self-start"
+          className="w-[70%] justify-self-start max-sm:justify-self-center max-sm:w-full max-sm:text-center max-sm:flex max-sm:flex-col max-sm:items-center max-sm:justify-center"
         >
           <Box
             sx={{
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              maxWidth: { xs: "100%", md: "50vw" },
+              maxWidth: { xs: "100%", md: "60vw" },
               gap: 2,
             }}
           >
@@ -88,10 +88,11 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
                 sx={{
                   fontFamily: "Manrope, Helvetica",
                   fontWeight: 400,
-                  fontSize: "1rem",
+                  pt: {xs: 2,md: 0},
+                  fontSize: {xs: ".8rem",md: "1rem"},
                   color: "white",
                   letterSpacing: "0.15rem",
-                  mb: 1,
+                  mb: "18x",
                 }}
               >
                 <EditableText
@@ -109,9 +110,8 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
             >
               <Typography
                 sx={{
-                  fontFamily: "Manrope, Helvetica",
                   fontWeight: 700,
-                  fontSize: { xs: "6vw", md: "3.5vw" },
+                  fontSize: { xs: "1.5rem", md: "4rem" },
                   lineHeight: 1.2,
                   color: "white",
                 }}
@@ -140,12 +140,12 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
             >
               <Typography
                 sx={{
-                  fontFamily: "Manrope, Helvetica",
                   fontWeight: 400,
-                  fontSize: { xs: "4vw", md: "1.25vw" },
+                  fontSize: { xs: ".8rem", md: "1rem" },
                   color: "white",
+                  textAlign:{xs: "center",md: "left"},
                   letterSpacing: "-0.5px",
-                  maxWidth: "90%",
+                  maxWidth: {xs: "100%",md: "90%"},
                 }}
               >
                 <EditableText
@@ -161,6 +161,7 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 1.2, duration: 0.5 }}
+              className="max-sm:flex max-sm:justify-center max-sm:items-center"
             >
               <Button
                 variant="contained"

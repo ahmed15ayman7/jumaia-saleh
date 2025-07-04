@@ -12,12 +12,22 @@ import {
   Typography,
   useScrollTrigger,
   Slide,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+  IconButton,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import LegalServicesSection from "./LegalServicesSection";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 const navItems = [
   { label: "home", hasDropdown: false, href: "/" },
@@ -28,6 +38,7 @@ const navItems = [
 
 const Navbar = ({ locale }: { locale: string }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
@@ -52,7 +63,68 @@ const Navbar = ({ locale }: { locale: string }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+  const DrawerList = (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+    >
+      <Box className="flex items-center justify-end">
+        <IconButton onClick={() => setIsMenuOpen(false)}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
+      <List>
+        {navItems.map((item, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton onClick={() => {
+              router.push(item.href);
+              setIsMenuOpen(false);
+            }}>
+              <ListItemText primary={t(item.label)} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        <ListItem className="flex items-center gap-2" disablePadding>
+          <ListItemButton sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: "10px",
+            flexDirection: "row-reverse",
+            justifyContent: "space-between",
+          }}  onClick={() => {
+            router.push(
+              `/${locale === "en" ? "ar" : "en"}${pathname.slice(3)}`,
+              { scroll: false }
+            );
+            setIsMenuOpen(false);
+          }}>
+            <ListItemText primary={t("language")} />
+            <ListItemIcon>
 
+            <Box
+              component="img"
+              src={locale === "en" ? "/images/sa.svg" : "/images/sh.svg"}
+              alt={t("language")}
+              sx={{ width: 20, height: 15 }}
+              />
+              </ListItemIcon>
+              </ListItemButton>
+        </ListItem>
+      </List>
+      <Divider />
+      <List>
+        <ListItem>
+          <ListItemButton>
+            <ListItemText primary={t("contact")} />
+            
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
   return (
     <Box sx={{ height: "100px", position: "relative" }}>
       <AnimatePresence>
@@ -71,7 +143,9 @@ const Navbar = ({ locale }: { locale: string }) => {
               sx={{ zIndex: 1000 }}
             >
               <Container maxWidth="xl" sx={{ zIndex: 1000 }} disableGutters>
-                <Toolbar sx={{ justifyContent: "space-between", width: "100%" }}>
+                <Toolbar
+                  sx={{ justifyContent: "space-between", width: "100%" }}
+                >
                   <motion.img
                     src={
                       locale === "en"
@@ -82,9 +156,8 @@ const Navbar = ({ locale }: { locale: string }) => {
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
+                    className="w-[120px] md:w-[200px] h-[60px] md:h-[90px] object-contain"
                     style={{
-                      width: 200,
-                      height: "90px",
                       padding: "10px",
                       objectFit: "cover",
                     }}
@@ -97,29 +170,31 @@ const Navbar = ({ locale }: { locale: string }) => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2, duration: 0.6 }}
                     >
-                       <AnimatePresence>
-                            {isDropdownOpen && (
-                              <motion.div
-                                initial={{ opacity: 0, y: -20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -20 }}
-                                transition={{ duration: 0.3 }}
-                                style={{
-                                  position: "absolute",
-                                  top: "100%",
-                                  left: 0,
-                                  width: "100%",
-                                  height: "100%",
-                                }}
-                              >
-                                <LegalServicesSection />
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
+                      <AnimatePresence>
+                        {isDropdownOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -20 }}
+                            transition={{ duration: 0.3 }}
+                            style={{
+                              position: "absolute",
+                              top: "100%",
+                              left: 0,
+                              width: "100%",
+                              height: "100%",
+                            }}
+                          >
+                            <LegalServicesSection />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
                       {navItems.map((item, index) => (
                         <Box
                           key={index}
-                          onMouseOver={() => item.hasDropdown && handleDropdownClick(item.label)}
+                          onMouseOver={() =>
+                            item.hasDropdown && handleDropdownClick(item.label)
+                          }
                           className="flex rtl:space-x-reverse items-center gap-2"
                           sx={{
                             color: "primary.main",
@@ -132,7 +207,6 @@ const Navbar = ({ locale }: { locale: string }) => {
                             },
                           }}
                         >
-                          
                           <Typography
                             variant="body1"
                             onClick={() => {
@@ -145,7 +219,6 @@ const Navbar = ({ locale }: { locale: string }) => {
                               fontSize: "1.25rem",
                               position: "relative",
                               fontWeight: 500,
-                             
                             }}
                           >
                             {t(item.label)}
@@ -160,11 +233,9 @@ const Navbar = ({ locale }: { locale: string }) => {
                                 cursor: "pointer",
                                 height: "30px",
                                 marginRight: "-1.11px",
-                               
                               }}
                             />
                           )}
-                         
                         </Box>
                       ))}
 
@@ -175,7 +246,9 @@ const Navbar = ({ locale }: { locale: string }) => {
                         className="rtl:space-x-reverse cursor-pointer"
                         onClick={() => {
                           router.push(
-                            `/${locale === "en" ? "ar" : "en"}${pathname.slice(3)}`,
+                            `/${locale === "en" ? "ar" : "en"}${pathname.slice(
+                              3
+                            )}`,
                             { scroll: false }
                           );
                         }}
@@ -207,6 +280,7 @@ const Navbar = ({ locale }: { locale: string }) => {
 
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
+                      className="hidden md:flex"
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4, duration: 0.5 }}
                     >
@@ -236,27 +310,54 @@ const Navbar = ({ locale }: { locale: string }) => {
                         >
                           {t("contact")}
                         </Typography>
-                        
 
                         {locale === "en" ? (
                           <ArrowForwardIcon
-                          className="bounce-h"
-                          sx={{
-                            color: "secondary.main",
-                            width: 24,
-                            height: 24,
-                          }}
+                            className="bounce-h"
+                            sx={{
+                              color: "secondary.main",
+                              width: 24,
+                              height: 24,
+                            }}
                           />
                         ) : (
                           <ArrowBackIcon
-                          className="bounce-h"
+                            className="bounce-h"
+                            sx={{
+                              color: "secondary.main",
+                              width: 24,
+                              height: 24,
+                            }}
+                          />
+                        )}
+                      </Stack>
+                    </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      className="flex md:hidden"
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.4, duration: 0.5 }}
+                    >
+                      <Stack
+                        direction="row"
+                        alignItems="center"
+                        sx={{
+                          justifyContent: "space-between",
+                          gap: "10px",
+                        }}
+                        className="cursor-pointer"
+                      >
+                        <IconButton
+                          className="animate-pulse md:hidden"
+                          onClick={() => setIsMenuOpen(true)}
                           sx={{
                             color: "secondary.main",
                             width: 24,
                             height: 24,
                           }}
-                          />
-                        )}
+                        >
+                          <MenuIcon />
+                        </IconButton>
                       </Stack>
                     </motion.div>
                   </Box>
@@ -266,6 +367,22 @@ const Navbar = ({ locale }: { locale: string }) => {
           </motion.div>
         )}
       </AnimatePresence>
+       
+              {isMenuOpen && (
+                <Drawer
+                  anchor="right"
+                  open={isMenuOpen}
+                  onClose={() => setIsMenuOpen(false)}
+                  sx={{
+                    "& .MuiDrawer-paper": {
+                      width: "50%",
+                      height: "100%",
+                    },
+                  }}
+                >
+                  {DrawerList}
+                </Drawer>
+              )}
     </Box>
   );
 };

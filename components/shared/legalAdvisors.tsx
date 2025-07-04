@@ -51,7 +51,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
       ref={ref}
       sx={{
         width: "100vw",
-        minHeight: "100vh",
+        minHeight: {xs: "70vh", sm: "80vh", md: "100vh"},
         overflow: "hidden",
         bgcolor: "#0c1c19",
         px: 0,

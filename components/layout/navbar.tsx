@@ -156,7 +156,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    className="w-[120px] md:w-[200px] h-[60px] md:h-[90px] object-contain"
+                    className={`w-[120px] md:w-[200px]  ${locale === "ar" ? "md:h-[100px] h-[70px] " : "md:h-[90px] h-[60px]"} object-contain`}
                     style={{
                       padding: "10px",
                       objectFit: "cover",

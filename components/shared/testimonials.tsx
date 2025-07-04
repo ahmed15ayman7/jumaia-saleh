@@ -34,21 +34,21 @@ const TestimonialSection = ({
   const testimonials = [
     {
       id: 1,
+      description: t("description_0"),
+      name: t("name_0"),
+      role: t("role_0"),
+    },
+    {
+      id: 2,
       description: t("description_1"),
       name: t("name_1"),
       role: t("role_1"),
     },
     {
-      id: 2,
+      id: 3,
       description: t("description_2"),
       name: t("name_2"),
       role: t("role_2"),
-    },
-    {
-      id: 3,
-      description: t("description_3"),
-      name: t("name_3"),
-      role: t("role_3"),
     },
   ];
 
@@ -70,8 +70,10 @@ const TestimonialSection = ({
         padding: {xs: "2vh 1vw", sm: "2vh 1vw", md: "10vh 5vw"},
         display: "flex",
         flexDirection: {xs: "column", sm: "column", md: "row"},
-        justifyContent: {xs: "space-between", sm: "space-between", md: "center"},
-        gap: {xs: "1rem", sm: "1rem", md: "4rem"},
+        justifyContent: {xs: "flex-start", sm: "flex-start", md: "center"},
+        alignItems: {xs: "center", sm: "center", md: "start"},
+        textAlign: {xs: "center", sm: "center", md: locale === "ar" ? "right" : "left"},
+        gap: {xs: "4rem", sm: "4rem", md: "4rem"},
       }}
     >
      
@@ -79,14 +81,16 @@ const TestimonialSection = ({
         initial={{ opacity: 0, y: 50, x: 50 }}
         animate={isInView ? { opacity: 1, y: 0, x: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="flex flex-col justify-start gap-[.5rem] max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]"
+        className="flex flex-col justify-start max-md:items-center gap-[.5rem] max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]"
       >
        
 
         <Typography
+        style={{
+          color: "#cf9425 !important",
+        }}
           sx={{
             fontFamily: "Manrope-Regular, Helvetica",
-            color: "#cf9425",
             fontSize: {xs: ".7rem", sm: ".7rem", md: ".8rem"},
             letterSpacing: "1px",
           }}
@@ -117,7 +121,7 @@ const TestimonialSection = ({
         <Button
           variant="contained"
           sx={{
-            width: "15vw",
+            width: {xs: "30vw", sm: "30vw", md: "15vw"},
             borderRadius: "100px",
             py: 1.5,
             bgcolor: "#cf9425",
@@ -130,7 +134,7 @@ const TestimonialSection = ({
             sx={{
               fontFamily: "Manrope-Regular, Helvetica",
               color: "white",
-              fontSize: "1.3vw",
+              fontSize: {xs: ".8rem", sm: ".8rem", md: "1.3rem"},
             }}
           >
             {t("button")}
@@ -139,19 +143,18 @@ const TestimonialSection = ({
       </motion.div>
 
       <AnimatePresence mode="wait">
-        <Box className="flex flex-col gap-16 max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]">
+        <Box className="flex flex-col gap-16 max-sm:text-center max-sm:items-center max-sm:gap-4">
         <motion.div
           key={currentIndex}
           initial={{ x: locale === "ar" ? 100 : -100, opacity: 0 }}
           animate={isInView ? { x: 0, opacity: 1 } : {}}
           exit={isInView ? { x: locale === "ar" ? -100 : 100, opacity: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="w-full"
+          className="w-full gap-20 max-sm:items-center items-start"
           style={{
 
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-start",
             height: "100%",
             justifyContent: "space-between",
           
@@ -174,13 +177,12 @@ const TestimonialSection = ({
               isAdmin={isAdmin}
             />
           </Typography>
-
+<Box className="flex flex-col gap-1 max-sm:items-center max-sm:text-center  ">
           <Typography
             sx={{
-              mt: "2vh",
               fontFamily: "Manrope-Bold, Helvetica",
               color: "#cf9425",
-              fontSize: "1vw",
+              fontSize: {xs: ".8rem", sm: ".8rem", md: "1rem"},
             }}
           >
             <EditableText
@@ -189,14 +191,14 @@ const TestimonialSection = ({
               isAdmin={isAdmin}
             />
           </Typography>
-
-          <Typography sx={{ mt: "1vh", fontSize: "1vw" }}>
+          <Typography sx={{  fontSize: {xs: ".8rem", sm: ".8rem", md: "1rem"} }}>
             <EditableText
               value={testimonials[currentIndex].role}
               onSave={(val) => onSave(`testimonials.role_${currentIndex}`, val)}
               isAdmin={isAdmin}
-            />
+              />
           </Typography>
+              </Box>
         </motion.div>
         <motion.div
         initial={{ opacity: 0, y: 30 }}

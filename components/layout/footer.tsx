@@ -71,16 +71,17 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
       sx={{
         width: "100%",
         color: "white",
+        px: {xs: "1wv", sm: "1vw", md: "6vw"},
         overflow: "hidden",
         position: "relative",
-        textAlign: {xs: "center", sm: "center", md: "left"},
+        textAlign: {xs: "center", sm: "center", md: locale === "ar" ? "right" : "left"},
         background:
         'linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)',
       
       }}
       ref={ref}
     >
-      <Box sx={{ position: "relative" }}>
+      <Box >
         {/* Decorative Images */}
         <Box
           sx={{
@@ -220,7 +221,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
               </Stack>
 
                       {/* Social media icons */}
-                      <Box sx={{ display: "flex", flexDirection: "row", gap: 1.5 }}>
+                      <Box sx={{ display: "flex", flexDirection: "row", gap: 1.5, justifyContent: {xs: "center", sm: "center", md: "flex-start"}, alignItems: "center" }}>
                 {socialMedia.map((social, index) => (
                   <IconButton
                     key={index}
@@ -228,8 +229,8 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     sx={{
                       bgcolor: "white",
                       color: "black",
-                      width: "41px",
-                      height: "41px",
+                      width: {xs: "35px", sm: "35px", md: "41px"},
+                      height: {xs: "35px", sm: "35px", md: "41px"},
                       "&:hover": { bgcolor: "#f5f5f5" },
                     }}
                   >

@@ -53,7 +53,6 @@ export default function NewsletterSection({ locale, isAdmin }: { locale: string;
           bottom: 0,
           right: 0,
           width: "190px",
-          height: "50vh",
           zIndex: 1,
           pointerEvents: "none",
           transform: "rotateY(180deg)",

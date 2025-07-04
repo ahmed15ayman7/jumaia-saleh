@@ -129,12 +129,14 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.12, duration: 0.7 }}
         >
-          <Stack
-            direction={{ xs: "column", sm: "row" }}
-            spacing={{ xs: 2, sm: 4, md: 5 }}
-            alignItems="center"
-            justifyContent="center"
+          <Box
+
             sx={{
+              display: "flex",
+              flexDirection: { xs: "column", sm: "row" },
+              gap: { xs: 2, sm: 4, md: 5 },
+              alignItems: "center",
+              justifyContent: "center",
               width: { xs: "94vw", sm: "65vw", md: "46vw" },
               mx: "auto",
               mb: { xs: "4vh", md: "6vh" },
@@ -204,7 +206,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
                 </Typography>
               </Paper>
             ))}
-          </Stack>
+          </Box>
         </motion.div>
 
         {/* Divider with "OR" text */}

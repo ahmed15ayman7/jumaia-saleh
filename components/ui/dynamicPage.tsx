@@ -73,11 +73,16 @@ export default function DynamicPage({
         bgcolor: "#fff",
         minHeight: "100vh",
         pb: 0,
-        px: { xs: "1.5rem", md: "5vw" },
+        
         pt: { xs: 1, md: 3 },
         position: "relative",
       }}
     >
+      <Box sx={{
+        px: { xs: "1.5rem", md: "5vw" },
+      }}> 
+        
+
       {/* Absolute bottom/left background image */}
       {/* {data.bottomImage && (
         <Box
@@ -392,14 +397,15 @@ export default function DynamicPage({
             ))}
           </List>
         </Box>
-        <Box
+      </motion.div>
+      <Box
           sx={{
             display: { xs: "none", md: "block" },
             position: "absolute",
             bottom: 0,
             left: 0,
             width: "190px",
-            zIndex: 1,
+            zIndex: 0,
             pointerEvents: "none",
             // transform: "rotateY(180deg)",
           }}
@@ -412,7 +418,8 @@ export default function DynamicPage({
             style={{ objectFit: "contain" }}
           />
         </Box>
-      </motion.div>
+      </Box>
+
       <Newsletter
         data={{
           newsletterTitle: data.newsletterTitle || "",

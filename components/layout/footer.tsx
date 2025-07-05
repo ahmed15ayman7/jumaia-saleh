@@ -272,6 +272,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     variant="body2"
                     sx={{
                       cursor: "pointer",
+                      fontSize: { xs: ".7rem", sm: ".8rem" },
                       "&:hover": { textDecoration: "underline" },
                     }}
                   >
@@ -285,6 +286,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     variant="body2"
                     sx={{
                       cursor: "pointer",
+                      fontSize: { xs: ".7rem", sm: ".8rem" },
                       "&:hover": { textDecoration: "underline" },
                     }}
                   >

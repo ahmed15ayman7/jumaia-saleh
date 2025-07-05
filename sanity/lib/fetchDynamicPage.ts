@@ -2,10 +2,16 @@
 import { client } from './client';
 
 export const fetchDynamicPage = async (slug: string, locale: string) => {
+  console.log("fetching dynamic page",999999, slug, locale);
   const query = `
-    *[_type == "real-estate" && slug.current == ${slug} && language == ${locale}][0]{
-      image,
-      bottomImage,
+    *[_type == "real-estate" && slug->value == $slug && language == $locale][0]{
+      sharedPageContent->{
+        title,
+        image,
+        brochureFiles,
+        newsletterSlides,
+        relatedServices
+      },
       mainTitle,
       subtitle,
       description,

@@ -24,7 +24,7 @@ interface PracticeAreaProps {
   data: {
     relatedTitle?: string;
     relatedDesc?: string;
-    relatedServices?: { image: SanityImageSource; title: string }[];
+    relatedServices?: { image: SanityImageSource; title: string, titleAr: string }[];
     breadcrumb?: { label: string; href?: string }[];
     image?: SanityImageSource;
     mainTitle?: string;
@@ -36,7 +36,7 @@ interface PracticeAreaProps {
     readMoreLink?: string;
     brochureTitle?: string;
     brochureDesc?: string;
-    brochureFiles?: { label: string; link: string }[];
+    brochureFiles?: { label: string; link: string, labelAr: string }[];
     whyTitle?: string;
     whyDesc?: string;
     whyPoints?: string[];
@@ -49,7 +49,9 @@ interface PracticeAreaProps {
       backgroundImage?: SanityImageSource;
       contentImage?: SanityImageSource;
       label?: string;
+      labelAr?: string;
       title?: string;
+      titleAr?: string;
     }[];
     phone?: string;
   };
@@ -434,8 +436,11 @@ export default function DynamicPage({
               contentImage: slide.contentImage || "",
               label: slide.label || "",
               title: slide.title || "",
+              labelAr: slide.labelAr || "",
+              titleAr: slide.titleAr || "",
             })) || [],
         }}
+        locale={locale}
       />
       <RelatedServices
         data={{
@@ -445,10 +450,12 @@ export default function DynamicPage({
             data.relatedServices?.map((service) => ({
               image: service.image || "",
               title: service.title || "",
+              titleAr: service.titleAr || "",
             })) || [],
         }}
+        locale={locale}
       />
-      <Subscribe locale={locale} isAdmin={isAdmin} />
+        <Subscribe locale={locale} isAdmin={isAdmin} />
     </Box>
   );
 }

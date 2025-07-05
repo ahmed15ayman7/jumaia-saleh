@@ -12,13 +12,14 @@ interface NewsletterProps {
         newsletterDesc?: string;
         newsletterInput?: string;
         newsletterCta?: string;
-        slides?: { backgroundImage: SanityImageSource; contentImage: SanityImageSource; label: string; title: string }[];
+        slides?: { backgroundImage: SanityImageSource; contentImage: SanityImageSource; label: string; title: string, labelAr: string, titleAr: string }[];
         phone?: string;
     };
+    locale: string;
 }
 
 
-const Newsletter = ({data}:NewsletterProps) => {
+const Newsletter = ({data, locale}:NewsletterProps) => {
   console.log("data newsletter", data);
   return (
     <Box
@@ -145,7 +146,7 @@ const Newsletter = ({data}:NewsletterProps) => {
           alignItems: "center",
           justifyContent: { xs: "center", md: "flex-start" }
         }}>
-          <CustomSlider slides={(data.slides) || []} />
+          <CustomSlider slides={(data.slides) || []} locale={locale} />
         </Grid>
       </Grid>
     </Box>

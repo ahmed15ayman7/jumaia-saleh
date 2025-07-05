@@ -8,10 +8,11 @@ import { urlFor } from "@/sanity/lib/image";
 
 const IMAGE_WIDTH = 400; // px for desktop, responsive handled below
 interface CustomSliderProps {
-  slides: { backgroundImage: SanityImageSource; contentImage: SanityImageSource; label: string; title: string }[];
+  slides: { backgroundImage: SanityImageSource; contentImage: SanityImageSource; label: string; title: string, labelAr: string, titleAr: string }[];
   interval?: number;
+  locale: string;
 }
-function CustomSlider({ slides, interval = 5000 }: CustomSliderProps) {
+function CustomSlider({ slides, interval = 5000, locale }: CustomSliderProps) {
   const [current, setCurrent] = useState(0);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -72,7 +73,7 @@ function CustomSlider({ slides, interval = 5000 }: CustomSliderProps) {
           minWidth: { xs: "95vw", sm: "80vw", md: IMAGE_WIDTH },
           maxWidth: { md: IMAGE_WIDTH },
           aspectRatio: { xs: "1.1", md: "1 / 1.15" },
-          borderRadius: "10px",
+          // borderRadius: "10px",
           boxShadow: "0px 4px 22px #dbdad84d",
           overflow: "hidden",
           bgColor: "#fff",
@@ -126,10 +127,10 @@ function CustomSlider({ slides, interval = 5000 }: CustomSliderProps) {
                   style={{ width: "100%" }}
                 >
                   <Box sx={{ color: "#535353", fontSize: "1.1rem", fontWeight: 500, letterSpacing: ".01em" }}>
-                    {slides[current]?.label || ""}
+                    { locale === "ar" ? slides[current]?.labelAr || "" : slides[current]?.label || ""}
                   </Box>
                   <Box sx={{ fontSize: "2rem", fontWeight: 800, color: "#353535", minHeight: "35px" }}>
-                    {slides[current]?.title || ""}
+                    {locale === "ar" ? slides[current]?.titleAr || "" : slides[current]?.title || ""}
                   </Box>
                 </motion.div>
                 
@@ -180,7 +181,7 @@ function CustomSlider({ slides, interval = 5000 }: CustomSliderProps) {
         position: "relative",
         width: "300px",
         height: "400px",
-        overflow: "hidden",
+        // overflow: "hidden",
         perspective: "1100px", // مهمة للـ 3D
       }}
     >
@@ -199,9 +200,9 @@ function CustomSlider({ slides, interval = 5000 }: CustomSliderProps) {
             top: 0,
             left: 0,
             willChange: "transform",
-            borderRadius: "20px",
+            // borderRadius: "20px",
             cursor: "pointer",
-            background: `url(${slides[current].backgroundImage}) center/cover no-repeat`,
+            background: `url(${urlFor(slides[current].contentImage).url()}) center/cover no-repeat`,
             boxShadow: "0px 4px 18px #bfa84129",
             backfaceVisibility: "hidden", // مهم للـflip
           }}

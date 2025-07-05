@@ -15,7 +15,7 @@ import Image from "next/image";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { urlFor } from "@/sanity/lib/image";
 
-const RelatedServices = ({ data }: { data: {title: string, description: string, practiceAreas: { title: string, image: SanityImageSource}[]} }) => {
+const RelatedServices = ({ data, locale }: { data: {title: string, description: string, practiceAreas: { title: string, image: SanityImageSource, titleAr: string }[]}, locale: string }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.5 });
 
@@ -35,7 +35,7 @@ const RelatedServices = ({ data }: { data: {title: string, description: string, 
         <HeadSections
           title={data.title}
           description={data.description}
-          locale={"ar"}
+          locale={locale}
           keyTitle="ourPracticeAreas.title"
           keyDescription="ourPracticeAreas.description"
           isAdmin={false}
@@ -102,7 +102,7 @@ const RelatedServices = ({ data }: { data: {title: string, description: string, 
                     }}
                   >
                     <EditableText
-                      value={area.title}
+                      value={locale === "ar" ? area.titleAr : area.title}
                       onSave={(value: string) => {}}
                       isAdmin={false}
                       className="text-center text-xl md:text-2xl font-semibold text-[#cf9425] bg-transparent"

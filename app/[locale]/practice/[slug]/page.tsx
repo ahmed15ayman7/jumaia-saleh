@@ -29,6 +29,7 @@ const Page = ({ params }: { params: Promise<{ locale: string, slug: string }> })
   // Fetch Sanity content
   useEffect(() => {
     if (slug && locale) {
+      console.log("fetching dynamic page",999999, slug, locale);
       fetchDynamicPage(slug, locale).then((res) => {
         console.log("Fetched Page Data:", res);
         setData(res);
@@ -48,7 +49,12 @@ const Page = ({ params }: { params: Promise<{ locale: string, slug: string }> })
   return (
     <DynamicPage
       data={{
-        ...data,
+        ...data,...{
+          image: data.sharedPageContent.image,
+          brochureFiles: data.sharedPageContent.brochureFiles,
+          newsletterSlides: data.sharedPageContent.newsletterSlides,
+          relatedServices: data.sharedPageContent.relatedServices,
+        }
       }}
       locale={locale}
       isAdmin={isAdmin}

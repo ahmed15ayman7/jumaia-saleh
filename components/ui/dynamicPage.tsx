@@ -87,35 +87,6 @@ export default function DynamicPage({
       }}> 
         
 
-      {/* Absolute bottom/left background image */}
-      {/* {data.bottomImage && (
-        <Box
-          sx={{
-            position: "absolute",
-            left: isRTL ? "unset" : 0,
-            right: isRTL ? 0 : "unset",
-            bottom: 0,
-            width: { xs: "30vw", md: "15vw" },
-            height: { xs: "35vw", md: "30vw" },
-            zIndex: 1,
-            pointerEvents: "none",
-            opacity: 0.15,
-            display: { xs: "none", md: "block" },
-          }}
-        >
-          <Image
-            src={data.bottomImage}
-            alt="Decor"
-            fill
-            style={{
-              objectFit: "contain",
-              ...(isRTL ? { transform: "rotateY(180deg)" } : {}),
-            }}
-            sizes="15vw"
-          />
-        </Box>
-      )} */}
-
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -200,6 +171,7 @@ export default function DynamicPage({
             px: { xs: 2, md: 0 },
             pb: { xs: 4, md: 7 },
             position: "relative",
+            textAlign: {xs: "center", md: locale === "ar" ? "right" : "left"},
             zIndex: 2,
           }}
         >
@@ -234,7 +206,7 @@ export default function DynamicPage({
               color: "#627174",
               mb: 2,
               fontFamily: "'Manrope-Regular', Helvetica",
-              fontSize: { xs: "3vw", md: "1.14rem" },
+              fontSize: { xs: ".8rem", sm: "1rem" },
             }}
           >
             {data.description}
@@ -246,17 +218,17 @@ export default function DynamicPage({
               <Box key={i} sx={{ mb: 1.5 }}>
                 <Typography
                   component="div"
-                  sx={{ fontSize: "1rem", color: "#627174", mb: 0.5 }}
+                  sx={{ fontSize: {xs: ".8rem", sm: "1rem"}, color: "#627174", mb: 0.5 }}
                 >
-                  <>&#8226;</> {"    "}
+                  <span className="hidden md:block">&#8226;</span> {"    "}
                   <span className="text-[#627174]">{point.title}</span>
                 </Typography>
                 <Typography
                   component="div"
                   sx={{
                     color: "#627174",
-                    fontSize: { xs: "2.6vw", md: "1.05rem" },
-                    ml: 3,
+                    fontSize: { xs: ".8rem", sm: "1rem" },
+                    ml: {xs: 0, md: 3},
                   }}
                 >
                   {point.desc}
@@ -279,6 +251,7 @@ export default function DynamicPage({
         <Box
           sx={{
             maxWidth: "900px",
+            textAlign: {xs: "center", md: locale === "ar" ? "right" : "left"},
             mx: "auto",
             mb: { xs: 3, md: 6 },
             px: { xs: 2, md: 0 },
@@ -287,7 +260,7 @@ export default function DynamicPage({
           <Button
             sx={{
               color: "#cf9425",
-              fontSize: "1.1rem",
+              fontSize: {xs: ".8rem", sm: "1rem"},
               fontWeight: 600,
               px: 2,
               border: "2px solid transparent",
@@ -312,6 +285,7 @@ export default function DynamicPage({
         <Box
           sx={{
             maxWidth: "900px",
+            textAlign: {xs: "center", md: locale === "ar" ? "right" : "left"},
             mx: "auto",
             px: { xs: 2, md: 0 },
             my: { xs: 5, md: 10 },
@@ -322,7 +296,7 @@ export default function DynamicPage({
           <Typography
             variant="h5"
             sx={{
-              fontSize: { xs: "5vw", md: "2.1rem" },
+              fontSize: { xs: "1.4rem", md: "1.8rem" },
               fontWeight: 700,
               color: "#183826",
               mb: 1,
@@ -330,10 +304,10 @@ export default function DynamicPage({
           >
             {data.brochureTitle}
           </Typography>
-          <Typography sx={{ mb: 3, color: "#475650" }}>
+          <Typography sx={{ mb: 3, color: "#191C1E",fontWeight: 300, fontSize: {xs: ".8rem", sm: "1rem"} }}>
             {data.brochureDesc}
           </Typography>
-          <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+          <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2, justifyContent: {xs: "center", md: "flex-start"} ,alignItems: {xs: "center", md: "flex-start"} }} className=" rtl:space-x-reverse">
             {data.brochureFiles?.map((file, i) => (
               <Button
                 key={i}
@@ -344,9 +318,11 @@ export default function DynamicPage({
                   bgcolor: i === 0 ? "#cf9425" : "#fff",
                   color: i === 0 ? "#fff" : "#cf9425",
                   border: "2px solid #cf9425",
+                  borderRadius: "25px",
                   fontWeight: 700,
                   fontSize: { xs: ".8rem", md: "1rem" },
-                  minWidth: { xs: 190, md: 210 },
+                  minWidth: { xs: 160, md: 210 },
+                  maxWidth: { xs: 160, md: 210 },
                   py: { xs: 1, md: 1.2 },
                   px: { xs: 1, md: 2 },
                   "&:hover": {
@@ -359,18 +335,18 @@ export default function DynamicPage({
                 {file.label}
               </Button>
             ))}
-          </Stack>
+          </Box>
         </Box>
 
         {/* Why Us */}
         <Divider sx={{ my: { xs: 4, md: 7 } }} />
         <Box
-          sx={{ maxWidth: "900px", mx: "auto", px: { xs: 2, md: 0 }, pb: 6 }}
+          sx={{ maxWidth: "900px", mx: "auto", px: { xs: 2, md: 0 }, pb: 6, textAlign: {xs: "center", md: locale === "ar" ? "right" : "left"} }}
         >
           <Typography
             variant="h5"
             sx={{
-              fontSize: { xs: "4vw", md: "2.1rem" },
+              fontSize: { xs: "1.4rem", md: "1.8rem" },
               fontWeight: 700,
               color: "#cf9425",
               mb: 1,
@@ -378,20 +354,24 @@ export default function DynamicPage({
           >
             {data.whyTitle}
           </Typography>
-          <Typography sx={{ mb: 2, color: "#475650" }}>
+          <Typography sx={{ mb: 2, color: "#191C1E",fontWeight: 300, fontSize: {xs: ".8rem", sm: "1rem"} }}>
             {data.whyDesc}
           </Typography>
           <List>
             {data.whyPoints?.map((whyKey, i) => (
-              <ListItem sx={{ pl: 0 }} key={i}>
-                <ListItemIcon sx={{ minWidth: 36, color: "#cf9425" }}>
+              <ListItem sx={{ pl: 0,textAlign: isRTL ? "right" : "left", display: "flex", alignItems: "flex-start" }} key={i} >
+                <ListItemIcon sx={{ minWidth: 36, color: "#cf9425",paddingTop: "10px" }}>
                   <CheckCircleRoundedIcon />
                 </ListItemIcon>
                 <ListItemText
-                  primary={<span className="text-[#1d2327]">{whyKey}</span>}
+                
+                style={{
+                  lineHeight: "1",
+                }}
+                  primary={<span className="text-[#1d2327] text-[1rem] max-sm:text-[.7rem]">{whyKey}</span>}
                   primaryTypographyProps={{
                     sx: {
-                      fontSize: { xs: "2.8vw", md: "1.05rem" },
+                      fontSize: { xs: ".8rem", sm: "1rem" },
                       color: "#1d2327",
                       fontWeight: 500,
                     },

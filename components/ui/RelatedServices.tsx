@@ -31,7 +31,7 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
         overflowX: "hidden",
       }}
     >
-      <Box sx={{maxWidth: "100%",px: 0}} >
+      <Box sx={{maxWidth: "100%",px: {xs: 1,md: 0}}} >
         <HeadSections
           title={data.title}
           description={data.description}
@@ -52,7 +52,9 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
             mt: {xs: 2,md: "65px"},
             width: "100%",
             display: "flex",
+            flexDirection: {xs: "column",md: "row"},
             justifyContent: "center",
+            alignItems: {xs: "center",md: "flex-start"},
             flexWrap: "nowrap",
             gap: {xs: "10px",md: "62px"},
             pb: 1,
@@ -70,8 +72,10 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
                   sm: "calc(50% - 12px)",
                   md: "calc(34% - 18px)",
                 },
+                position: "relative",
               }}
             >
+              <Box sx={{ position: "absolute", top: 0, left: 0, width: "100%", borderRadius: "15px", height: "100%", backgroundColor: "rgba(0,0,0,0.5)", zIndex: 1 }}> </Box>
               <motion.div
                 key={isInView ? `area-${index}-in` : `area-${index}-out`}
                 style={{
@@ -88,7 +92,7 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
               >
                 <Box sx={{ height: { xs: "200px", md: 419 },borderRadius: "25px",border: "none",boxShadow: "none", position: "relative",py: 0,backgroundColor: "transparent" }} >
          
-                    <Image src={urlFor(area.image).url() || ""} alt={area.title} width={100} height={100} className="w-full h-full object-cover bg-transparent rounded-2xl border-white border" />
+                    <Image src={urlFor(area.image).url() || ""} alt={area.title} width={100} height={100} className="w-full h-full object-cover bg-transparent rounded-[15px] border-white border" />
                 
         
              <Box
@@ -99,6 +103,7 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
                       backgroundColor: "transparent",
                       padding: 0,
                       textAlign: "center",
+                      zIndex: 2,
                     }}
                   >
                     <EditableText

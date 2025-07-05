@@ -7,7 +7,7 @@ const realEstate = {
   fields: [
     {
       name: 'slug',
-      title: 'Slug | اسم الصفحه ويجب ان تنتهي في العربي -ar والانجليزي -en',
+      title: 'Slug | اختر اسم الصفحه',
       type: 'reference',
       to: [{ type: 'pageType' }],
       validation: (Rule: any) => Rule.required(),

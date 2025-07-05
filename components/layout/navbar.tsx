@@ -34,6 +34,7 @@ const navItems = [
   { label: "about", hasDropdown: false, href: "/about" },
   { label: "practice", hasDropdown: true, href: "/practice" },
   { label: "blog", hasDropdown: false, href: "/blog" },
+  { label: "offers", hasDropdown: false, href: "/offers" },
 ];
 
 const Navbar = ({ locale }: { locale: string }) => {
@@ -194,9 +195,9 @@ const Navbar = ({ locale }: { locale: string }) => {
                       {navItems.map((item, index) => (
                         <Box
                           key={index}
-                          onMouseOver={() =>
-                            item.hasDropdown && handleDropdownClick(item.label)
-                          }
+                          // onMouseOver={() =>
+                          //   item.hasDropdown && handleDropdownClick(item.label)
+                          // }
                           className="flex rtl:space-x-reverse items-center gap-2"
                           sx={{
                             color: "primary.main",
@@ -213,7 +214,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                           <Typography
                             variant="body1"
                             onClick={() => {
-                              router.push(item.href);
+                              router.push(`/${locale}${item.href}`);
                             }}
                             sx={{
                               color: "inherit",

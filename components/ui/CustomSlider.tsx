@@ -3,10 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Box, Stack, IconButton } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import { AnimatePresence, motion, Variants } from "framer-motion";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { urlFor } from "@/sanity/lib/image";
 
 const IMAGE_WIDTH = 400; // px for desktop, responsive handled below
 interface CustomSliderProps {
-  slides: { backgroundImage: string; contentImage: string; label: string; title: string }[];
+  slides: { backgroundImage: SanityImageSource; contentImage: SanityImageSource; label: string; title: string }[];
   interval?: number;
 }
 function CustomSlider({ slides, interval = 5000 }: CustomSliderProps) {
@@ -92,7 +94,7 @@ function CustomSlider({ slides, interval = 5000 }: CustomSliderProps) {
               display: "flex",
               flexDirection: "column",
               justifyContent: "flex-end",
-              background: `url(${slides[current]?.backgroundImage || ""}) center/cover no-repeat`,
+              background: `url(${urlFor(slides[current]?.backgroundImage).url() || ""}) center/cover no-repeat`,
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center" }}>

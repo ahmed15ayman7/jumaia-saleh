@@ -29,7 +29,7 @@ const realEstate = {
       validation: (Rule: any) => Rule.required(),
     },
     { name: 'breadcrumb', title: 'Breadcrumb | الخلفية', type: 'array', of: [{ type: 'object', fields: [{ name: 'label', title: 'Label | التسمية', type: 'string' }, { name: 'href', title: 'Href | الرابط', type: 'string' }] }] },
-    { name: 'imageUrl', title: 'Main Image URL| صورة الصفحة الرئيسية', type: 'url' },
+    { name: 'image', title: 'Main Image| صورة الصفحة الرئيسية', type: 'image', options: { hotspot: true } },
     { name: 'mainTitle', title: 'Main Title | العنوان الرئيسي', type: 'string' },
     { name: 'description', title: 'Description | الوصف', type: 'text' },
     {
@@ -78,11 +78,10 @@ const realEstate = {
     { name: 'newsletterPhone', title: 'Newsletter Phone| رقم الهاتف في النشرة الإخبارية', type: 'string' },
     { name: 'newsletterInput', title: 'Newsletter Input| حقل الإشتراك في النشرة الإخبارية', type: 'string' },
     { name: 'newsletterCta', title: 'Newsletter CTA| زر الإشتراك في النشرة الإخبارية', type: 'string' },
-    { name: 'newsletterSlides', title: 'Newsletter Slides| الشرائح في النشرة الإخبارية', type: 'array', of: [{ type: 'object', fields: [{ name: 'backgroundImage', title: 'Background Image| صورة الخلفية', type: 'url' }, { name: 'contentImage', title: 'Content Image| صورة المحتوى', type: 'url' }, { name: 'label', title: 'Label| التسمية', type: 'string' }, { name: 'title', title: 'Title| العنوان', type: 'string' }] }] },
-    { name: 'bottomImage', title: 'Bottom Decorative Image URL| صورة الصفحة السفلية', type: 'url' },
+    { name: 'newsletterSlides', title: 'Newsletter Slides| الشرائح في النشرة الإخبارية', type: 'array', of: [{ type: 'object', fields: [{ name: 'backgroundImage', title: 'Background Image| صورة الخلفية', type: 'image', options: { hotspot: true } }, { name: 'contentImage', title: 'Content Image| صورة المحتوى', type: 'image', options: { hotspot: true } }, { name: 'label', title: 'Label| التسمية', type: 'string' }, { name: 'title', title: 'Title| العنوان', type: 'string' }] }] },
     { name: 'relatedTitle', title: 'Related Services Title| عنوان الخدمات المتعلقة', type: 'string' },
     { name: 'relatedDesc', title: 'Related Services Description| وصف الخدمات المتعلقة', type: 'string' },
-    { name: 'relatedServices', title: 'Related Services| الخدمات المتعلقة', type: 'array', of: [{ type: 'object', fields: [{ name: 'image', title: 'Image| صورة الخدمة', type: 'url' }, { name: 'title', title: 'Title| العنوان', type: 'string' }] }] },
+    { name: 'relatedServices', title: 'Related Services| الخدمات المتعلقة', type: 'array', of: [{ type: 'object', fields: [{ name: 'image', title: 'Image| صورة الخدمة', type: 'image', options: { hotspot: true } }, { name: 'title', title: 'Title| العنوان', type: 'string' }] }] },
   ],
   preview: {
     select: {

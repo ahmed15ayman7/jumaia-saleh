@@ -12,8 +12,10 @@ import { motion, useInView } from "framer-motion";
 import EditableText from "../EditableText";
 
 import Image from "next/image";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { urlFor } from "@/sanity/lib/image";
 
-const RelatedServices = ({ data }: { data: {title: string, description: string, practiceAreas: { title: string, image: string}[]} }) => {
+const RelatedServices = ({ data }: { data: {title: string, description: string, practiceAreas: { title: string, image: SanityImageSource}[]} }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.5 });
 
@@ -86,7 +88,7 @@ const RelatedServices = ({ data }: { data: {title: string, description: string, 
               >
                 <Box sx={{ height: { xs: "200px", md: 419 },borderRadius: "25px",border: "none",boxShadow: "none", position: "relative",py: 0,backgroundColor: "transparent" }} >
          
-                    <Image src={area.image} alt={area.title} width={100} height={100} className="w-full h-full object-cover bg-transparent rounded-2xl border-white border" />
+                    <Image src={urlFor(area.image).url() || ""} alt={area.title} width={100} height={100} className="w-full h-full object-cover bg-transparent rounded-2xl border-white border" />
                 
         
              <Box

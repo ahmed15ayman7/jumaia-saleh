@@ -68,7 +68,7 @@ const TestimonialSection = ({
         padding: { xs: "2vh 1vw", sm: "2vh 1vw", md: "10vh 5vw" },
         display: "flex",
         flexDirection: { xs: "column", sm: "column", md: "row" },
-        justifyContent: { xs: "flex-start", sm: "flex-start", md: "center" },
+        justifyContent: { xs: "center", sm: "center", md: "center" },
         alignItems: { xs: "center", sm: "center", md: "center" },
         textAlign: {
           xs: "center",
@@ -86,20 +86,15 @@ const TestimonialSection = ({
       >
         <Typography
           style={{
-            color: "#cf9425 !important",
+            color: "primary.main",
           }}
           sx={{
             fontFamily: "Manrope-Regular, Helvetica",
             fontSize: { xs: ".7rem", sm: ".7rem", md: ".8rem" },
             letterSpacing: "1px",
+            color: "primary.main",
           }}
-        >
-          <EditableText
-            value={t("tag")}
-            onSave={(val) => onSave("testimonials.tag", val)}
-            isAdmin={isAdmin}
-          />
-        </Typography>
+        >{t("tag")}</Typography>
 
         <Typography
           variant="h1"
@@ -142,7 +137,7 @@ const TestimonialSection = ({
       </motion.div>
 
       <AnimatePresence mode="wait">
-        <Box className="flex flex-col gap-10 max-sm:text-center justify-between h-[80%] max-sm:h-[70%] max-sm:items-center max-sm:gap-4">
+        <Box className="flex flex-col gap-10 max-sm:text-center justify-between h-[80%] max-sm:h-[40%] max-sm:items-center max-sm:gap-4">
           <motion.div
             key={currentIndex}
             initial={{ x: locale === "ar" ? 100 : -100, opacity: 0 }}
@@ -151,18 +146,17 @@ const TestimonialSection = ({
               isInView ? { x: locale === "ar" ? -100 : 100, opacity: 0 } : {}
             }
             transition={{ duration: 0.5 }}
-            className="w-full gap-5 max-sm:items-center items-start mt-10 max-sm:mt-0"
+            className="w-full gap-5 max-sm:items-center items-start justify-between max-sm:justify-start mt-10 max-sm:mt-0"
             style={{
               display: "flex",
               flexDirection: "column",
               height: "100%",
-              justifyContent: "space-between",
             }}
           >
             <Typography
               sx={{
                 fontSize: { xs: ".8rem", sm: ".8rem", md: "1rem" },
-                flexGrow: 1,
+                flexGrow: { xs: 0, sm: 0, md: 1 },
                 display: "flex",
                 alignItems: "flex-start",
                 justifyContent: "flex-start",

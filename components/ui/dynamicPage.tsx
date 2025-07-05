@@ -18,14 +18,15 @@ import Image from "next/image";
 import RelatedServices from "./RelatedServices";
 import Newsletter from "./Newsletter";
 import Subscribe from "./Subscribe";
-
+import { urlFor } from '@/sanity/lib/image'
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 interface PracticeAreaProps {
   data: {
     relatedTitle?: string;
     relatedDesc?: string;
-    relatedServices?: { image: string; title: string }[];
+    relatedServices?: { image: SanityImageSource; title: string }[];
     breadcrumb?: { label: string; href?: string }[];
-    imageUrl?: string;
+    image?: SanityImageSource;
     mainTitle?: string;
     subtitle?: string;
     description?: string;
@@ -39,14 +40,14 @@ interface PracticeAreaProps {
     whyTitle?: string;
     whyDesc?: string;
     whyPoints?: string[];
-    bottomImage?: string;
+    bottomImage?: SanityImageSource;
     newsletterTitle?: string;
     newsletterDesc?: string;
     newsletterInput?: string;
     newsletterCta?: string;
     newsletterSlides?: {
-      backgroundImage?: string;
-      contentImage?: string;
+      backgroundImage?: SanityImageSource;
+      contentImage?: SanityImageSource;
       label?: string;
       title?: string;
     }[];
@@ -176,7 +177,7 @@ export default function DynamicPage({
           }}
         >
           <Image
-            src={data.imageUrl || ""}
+            src={urlFor(data.image as SanityImageSource).url() || ""}
             alt=""
             width={1200}
             height={650}

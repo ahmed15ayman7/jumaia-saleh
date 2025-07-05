@@ -4,7 +4,7 @@ import { client } from './client';
 export const fetchDynamicPage = async (slug: string, locale: string) => {
   const query = `
     *[_type == "real-estate" && slug.current == ${slug} && language == ${locale}][0]{
-      imageUrl,
+      image,
       bottomImage,
       mainTitle,
       subtitle,

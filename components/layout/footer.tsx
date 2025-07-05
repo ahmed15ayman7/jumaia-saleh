@@ -183,7 +183,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     <Grid
                       key={index}
                       component="div"
-                      size={{xs: 12, sm: index === 0 ? 12 : 6, md: index === 0 ? 4 : 2}}
+                      size={{xs: index === 0 ? 12 : 3, sm: index === 0 ? 12 : 3, md: index === 0 ? 4 : 2}}
                     >
                       {column.aboutTextKey ? (
                         <Typography variant="body2" sx={{ lineHeight: 1.5, fontSize: { xs: ".7rem", md: ".7rem" }, maxWidth: "100%" }}>
@@ -194,7 +194,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                           />
                         </Typography>
                       ) : (
-                        <Box className="flex flex-col gap-1 max-sm:text-center max-sm:items-center max-sm:gap-[.2rem] max-sm:flex-row max-sm:justify-between">
+                        <Box className="flex flex-col gap-1 max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]  max-sm:justify-between">
                           {column.links.map((linkKey, linkIndex) => (
                             <Typography
                               variant="body2"

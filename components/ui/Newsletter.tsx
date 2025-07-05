@@ -5,13 +5,14 @@ import { Box, Grid, Stack, Typography, IconButton, ButtonBase, Button } from "@m
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CustomSlider from "./CustomSlider";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 interface NewsletterProps {
     data: {
         newsletterTitle?: string;
         newsletterDesc?: string;
         newsletterInput?: string;
         newsletterCta?: string;
-        slides?: { backgroundImage: string; contentImage: string; label: string; title: string }[];
+        slides?: { backgroundImage: SanityImageSource; contentImage: SanityImageSource; label: string; title: string }[];
         phone?: string;
     };
 }
@@ -144,7 +145,7 @@ const Newsletter = ({data}:NewsletterProps) => {
           alignItems: "center",
           justifyContent: { xs: "center", md: "flex-start" }
         }}>
-          <CustomSlider slides={data.slides || []} />
+          <CustomSlider slides={(data.slides) || []} />
         </Grid>
       </Grid>
     </Box>

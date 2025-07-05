@@ -61,7 +61,6 @@ function CustomSlider({ slides, interval = 5000 }: CustomSliderProps) {
       flexDirection: { xs: "column", md: "row" },
       gap: { xs: 4, md: "24px" },
       alignItems: "flex-start",
-      bgcolor: "#fcf9f6",
       justifyContent: "center",
       py: { xs: 4, md: 10 }
     }}>

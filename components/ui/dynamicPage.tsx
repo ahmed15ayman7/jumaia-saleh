@@ -80,6 +80,7 @@ export default function DynamicPage({
     >
       <Box sx={{
         px: { xs: "1.5rem", md: "5vw" },
+        position: "relative",
       }}> 
         
 

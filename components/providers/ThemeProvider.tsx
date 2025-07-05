@@ -21,7 +21,7 @@ const appTheme = createTheme({
     //   dark: "#0C1C19",
     },
     text: {
-      primary: "#cf9425",
+      primary: "#0C1C19",
       secondary: "#FFFFFF",
     //   dark: "#0C1C19",
     },

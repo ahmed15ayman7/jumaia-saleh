@@ -1,0 +1,445 @@
+"use client";
+
+import {
+  Box,
+  Typography,
+  Stack,
+  Button,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Divider,
+} from "@mui/material";
+import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
+import Image from "next/image";
+import RelatedServices from "./RelatedServices";
+import Newsletter from "./Newsletter";
+import Subscribe from "./Subscribe";
+
+interface PracticeAreaProps {
+  data: {
+    relatedTitle?: string;
+    relatedDesc?: string;
+    relatedServices?: { image: string; title: string }[];
+    breadcrumb?: { label: string; href?: string }[];
+    imageUrl?: string;
+    mainTitle?: string;
+    subtitle?: string;
+    description?: string;
+    endDescription?: string;
+    points?: { title: string; desc: string }[];
+    readMore?: string;
+    readMoreLink?: string;
+    brochureTitle?: string;
+    brochureDesc?: string;
+    brochureFiles?: { label: string; link: string }[];
+    whyTitle?: string;
+    whyDesc?: string;
+    whyPoints?: string[];
+    bottomImage?: string;
+    newsletterTitle?: string;
+    newsletterDesc?: string;
+    newsletterInput?: string;
+    newsletterCta?: string;
+    newsletterSlides?: {
+      backgroundImage?: string;
+      contentImage?: string;
+      label?: string;
+      title?: string;
+    }[];
+    phone?: string;
+  };
+  locale: string;
+  isAdmin: boolean;
+  // for RTL absolute image positioning
+  isRTL?: boolean;
+}
+
+export default function DynamicPage({
+  data,
+  locale,
+  isAdmin,
+  isRTL,
+}: PracticeAreaProps) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.2 });
+
+  return (
+    <Box
+      sx={{
+        bgcolor: "#fff",
+        minHeight: "100vh",
+        pb: 0,
+        px: { xs: "1.5rem", md: "5vw" },
+        pt: { xs: 1, md: 3 },
+        position: "relative",
+      }}
+    >
+      {/* Absolute bottom/left background image */}
+      {/* {data.bottomImage && (
+        <Box
+          sx={{
+            position: "absolute",
+            left: isRTL ? "unset" : 0,
+            right: isRTL ? 0 : "unset",
+            bottom: 0,
+            width: { xs: "30vw", md: "15vw" },
+            height: { xs: "35vw", md: "30vw" },
+            zIndex: 1,
+            pointerEvents: "none",
+            opacity: 0.15,
+            display: { xs: "none", md: "block" },
+          }}
+        >
+          <Image
+            src={data.bottomImage}
+            alt="Decor"
+            fill
+            style={{
+              objectFit: "contain",
+              ...(isRTL ? { transform: "rotateY(180deg)" } : {}),
+            }}
+            sizes="15vw"
+          />
+        </Box>
+      )} */}
+
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7 }}
+        ref={ref}
+        style={{
+          position: "relative",
+        }}
+      >
+        {/* Breadcrumb */}
+        <Box sx={{ pt: 2, pb: 3, fontSize: "13px" }}>
+          {data.breadcrumb?.map((bc, i) => (
+            <Box key={i} display="inline">
+              {bc.href ? (
+                <a
+                  href={bc.href}
+                  style={{ color: "#444", textDecoration: "none" }}
+                >
+                  <Typography
+                    component="span"
+                    sx={{
+                      fontSize: ".8rem",
+                    }}
+                    color={
+                      i === (data.breadcrumb?.length || 0) - 1
+                        ? "primary.main"
+                        : "#444"
+                    }
+                  >
+                    {bc.label}
+                  </Typography>
+                </a>
+              ) : (
+                <Typography
+                  component="span"
+                  color={
+                    i === (data.breadcrumb?.length || 0) - 1
+                      ? "primary.main"
+                      : "#444"
+                  }
+                >
+                  {bc.label}
+                </Typography>
+              )}
+              {i < (data.breadcrumb?.length || 0) - 1 && <> &gt; </>}
+            </Box>
+          ))}
+        </Box>
+
+        {/* Main Image */}
+        <Box
+          sx={{
+            width: { xs: "100%", md: "100%" },
+            mx: "auto",
+            borderRadius: "8px",
+            overflow: "hidden",
+            mb: { xs: 3, md: 6 },
+            boxShadow: 3,
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          <Image
+            src={data.imageUrl || ""}
+            alt=""
+            width={1200}
+            height={650}
+            style={{
+              width: "100%",
+              height: "auto",
+              display: "block",
+              objectFit: "cover",
+            }}
+            priority
+          />
+        </Box>
+
+        <Box
+          sx={{
+            maxWidth: "900px",
+            mx: "auto",
+            px: { xs: 2, md: 0 },
+            pb: { xs: 4, md: 7 },
+            position: "relative",
+            zIndex: 2,
+          }}
+        >
+          {/* Title & Subtitle */}
+          <Typography
+            variant="h3"
+            sx={{
+              color: "primary.main",
+              fontSize: { xs: "6vw", md: "2.5rem" },
+              fontWeight: 700,
+              mb: { xs: 1, md: "59px" },
+            }}
+          >
+            {data.mainTitle}
+          </Typography>
+          <Divider sx={{ mb: { xs: 1, md: "20px" } }} />
+          <Typography
+            variant="subtitle1"
+            sx={{
+              color: "#4d4d4d",
+              fontWeight: 600,
+              fontSize: { xs: "3.3vw", md: "1.25rem" },
+              mb: 2,
+            }}
+          >
+            {data.subtitle}
+          </Typography>
+
+          {/* Description */}
+          <Typography
+            sx={{
+              color: "#627174",
+              mb: 2,
+              fontFamily: "'Manrope-Regular', Helvetica",
+              fontSize: { xs: "3vw", md: "1.14rem" },
+            }}
+          >
+            {data.description}
+          </Typography>
+
+          {/* Points */}
+          <List sx={{ mb: 2, pl: 1 }}>
+            {data.points?.map((point, i) => (
+              <Box key={i} sx={{ mb: 1.5 }}>
+                <Typography
+                  component="div"
+                  sx={{ fontSize: "1rem", color: "#627174", mb: 0.5 }}
+                >
+                  <>&#8226;</> {"    "}
+                  <span className="text-[#627174]">{point.title}</span>
+                </Typography>
+                <Typography
+                  component="div"
+                  sx={{
+                    color: "#627174",
+                    fontSize: { xs: "2.6vw", md: "1.05rem" },
+                    ml: 3,
+                  }}
+                >
+                  {point.desc}
+                </Typography>
+              </Box>
+            ))}
+          </List>
+          <Typography
+            sx={{
+              color: "#627174",
+              mb: 2,
+              fontFamily: "'Manrope-Regular', Helvetica",
+              fontSize: { xs: "3vw", md: "1.14rem" },
+            }}
+          >
+            {data.endDescription}
+          </Typography>
+        </Box>
+        {/* Read more */}
+        <Box
+          sx={{
+            maxWidth: "900px",
+            mx: "auto",
+            mb: { xs: 3, md: 6 },
+            px: { xs: 2, md: 0 },
+          }}
+        >
+          <Button
+            sx={{
+              color: "#cf9425",
+              fontSize: "1.1rem",
+              fontWeight: 600,
+              px: 2,
+              border: "2px solid transparent",
+              borderBottom: "2px solid #cf9425",
+              transition: "all .5s",
+              "&:hover": {
+                backgroundColor: "transparent",
+                borderRadius: "25px",
+                border: "2px solid #cf9425",
+              },
+            }}
+            disableRipple
+            onClick={() => {
+              window.open(data.readMoreLink, "_blank");
+            }}
+          >
+            {data.readMore}
+          </Button>
+        </Box>
+
+        {/* Brochure Section */}
+        <Box
+          sx={{
+            maxWidth: "900px",
+            mx: "auto",
+            px: { xs: 2, md: 0 },
+            my: { xs: 5, md: 10 },
+            zIndex: 2,
+            position: "relative",
+          }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              fontSize: { xs: "5vw", md: "2.1rem" },
+              fontWeight: 700,
+              color: "#183826",
+              mb: 1,
+            }}
+          >
+            {data.brochureTitle}
+          </Typography>
+          <Typography sx={{ mb: 3, color: "#475650" }}>
+            {data.brochureDesc}
+          </Typography>
+          <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>
+            {data.brochureFiles?.map((file, i) => (
+              <Button
+                key={i}
+                variant="outlined"
+                href={file.link}
+                target="_blank"
+                sx={{
+                  bgcolor: i === 0 ? "#cf9425" : "#fff",
+                  color: i === 0 ? "#fff" : "#cf9425",
+                  border: "2px solid #cf9425",
+                  fontWeight: 700,
+                  fontSize: { xs: ".8rem", md: "1rem" },
+                  minWidth: { xs: 190, md: 210 },
+                  py: { xs: 1, md: 1.2 },
+                  px: { xs: 1, md: 2 },
+                  "&:hover": {
+                    bgcolor: "#cf9425",
+                    color: "#fff",
+                  },
+                  mb: { xs: i === 0 ? 1 : 0, sm: 0 },
+                }}
+              >
+                {file.label}
+              </Button>
+            ))}
+          </Stack>
+        </Box>
+
+        {/* Why Us */}
+        <Divider sx={{ my: { xs: 4, md: 7 } }} />
+        <Box
+          sx={{ maxWidth: "900px", mx: "auto", px: { xs: 2, md: 0 }, pb: 6 }}
+        >
+          <Typography
+            variant="h5"
+            sx={{
+              fontSize: { xs: "4vw", md: "2.1rem" },
+              fontWeight: 700,
+              color: "#cf9425",
+              mb: 1,
+            }}
+          >
+            {data.whyTitle}
+          </Typography>
+          <Typography sx={{ mb: 2, color: "#475650" }}>
+            {data.whyDesc}
+          </Typography>
+          <List>
+            {data.whyPoints?.map((whyKey, i) => (
+              <ListItem sx={{ pl: 0 }} key={i}>
+                <ListItemIcon sx={{ minWidth: 36, color: "#cf9425" }}>
+                  <CheckCircleRoundedIcon />
+                </ListItemIcon>
+                <ListItemText
+                  primary={<span className="text-[#1d2327]">{whyKey}</span>}
+                  primaryTypographyProps={{
+                    sx: {
+                      fontSize: { xs: "2.8vw", md: "1.05rem" },
+                      color: "#1d2327",
+                      fontWeight: 500,
+                    },
+                  }}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </Box>
+        <Box
+          sx={{
+            display: { xs: "none", md: "block" },
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "190px",
+            zIndex: 1,
+            pointerEvents: "none",
+            // transform: "rotateY(180deg)",
+          }}
+        >
+          <Image
+            src="/images/image-9.svg"
+            alt=""
+            width={190}
+            height={150}
+            style={{ objectFit: "contain" }}
+          />
+        </Box>
+      </motion.div>
+      <Newsletter
+        data={{
+          newsletterTitle: data.newsletterTitle || "",
+          newsletterDesc: data.newsletterDesc || "",
+          newsletterInput: data.newsletterInput || "",
+          newsletterCta: data.newsletterCta || "",
+          slides:
+            data.newsletterSlides?.map((slide) => ({
+              backgroundImage: slide.backgroundImage || "",
+              contentImage: slide.contentImage || "",
+              label: slide.label || "",
+              title: slide.title || "",
+            })) || [],
+        }}
+      />
+      <RelatedServices
+        data={{
+          title: data.relatedTitle || "",
+          description: data.relatedDesc || "",
+          practiceAreas:
+            data.relatedServices?.map((service) => ({
+              image: service.image || "",
+              title: service.title || "",
+            })) || [],
+        }}
+      />
+      <Subscribe locale={locale} isAdmin={isAdmin} />
+    </Box>
+  );
+}

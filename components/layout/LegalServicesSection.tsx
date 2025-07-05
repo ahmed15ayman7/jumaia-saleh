@@ -4,6 +4,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useMemo } from 'react';
+import Link from 'next/link';
 
 const LegalServicesSection = () => {
   const t = useTranslations('navbar.services');
@@ -11,13 +12,13 @@ const LegalServicesSection = () => {
 
   const services = useMemo(
     () => [
-      t('real_estate'),
-      t('legal_rep'),
-      t('contracts'),
-      t('labour'),
-      t('criminal'),
-      t('family'),
-      t('civil'),
+      {label: t('real_estate'), href: '/practice/real-estate'},
+      {label: t('legal_rep'), href: '/practice/legal-rep'},
+      {label: t('contracts'), href: '/practice/contracts'},
+      {label: t('labour'), href: '/practice/labour'},
+      {label: t('criminal'), href: '/practice/criminal'},
+      {label: t('family'), href: '/practice/family'},
+      {label: t('civil'), href: '/practice/civil'},
     ],
     [t]
   );
@@ -77,7 +78,7 @@ const LegalServicesSection = () => {
               variants={itemVariants as any}
               className="bg-white px-5 py-3 rounded-lg shadow-lg text-[#0C1C19] font-semibold text-[14px]  hover:shadow-xl transition-all duration-300"
             >
-              {service}
+              <Link href={`/${locale === "ar" ? "ar" : "en"}${service.href}`}>{service.label}</Link>
             </motion.div>
           ))}
         </motion.div>

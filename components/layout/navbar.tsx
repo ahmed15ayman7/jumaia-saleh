@@ -134,7 +134,9 @@ const Navbar = ({ locale }: { locale: string }) => {
             animate={{ y: 0 }}
             exit={{ y: -80 }}
             transition={{ duration: 0.3 }}
-            style={{ position: "absolute", width: "100%", top: 0 }}
+            style={{ position: "absolute", width: "100%", top: 0, background:pathname==="/en" || pathname==="/ar"  ? "transparent" :
+              'linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)',
+             }}
           >
             <AppBar
               position="static"
@@ -198,6 +200,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                           className="flex rtl:space-x-reverse items-center gap-2"
                           sx={{
                             color: "primary.main",
+                            borderBottom: `/${pathname.slice(4)}` === item.href || (pathname.slice(3).includes(item.href) && item.href !== "/") ? "2px solid #cf9425" : "none",
                             padding: "10px",
                             "&:hover": {
                               color: "secondary.main",

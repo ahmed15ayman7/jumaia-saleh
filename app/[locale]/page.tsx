@@ -10,6 +10,7 @@ import OurLawyers from '@/components/shared/OurLawyers';
 import Testimonials from '@/components/shared/testimonials';
 import LegalConsultation from '@/components/shared/legalAdvisors';
 import Subscribe from '@/components/ui/Subscribe';
+import RelatedServices from '@/components/ui/RelatedServices';
 // export function generateStaticParams() {
 //   return [{ locale: 'en' }, { locale: 'ar' }]
 // }

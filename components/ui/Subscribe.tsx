@@ -10,7 +10,7 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 
-export default function NewsletterSection({ locale, isAdmin }: { locale: string; isAdmin: boolean }) {
+export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin: boolean }) {
   const t = useTranslations("subscribe");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
@@ -75,14 +75,16 @@ export default function NewsletterSection({ locale, isAdmin }: { locale: string;
       >
         <Stack
           alignItems="center"
-          spacing={{ xs: 2, md: 3 }}
+          spacing={{ xs: 2, md: "1.5rem" }}
           sx={{
             width: "100%",
             maxWidth: "1050px",
+            gap: { xs: 2, md: "1rem" },
             px: { xs: 2, md: 0 },
             py: { xs: "10vh", md: "14vh" },
           }}
         >
+          <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: { xs: 2, md: "1rem" }}}>
           <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 1 }}>
             <MailOutlineIcon sx={{ color: "#cf9425", fontSize: { xs: "7vw", md: "45px" }, mr: 1 }} />
             <Typography
@@ -110,6 +112,7 @@ export default function NewsletterSection({ locale, isAdmin }: { locale: string;
               fontSize: { xs: "3.2vw", sm: "2vw", md: "1.15vw" },
               maxWidth: "850px",
               textAlign: "center",
+              mb: { xs: 2, sm: "1rem" },
             }}
           >
             <EditableText
@@ -118,7 +121,7 @@ export default function NewsletterSection({ locale, isAdmin }: { locale: string;
               isAdmin={isAdmin}
             />
           </Typography>
-
+          </Box>
           {/* Subscription input + Button */}
           <Box
             sx={{
@@ -126,7 +129,7 @@ export default function NewsletterSection({ locale, isAdmin }: { locale: string;
               flexDirection: { xs: "column", sm: "row" },
               mt: { xs: 4, md: 6 },
               width: { xs: "94vw", sm: "75vw", md: "680px" },
-              gap: { xs: 2, sm: 3 },
+              gap: { xs: 2, sm: 2 },
               alignItems: "center",
               justifyContent: "center",
             }}
@@ -155,6 +158,7 @@ export default function NewsletterSection({ locale, isAdmin }: { locale: string;
               variant="contained"
               sx={{
                 px: { xs: 5, sm: 6 },
+                py: { xs: 2, sm: 4 },
                 height: { xs: "11vw", sm: "48px" },
                 bgcolor: "primary.main",
                 color: "white",

@@ -75,7 +75,7 @@
     "button": "Contact Us",
     "tag": "TESTIMONIALS",
     "role": "CEO, Loreum Ipsum",
-    "description_1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "description_1": "Working with Jumaia Saleh has been a pivotal moment for our company. From our initial formation to navigating complex commercial contracts, their legal advice has been invaluable. They are not just our lawyers; they are true strategic partners in our growth. Their professionalism and foresight are second to none.",
     "description_2": "Working with Jumaia Saleh has been a pivotal moment for our company. From our initial formation to navigating complex commercial contracts, their legal advice has been invaluable. They are not just our lawyers; they are true strategic partners in our growth. Their professionalism and foresight are second to none.",
     "description_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     "name_1": "John Doe",
@@ -85,7 +85,8 @@
     "role_2": "CEO, Loreum Ipsum",
     "role_3": "CEO, Loreum Ipsum",
     "description_0": "Working with Jumaia Saleh has been a pivotal moment for our company. From our initial formation to navigating complex commercial contracts, their legal advice has been invaluable. They are not just our lawyers; they are true strategic partners in our growth. Their professionalism and foresight are second to none.",
-    "name_0": "Ritesh"
+    "name_0": "Ritesh",
+    "role_0": "CEO, Loreum Ipsum"
   },
   "legalAdvisors": {
     "header": {

@@ -54,6 +54,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
         minHeight: {xs: "70vh", sm: "80vh", md: "100vh"},
         overflow: "hidden",
         bgcolor: "#0c1c19",
+        position: "relative",
         px: 0,
         py: { xs: "5vw", sm: "4vw" },
         display: "flex",
@@ -61,6 +62,16 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
         alignItems: "center",
       }}
     >
+      <Box style={{display: "flex",
+        flexDirection: "column",
+        alignItems: "center",backgroundImage: "url('/images/pattern.svg')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0}} >
+      <Box style={{display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        }}>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -223,7 +234,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
           <Divider
             sx={{
               flexGrow: 1,
-              borderColor: "white",
+              borderColor: "primary.main",
               borderBottomWidth: "2px",
             }}
           />
@@ -257,7 +268,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
           <Divider
             sx={{
               flexGrow: 1,
-              borderColor: "white",
+              borderColor: "primary.main",
               borderBottomWidth: "2px",
             }}
           />
@@ -369,6 +380,8 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
           </Box>
         </motion.div>
       </motion.div>
+      </Box>
+    </Box>
     </Box>
   );
 }

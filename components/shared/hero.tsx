@@ -59,7 +59,7 @@ const Hero = ({
             right: locale === 'en' ? '0%' : 'auto',
             left: locale === 'en' ? 'auto' : '0%',
             width: { xs: '30%', sm: '40%', md: '40%' },
-            height: {xs: '70vh',md: '100vh'},
+            height: {xs: '70vh',md: '90vh'},
             zIndex: 1,
           }}
         >
@@ -69,7 +69,7 @@ const Hero = ({
             initial={{ opacity: 0, x: 80 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 1 }}
-            className="md:h-[90vh] h-auto"
+            className="md:h-[80vh] h-auto"
             style={{
               position: 'absolute',
               bottom: '0%',
@@ -86,14 +86,13 @@ const Hero = ({
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 1 }}
-            className="md:h-[90vh] h-auto"
+            className="md:h-[80vh] h-auto"
             style={{
               position: 'absolute',
               bottom: '0%',
               left: locale === 'en' ? '0%' : '-20%',
               right: locale === 'en' ? '-20%' : '0%',
               width: '120%',
-              height: 'auto',
               objectFit: 'contain',
               zIndex: 8,
             }}
@@ -119,11 +118,11 @@ const Hero = ({
           <motion.div
             key={isInView ? 'hero-title-visible' : 'hero-title-hidden'}
             initial={{ opacity: 0, y: 40 }}
-            className="text-center md:text-left"
+            className={`text-center ${locale === "en" ? "md:text-left" : "md:text-right"}`}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <Typography variant="subtitle1" sx={{ color: 'primary.main',fontFamily: 'Manrope',textAlign: {xs: "center",md: "left"} }}>
+            <Typography variant="subtitle1" sx={{ color: 'primary.main',fontFamily: 'Manrope',textAlign: {xs: "center",md: locale === "en" ? "left" : "right"} }}>
               <EditableText
                 value={t('hero')}
                 onSave={(value: string) => {
@@ -140,7 +139,7 @@ const Hero = ({
             key={isInView ? 'hero-subtitle-visible' : 'hero-subtitle-hidden'}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center md:text-left"
+            className={`text-center ${locale === "en" ? "md:text-left" : "md:text-right"}`}
             transition={{ delay: 0.2, duration: 0.6 }}
           >
             <Box sx={{ mt: 2 }}>
@@ -151,7 +150,7 @@ const Hero = ({
                   lineHeight: 1.3,
                   fontWeight: 600,
                   fontSize: { xs: '1.5rem', sm: '2.5rem', md: '3.2rem' },
-                  textAlign: {xs: "center",md: "left"}
+                  textAlign: {xs: "center",md: locale === "en" ? "left" : "right"}
                 }}
               >
                 <EditableText
@@ -195,7 +194,7 @@ const Hero = ({
               sx={{
                 color: 'white',
                 maxWidth: '600px',
-                textAlign: {xs: "center",md: "left"},
+                textAlign: {xs: "center",md: locale === "en" ? "left" : "right"},
                 mt: 3,
                 fontSize: { xs: '.9rem', md: '1.125rem' },
               }}

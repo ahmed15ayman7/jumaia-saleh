@@ -3,25 +3,27 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useMemo } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
+import { fetchDynamicPageType } from '@/sanity/lib/fetchDynamicPage';
 
 const LegalServicesSection = () => {
   const t = useTranslations('navbar.services');
   const locale = useLocale();
-
-  const services = useMemo(
-    () => [
-      {label: t('real_estate'), href: '/practice/real-estate'},
-      {label: t('legal_rep'), href: '/practice/legal-rep'},
-      {label: t('contracts'), href: '/practice/contracts'},
-      {label: t('labour'), href: '/practice/labour'},
-      {label: t('criminal'), href: '/practice/criminal'},
-      {label: t('family'), href: '/practice/family'},
-      {label: t('civil'), href: '/practice/civil'},
-    ],
-    [t]
-  );
+  let [services, setServices] = useState([
+    {title: t('real_estate'), titleEn: t('real_estate'), value: 'real-estate'},
+    {title: t('legal_rep'), titleEn: t('legal_rep'), value: 'legal-rep'},
+    {title: t('contracts'), titleEn: t('contracts'), value: 'contracts'},
+    {title: t('labour'), titleEn: t('labour'), value: 'labour'},
+    {title: t('criminal'), titleEn: t('criminal'), value: 'criminal'},
+    {title: t('family'), titleEn: t('family'), value: 'family'},
+    {title: t('civil'), titleEn: t('civil'), value: 'civil'},
+  ]);
+  useEffect(() => {
+    fetchDynamicPageType('real-estate').then((data) => {
+      setServices(data);
+    });
+  }, []);
 
   const isArabic = locale === 'ar';
 
@@ -78,7 +80,7 @@ const LegalServicesSection = () => {
               variants={itemVariants as any}
               className="bg-white px-5 py-3 rounded-lg shadow-lg text-[#0C1C19] font-semibold text-[14px]  hover:shadow-xl transition-all duration-300"
             >
-              <Link href={`/${locale === "ar" ? "ar" : "en"}${service.href}`}>{service.label}</Link>
+              <Link href={`/${locale === "ar" ? "ar" : "en"}/practice/${service.value}`}>{locale === "ar" ? service.title : service.titleEn}</Link>
             </motion.div>
           ))}
         </motion.div>

@@ -2,9 +2,20 @@
 
 const realEstate = {
   name: 'real-estate',
-  title: 'Real Estate || قضايا عقارية',
+  title: ' بيانات الصفحة الخاصة بخدماتنا',
   type: 'document',
   fields: [
+    {
+      name: 'slug',
+      title: 'Slug | اسم الصفحه ويجب ان تنتهي في العربي -ar والانجليزي -en',
+      type: 'reference',
+      example: 'real-estate-ar | real-estate-en',
+      to: [{ type: 'pageType' }],
+      // options: {
+      //   layout: 'dropdown',
+      // },
+      // validation: (Rule: any) => Rule.required(),
+    },
     {
       name: 'language',
       title: 'Language | اللغة',
@@ -73,6 +84,23 @@ const realEstate = {
     { name: 'relatedDesc', title: 'Related Services Description| وصف الخدمات المتعلقة', type: 'string' },
     { name: 'relatedServices', title: 'Related Services| الخدمات المتعلقة', type: 'array', of: [{ type: 'object', fields: [{ name: 'image', title: 'Image| صورة الخدمة', type: 'url' }, { name: 'title', title: 'Title| العنوان', type: 'string' }] }] },
   ],
+  preview: {
+    select: {
+      title: 'mainTitle',
+      lang: 'language',
+      slug: 'slug'
+    },
+    prepare(value: any) {
+      const title = value.title || 'No Title';
+      const lang = value.lang || '';
+      const slug = value.slug?.value || '';
+      return {
+        title: `${title} (${lang.toUpperCase()})`,
+        subtitle: slug
+      };
+    }
+  }
+  
 };
 
 export default realEstate;

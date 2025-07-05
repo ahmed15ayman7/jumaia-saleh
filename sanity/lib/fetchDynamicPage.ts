@@ -3,7 +3,7 @@ import { client } from './client';
 
 export const fetchDynamicPage = async (slug: string, locale: string) => {
   const query = `
-    *[_type == "${slug}" && language == $locale][0]{
+    *[_type == "real-estate" && slug.current == ${slug} && language == ${locale}][0]{
       imageUrl,
       bottomImage,
       mainTitle,
@@ -59,4 +59,14 @@ export const fetchDynamicPage = async (slug: string, locale: string) => {
     }
   `;
   return await client.fetch(query, { slug, locale });
+};
+export const fetchDynamicPageType = async (slug: string) => {
+  const query = `
+    *[_type == "pageType"]{
+      title,
+      titleEn,
+      value
+    }
+  `;
+  return await client.fetch(query, { slug });
 };

@@ -7,6 +7,7 @@
 import {visionTool} from '@sanity/vision'
 import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
+import StudioLogo from './components/ui/StudioLogo'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import {apiVersion, dataset, projectId} from './sanity/env'
@@ -14,9 +15,16 @@ import {schema} from './sanity/schemaTypes'
 import {structure} from './sanity/structure'
 
 export default defineConfig({
+  name: 'jumaia-saleh',         // اسم داخلي
+  title: 'Jumaia Saleh', 
   basePath: '/studio',
   projectId,
   dataset,
+  studio: {
+    components: {
+      logo: StudioLogo,
+    },
+  },
   // Add and edit the content schema in the './sanity/schemaTypes' folder
   schema,
   plugins: [

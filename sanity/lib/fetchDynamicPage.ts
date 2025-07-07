@@ -75,3 +75,123 @@ export const fetchDynamicPageType = async (slug: string) => {
   `;
   return await client.fetch(query, { slug });
 };
+
+
+
+export const fetchAboutUs = async (locale: string = 'ar') => {
+  const query = `
+    *[_type == "aboutUs"][0]{
+    breadcrumb,
+      hero->{
+        title,
+        titleAr,
+        subtitle,
+        subtitleAr,
+        backgroundImage {
+          asset->{url}
+        }
+      },
+      content {
+        title,
+        titleAr,
+        author,
+        authorAr,
+        date,
+        description,
+        descriptionAr
+      },
+      brochure {
+        title,
+        titleAr,
+        description,
+        descriptionAr,
+        buttons[]{
+          label,
+          labelAr,
+          link
+        }
+      },
+      vision {
+        title,
+        titleAr,
+        description,
+        descriptionAr,
+        description2,
+        descriptionAr2,
+        description3,
+        descriptionAr3
+      },
+      whyUs {
+        title,
+        titleAr,
+        description,
+        descriptionAr,
+        points[]{
+          label,
+          labelAr
+        }
+      },
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchTerms = async (locale: string = 'ar') => {
+  const query = `
+    *[_type == "terms"][0]{
+      breadcrumb,
+      hero->{
+        title,
+        titleAr,
+        subtitle,
+        subtitleAr,
+        backgroundImage { 
+          asset->{url}
+        }
+      },
+      content {
+        title,
+        titleAr,
+        description,
+        descriptionAr,
+        items[]{
+          title,
+          titleAr,
+          description,
+          descriptionAr
+        }
+      }
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchPrivacy = async (locale: string = 'ar') => {
+  const query = `
+    *[_type == "privacy"][0]{
+      breadcrumb,
+      hero->{
+        title,
+        titleAr,
+        subtitle,
+        subtitleAr,
+        backgroundImage { 
+          asset->{url}
+        }
+      },
+      content {
+        title,
+        titleAr,
+        description,
+        descriptionAr,
+        items[]{
+          title,
+          titleAr,
+          description,
+          descriptionAr
+        }
+      }
+    }
+  `;
+  return await client.fetch(query, { locale });
+};

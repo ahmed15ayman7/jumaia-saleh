@@ -18,6 +18,7 @@ import EditableText from "../EditableText";
 import { toast } from "sonner";
 import { updateMessage } from "@/lib/updateMessage";
 import { motion, useInView } from "framer-motion";
+import Link from "next/link";
 
 const socialMedia = [
   { icon: <FacebookIcon />, nameKey: "facebook" },
@@ -276,11 +277,13 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                       "&:hover": { textDecoration: "underline" },
                     }}
                   >
-                    <EditableText
-                      value={t("terms")}
-                      onSave={val => onSave("footer.terms", val)}
-                      isAdmin={isAdmin}
-                    />
+                    <Link href={"/"+locale+"/terms"}>
+                      <EditableText
+                        value={t("terms")}
+                        onSave={val => onSave("footer.terms", val)}
+                        isAdmin={isAdmin}
+                      />
+                    </Link>
                   </Typography>
                   <Typography
                     variant="body2"
@@ -290,11 +293,13 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                       "&:hover": { textDecoration: "underline" },
                     }}
                   >
+                    <Link href={"/"+locale+"/privacy"}>
                     <EditableText
                       value={t("privacy")}
-                      onSave={val => onSave("footer.privacy", val)}
-                      isAdmin={isAdmin}
-                    />
+                        onSave={val => onSave("footer.privacy", val)}
+                        isAdmin={isAdmin}
+                      />
+                    </Link>
                   </Typography>
                 </Box>
               </Box>

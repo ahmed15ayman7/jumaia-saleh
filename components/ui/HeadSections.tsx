@@ -14,6 +14,7 @@ interface HeadSectionsProps {
   keyTitle: string;
   keyDescription: string;
   isAdmin: boolean;
+  isbg: boolean;
 }
 
 const HeadSections = ({
@@ -23,6 +24,7 @@ const HeadSections = ({
   keyTitle,
   keyDescription,
   isAdmin,
+  isbg,
 }: HeadSectionsProps) => {
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -54,7 +56,7 @@ const HeadSections = ({
             variant="h1"
             align="center"
             sx={{
-              color: "primary.dark",
+              color: isbg ? "primary.main" : "primary.dark",
               fontFamily: "'Manrope-Bold', Helvetica",
               fontWeight: 700,
               fontSize: {xs: "32px",md: "64px"},
@@ -94,7 +96,7 @@ const HeadSections = ({
                 onSave(keyDescription, value);
               }}
               isAdmin={isAdmin}
-              className="text-sm md:text-2xl font-light mb-4"
+              className="text-sm md:text-[1rem] font-light mb-4"
             />
           </Typography>
         </motion.div>

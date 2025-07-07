@@ -36,7 +36,10 @@ export default function RootLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const { locale } = use(params);
+  let { locale } = use(params);
+  if(locale !== "ar"&&locale !== "en") {
+    locale = "ar";
+  }
   const isAdmin = true;
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>

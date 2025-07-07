@@ -11,15 +11,20 @@ import Testimonials from '@/components/shared/testimonials';
 import LegalConsultation from '@/components/shared/legalAdvisors';
 import Subscribe from '@/components/ui/Subscribe';
 import RelatedServices from '@/components/ui/RelatedServices';
+import NotFound404 from './not-found';
 // export function generateStaticParams() {
 //   return [{ locale: 'en' }, { locale: 'ar' }]
 // }
 export default  function HomePage({params}: {params: Promise<{locale: string}>}) {
   const t = useTranslations('home');
   const {locale} =  use(params);
+  if(locale !== "ar"&&locale !== "en") {
+    return <NotFound404 locale={"ar"} />
+  }else{
+    
+  }
   const {data: session} = useSession();
   const isAdmin = !!session;
-
 
   return (
     <main className="w-full min-h-screen bg-primary text-gold">

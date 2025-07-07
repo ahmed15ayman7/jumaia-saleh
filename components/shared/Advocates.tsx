@@ -37,7 +37,7 @@ const AnimatedCounter = ({ to, isInView, suffix }: { to: number; isInView: boole
   return <>{count}{suffix}</>;
 };
 
-const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
+const Advocates = ({ locale, isAdmin ,isbg=false}: { locale: string; isAdmin: boolean,isbg?:boolean }) => {
   const t = useTranslations("advocates");
 
   const ref = useRef(null);
@@ -52,6 +52,16 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
 
   return (
     <MUIBox ref={ref} className="w-full" sx={{ position: "relative", maxWidth: "101vw", height: { xs: "70vh", md: "90vh" }, mx: "auto" }}>
+         <MUIBox style={{display: "flex",
+        flexDirection: "column",
+        alignItems: "center",backgroundImage: isbg ? "url('/images/pattern.svg')" : "none",backgroundColor: isbg ? "#FCF8F3" : "transparent", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0}} >
+      <MUIBox style={{display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+        height: "100%",
+        }}>
       <MUIBox sx={{ width: "100%", height: "100%", position: "relative",pt: {xs: 4,md: "120px"} }} >
         <MUIBox sx={{width: "100%",maxWidth: {xs: "70vw",md: "50vw"},mx: "auto",mb: {xs: 4,md: "70px"}}}>
 
@@ -59,6 +69,7 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
           title={t("title")}
           description={t("description")}
           locale={locale}
+          isbg={isbg}
           keyTitle="advocates.title"
           keyDescription="advocates.description"
           isAdmin={isAdmin}
@@ -77,7 +88,7 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
           }}
         >
           {statistics.map((stat, index) => (
-            <Grid component="div" size={{ xs: 6,sm: 6, md: 3 }} key={index} sx={{ textAlign: "center",borderLeft:index !== 0 ? {xs: "none",md: "1px solid #bababa"} : "none",pl: {xs: 0,md: 4} }}>
+            <Grid component="div" size={{ xs: 6,sm: 6, md: 3 }} key={index} sx={{ textAlign: "center",[locale === "ar" ? "borderRight" : "borderLeft"]:index !== 0 ? {xs: "none",md: "1px solid #bababa"} : "none",pl: {xs: 0,md: 4} }}>
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
@@ -88,19 +99,14 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
                   sx={{
                     fontFamily: "Cormorant Garamond",
                     fontWeight: 400,
-                    color: "#0c1c19",
+                    color:"#0c1c19" ,
                     fontSize: { xs: "3rem", md: "4rem" },
                     letterSpacing: "-1.92px",
                   }}
                 >
                   <AnimatedCounter to={stat.value} suffix={stat.suffix} isInView={isInView} />
-                </Typography>
-                <EditableText
-                  value={t(stat.key)}
-                  onSave={(value: string) => onSave(`advocates.${stat.key}`, value)}
-                  isAdmin={isAdmin}
-                  className="text-lg md:text-2xl"
-                />
+                </Typography>{t(stat.key)}
+                
               </motion.div>
             </Grid>
           ))}
@@ -110,7 +116,7 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
 
 
         {/* Left image */}
-        <MUIBox
+      {!isbg && <MUIBox
           component="img"
           src={image9}
           alt="Image"
@@ -124,7 +130,9 @@ const Advocates = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =>
             objectFit: "cover",
             mt: { xs: 4, md: 0 },
           }}
-        />
+        />}
+      </MUIBox>
+      </MUIBox>
       </MUIBox>
     </MUIBox>
   );

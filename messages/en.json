@@ -143,5 +143,13 @@
     "copyright": "Copyright 2022 sybexdesigns@gmail.com. All Rights Reserved.",
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy"
-  }
+  },
+    "notFound": {
+      "header": "404 Page Not Found",
+      "headerDescription": "The page you're looking for might have been moved or doesn't exist. Please return to the homepage or contact us for assistance.",
+      "title": "Oops! Page not found",
+      "description": "The Page You're Looking For Might Have Been Moved Or Doesn't Exist. Please Return To The Homepage Or Contact Us For Assistance.",
+      "cta": "Go to homepage"
+    }
+  
 }

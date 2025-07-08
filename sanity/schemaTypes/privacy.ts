@@ -69,7 +69,7 @@ const privacy = {
     },
     prepare(selection: any) {
       return {
-        title: selection.title ||"من نحن",
+        title: selection.title ||"الخصوصية",
       }
     }
   }

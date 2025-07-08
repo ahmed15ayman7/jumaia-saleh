@@ -205,3 +205,32 @@ export const fetchAdminAuth = async () => {
   `;
   return await client.fetch(query);
 };
+
+export const fetchBlog = async (skip: number = 0, limit: number = 4) => {
+  const query = `
+    *[_type == "blog" && defined(slug.current)] | order(date desc)[$skip...$end] {
+      date,
+      title,
+      titleAr,
+      description,
+      descriptionAr,
+      slug
+    }
+  `;
+  return await client.fetch(query, { skip, end: skip + limit });
+};
+export const fetchBlogPage = async (locale: string) => {
+  const query = `
+    *[_type == "blogPage"  && language == $locale][0]{
+      breadcrumb,
+      hero->{
+        title,
+        titleAr,
+        subtitle,
+        subtitleAr,
+        backgroundImage { asset->{url} }
+      }
+    }
+  `;
+  return await client.fetch(query, { locale });
+};

@@ -76,13 +76,14 @@ export default function VerifyForm() {
           </Typography>
           <Typography textAlign="center" sx={{ mb: { xs: 3, md: "40px" }, color: 'gray', fontSize: '1rem' }}>
             سيتم ارسال رمز التحقق على بريدك الإلكتروني{' '}
+            <br/>
             <MuiLink href="#" sx={{ color: '#cf9425', fontWeight: 500 }}>
               {"info@jumaia-saleh.com"}
             </MuiLink>
           </Typography>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "30px" } }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "30px" }, mb: { xs: 2, md: "40px" } }}>
             <TextField
               fullWidth
               label="رمز التحقق"

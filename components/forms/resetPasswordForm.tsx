@@ -83,7 +83,7 @@ export default function ResetPasswordForm() {
           </Typography>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "30px" } }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "16px" }, mb: { xs: 2, md: "40px" } }}>
             <TextField
               fullWidth
               label="كلمة المرور الجديدة"

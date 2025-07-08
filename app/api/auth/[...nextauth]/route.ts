@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { fetchAdminAuth } from '@/sanity/lib/fetchDynamicPage';
 
 
 const handler = NextAuth({
@@ -11,8 +12,9 @@ const handler = NextAuth({
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        const adminEmail = process.env.ADMIN_EMAIL;
-        const adminPassword = process.env.ADMIN_PASSWORD;
+        const adminAuth = await fetchAdminAuth();
+        const adminEmail = adminAuth.email;
+        const adminPassword = adminAuth.password;
         if (
           credentials?.email === adminEmail &&
           credentials?.password === adminPassword

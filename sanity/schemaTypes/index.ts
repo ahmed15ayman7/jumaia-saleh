@@ -6,7 +6,8 @@ import aboutUs from './aboutUs'
 import HeroSection from './HeroSection'
 import terms from './terms'
 import privacy from './privacy'
+import adminAuth from './AdminAuth'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [dynamicPage, pageType, sharedPageContent,aboutUs,HeroSection,terms,privacy],
+  types: [dynamicPage, pageType, sharedPageContent,aboutUs,HeroSection,terms,privacy,adminAuth],
 }

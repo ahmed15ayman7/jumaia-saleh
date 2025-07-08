@@ -195,3 +195,13 @@ export const fetchPrivacy = async (locale: string = 'ar') => {
   `;
   return await client.fetch(query, { locale });
 };
+
+export const fetchAdminAuth = async () => {
+  const query = `
+    *[_type == "adminAuth"][0]{
+      email,
+      password
+    }
+  `;
+  return await client.fetch(query);
+};

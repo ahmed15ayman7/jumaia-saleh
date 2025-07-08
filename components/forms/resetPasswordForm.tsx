@@ -83,7 +83,7 @@ export default function ResetPasswordForm() {
           </Typography>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "16px" }, mb: { xs: 2, md: "40px" } }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "16px" }, mb: { xs: 2, md: "20px" } }}>
             <TextField
               fullWidth
               label="كلمة المرور الجديدة"
@@ -166,6 +166,7 @@ export default function ResetPasswordForm() {
                 color: '#fff',
                 py: 1.5,
                 borderRadius: '50px',
+                cursor:"pointer",
                 fontWeight: 'bold',
                 '&:hover': {
                   backgroundColor: 'primary.dark',

@@ -83,7 +83,7 @@ export default function VerifyForm() {
           </Typography>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate >
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "30px" }, mb: { xs: 2, md: "40px" } }}>
+            <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "30px" }, mb: { xs: 2, md: "30px" } }}>
             <TextField
               fullWidth
               label="رمز التحقق"

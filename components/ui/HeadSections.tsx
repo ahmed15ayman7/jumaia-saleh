@@ -14,7 +14,7 @@ interface HeadSectionsProps {
   keyTitle: string;
   keyDescription: string;
   isAdmin: boolean;
-  isbg: boolean;
+  isbg?: boolean;
 }
 
 const HeadSections = ({

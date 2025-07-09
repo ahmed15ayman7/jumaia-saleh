@@ -24,12 +24,13 @@ export default {
     type: 'reference',
     to: [{ type: 'hero' }],
   },
-  {
-    name: 'blog',
-    title: 'Blog',
-    type: 'reference',
-    to: [{ type: 'blog' }],
-  },
+// { 
+//   name: 'blogList',
+//   title: 'المقالات',
+//   type: 'array',
+//   of: [{ type: 'reference', to: [{ type: 'blog' }] }],
+// },
+
 ],preview: {
     select: {
       title: 'title',

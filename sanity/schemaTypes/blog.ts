@@ -50,7 +50,7 @@ export default {
     select: {
       title: 'title',
       date: 'date',
-      media: 'mainImage',
+      media: 'image',
     },
     prepare(selection: { title: string; date: string; media: any }) {
       const { title, date, media } = selection;

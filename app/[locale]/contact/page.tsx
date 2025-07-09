@@ -183,6 +183,25 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
           </Box>
         </Box>
       </Box>
+      </Box>
+    {/* Google Map */}
+    <Box sx={{
+      width: '100%',
+      height: '40vh',
+      mt: 6,
+      mb: 6,
+      borderRadius: '16px',
+      overflow: 'hidden',
+    }}>
+      <iframe
+        src="https://www.google.com/maps?q=25.40800,55.50868&hl=ar&z=17&output=embed"
+        width="100%"
+        height="100%"
+        style={{ border: 0, width: '100%', height: '100%' }}
+        allowFullScreen={true}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      ></iframe>
     </Box>
     <Subscribe locale={locale} isAdmin={false}/>
     </Box>

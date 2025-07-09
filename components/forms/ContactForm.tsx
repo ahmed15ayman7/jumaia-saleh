@@ -84,41 +84,51 @@ export default function ContactForm({contactFormData,locale}:{contactFormData:Co
 
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
-      <Typography variant="h4" sx={{ fontWeight: 700, fontSize: '2rem', mb: 2 }}>
-        {contactFormData.title}
+      <Typography variant="h4" sx={{ fontWeight: 700, fontSize: {xs: "1.2rem",md: "2rem"}, mb: 2 }}>
+        {locale === 'ar' ? contactFormData.titleAr : contactFormData.title}
       </Typography>
-      <Typography sx={{ color: '#666', fontSize: '1.2rem', mb: 3 }}>
-        {contactFormData.subtitle}
+      <Typography sx={{ color: '#666', fontSize: {xs: ".8rem",md: "1rem"}, mb: 3 }}>
+        {locale === 'ar' ? contactFormData.subtitleAr : contactFormData.subtitle}
       </Typography>
       <TextField
         name="name"
-        label={locale === 'ar' ? contactFormData.nameLabelAr : contactFormData.nameLabel}
+        placeholder={locale === 'ar' ? contactFormData.nameLabelAr : contactFormData.nameLabel}
         value={values.name}
+        sx={{
+          mb: 2,
+          '& .MuiInputBase-input': {
+            fontSize: {xs: ".8rem",md: "1rem"},
+          },
+          bgcolor: '#fff',
+        }}
         onChange={handleChange}
         error={!!errors.name}
         helperText={errors.name}
         fullWidth
-        sx={{ mb: 2 }}
       />
       <TextField
         name="email"
-        label={locale === 'ar' ? contactFormData.emailLabelAr : contactFormData.emailLabel}
+        placeholder={locale === 'ar' ? contactFormData.emailLabelAr : contactFormData.emailLabel}
         value={values.email}
         onChange={handleChange}
         error={!!errors.email}
         helperText={errors.email}
         fullWidth
-        sx={{ mb: 2 }}
+        sx={{ mb: 2,'& .MuiInputBase-input': {
+            fontSize: {xs: ".8rem",md: "1rem"},
+          },bgcolor: '#fff' }}
       />
       <TextField
         name="phone"
-        label={locale === 'ar' ? contactFormData.phoneLabelAr : contactFormData.phoneLabel}
+        placeholder={locale === 'ar' ? contactFormData.phoneLabelAr : contactFormData.phoneLabel}
         value={values.phone}
         onChange={handleChange}
         error={!!errors.phone}
         helperText={errors.phone}
         fullWidth
-        sx={{ mb: 2 }}
+        sx={{ mb: 2,'& .MuiInputBase-input': {
+            fontSize: {xs: ".8rem",md: "1rem"},
+          },bgcolor: '#fff' }}
       />
       <TextField
         name="serviceType"
@@ -129,17 +139,25 @@ export default function ContactForm({contactFormData,locale}:{contactFormData:Co
         helperText={errors.serviceType}
         select
         fullWidth
-        sx={{ mb: 2 }}
+        sx={{ mb: 2,'& .MuiInputBase-input': {
+            fontSize: {xs: ".8rem",md: "1rem"},
+          },bgcolor: '#fff',
+          '& .MuiInputLabel-root': {
+            color: 'primary.dark',
+            fontSize: {xs: ".8rem",md: "1rem"},
+            textAlign: locale === 'ar' ? 'left' : 'right',
+            fontWeight: 500,
+          }, }}
       >
         {serviceTypes.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
+          <MenuItem key={option.value} value={option.value} sx={{fontSize: {xs: ".8rem",md: "1rem"},display: 'flex',alignItems: 'center',justifyContent: locale === 'ar' ? 'flex-end' : 'flex-start'}} >
             {option.label}
           </MenuItem>
         ))}
       </TextField>
       <TextField
         name="message"
-        label={locale === 'ar' ? contactFormData.messageLabelAr : contactFormData.messageLabel}
+        placeholder={locale === 'ar' ? contactFormData.messageLabelAr : contactFormData.messageLabel}
         value={values.message}
         onChange={handleChange}
         error={!!errors.message}
@@ -147,7 +165,9 @@ export default function ContactForm({contactFormData,locale}:{contactFormData:Co
         fullWidth
         multiline
         minRows={4}
-        sx={{ mb: 3 }}
+          sx={{ mb: 3,'& .MuiInputBase-input': {
+            fontSize: {xs: ".8rem",md: "1rem"},
+          },bgcolor: '#fff' }}
       />
       <Button
         type="submit"

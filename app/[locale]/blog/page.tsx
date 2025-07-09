@@ -7,6 +7,7 @@ import AnimateBox from '@/components/ui/AnimateBox';
 import Subscribe from '@/components/ui/Subscribe';
 import NotFound404 from '../not-found';
 import ArrowForwardIosRounded from '@mui/icons-material/ArrowForwardIosRounded';
+import ArrowBackIosRounded from '@mui/icons-material/ArrowBackIosRounded';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
@@ -118,18 +119,20 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
           sx={{
             display: 'grid',
             gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
-            gap: '2.5rem',
+            gap: '16px',
+            maxWidth: '1040px',
             mt: 4,
+            mx: 'auto',
           }}
         >
           {blogs.map((blog, idx) => (
             <AnimateBox animation="fadeUp" delay={0.1 + idx * 0.1} key={blog.slug.current}>
               <Box
                 sx={{
-                  borderRadius: '16px',
+                  borderRadius: '10px',
                   overflow: 'hidden',
                   bgcolor: '#fff',
-                  boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                  // boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                   display: 'flex',
                   flexDirection: 'column',
                   height: '100%',
@@ -140,28 +143,33 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                     src={urlFor(blog.image).url() || '/images/placeholder.png'}
                     alt={locale === 'ar' ? blog.titleAr : blog.title}
                     fill
-                    style={{ objectFit: 'cover' }}
+                    style={{ objectFit: 'cover', borderRadius: '10px' }}
                   />
                 </Box>
-                <Box sx={{ p: '1.5rem' }}>
+                <Box sx={{ py: '1.5rem',display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%',flexGrow:1}}>
                   <Box
                     sx={{
                       display: 'inline-block',
                       border: '1px solid #C8931C',
-                      borderRadius: '6px',
+                      borderRadius: '3px',
                       px: '1rem',
                       py: '0.2rem',
                       color: '#C8931C',
-                      fontSize: '1.4rem',
+                      width: 'fit-content',
+                      fontSize: {xs:'.7rem',md:'.9rem'},
                       mb: '1rem',
                     }}
                   >
                     {blog.date?.split('-').reverse().join('-')}
                   </Box>
+                  <Box sx={{display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%'}}>
+                  <Box>
+
+                  
                   <Typography
                     sx={{
                       fontWeight: 700,
-                      fontSize: { xs: '1.5rem', md: '2.4rem' },
+                      fontSize: { xs: '1rem', md: '1.5rem' },
                       mb: '0.5rem',
                     }}
                   >
@@ -170,24 +178,29 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                   <Typography
                     sx={{
                       color: '#888',
-                      fontSize: { xs: '1.1rem', md: '1.6rem' },
+                      fontSize: { xs: '.8rem', md: '1rem' },
                       mb: '1.2rem',
                     }}
                   >
                     {locale === 'ar' ? blog.descriptionAr : blog.description}
-                  </Typography>
+                  </Typography></Box>
                   <Button
                     sx={{
                       color: '#C8931C',
-                      fontSize: '1.6rem',
+                      fontSize: {xs:'.7rem',md:'1rem'},
                       fontWeight: 500,
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'flex-start',
+                      gap: '0.5rem',
                       textTransform: 'none',
                     }}
-                    endIcon={<ArrowForwardIosRounded sx={{ fontSize: '1.2rem' }} />}
+                    endIcon={locale === 'en' ? <ArrowForwardIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} /> : <ArrowBackIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} />}
                     href={`/${locale}/blogs/${blog.slug.current}`}
                   >
-                  {locale === 'ar' ? "اقرأ المزيد" : "Read More"}
+                  {locale === 'ar' ? "اقرأ اكثر " : "Read More"}
                   </Button>
+                </Box>
                 </Box>
               </Box>
             </AnimateBox>
@@ -221,13 +234,13 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                 border: '1.5px solid #C8931C',
                 borderRadius: '8px',
                 color: '#C8931C',
-                fontSize: '1.6rem',
+                fontSize: {xs:'.7rem',md:'1rem'},
                 fontWeight: 500,
                 bgcolor: '#fff',
               }}
               onClick={() => setPage(page + 1)}
             >
-              الصفحة التالية
+              {locale === 'ar' ? "الصفحة التالية" : "Next Page"}
             </Button>
           )}
         </Box>

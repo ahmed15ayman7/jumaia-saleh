@@ -15,6 +15,8 @@ const handler = NextAuth({
         const adminAuth = await fetchAdminAuth();
         const adminEmail = adminAuth.email;
         const adminPassword = adminAuth.password;
+        console.log(credentials?.email, credentials?.password);
+        console.log(adminEmail, adminPassword);
         if (
           credentials?.email === adminEmail &&
           credentials?.password === adminPassword

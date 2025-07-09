@@ -1,5 +1,5 @@
 export default {
-  name: 'contactMessage',
+  name: 'contact',
   title: 'رسائل التواصل',
   type: 'document',
   fields: [
@@ -13,14 +13,13 @@ export default {
   preview: {
     select: {
       title: 'name',
-      subtitle: 'email',
-      media: 'createdAt'
+      subtitle: 'createdAt',
+      media: 'email'
     },
     prepare(selection: any) {
       return {
         title: selection.title || "رسالة",
         subtitle: selection.subtitle || "رسالة",
-        media: selection.media
       }
     }
   },

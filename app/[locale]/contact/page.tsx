@@ -52,8 +52,7 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
     setLoading(true);
     const fetchData=async()=>{
       const res=await fetchContactPage(locale);
-      const data=await res.json();
-      setContactPage(data);
+      setContactPage(res);
       setLoading(false);
     }
     fetchData();
@@ -68,14 +67,14 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
       bgcolor: '#fff',
       minHeight: '100vh',
       pb: 0,
-      px: { xs: '1.5rem', md: '5vw' },
-      pt: { xs: 1, md: 3 },
+      px: { xs: '2vw', md: '5vw' },
+      pt: { xs: "1vh", md: 3 },
       position: 'relative',
     }}
   >
     {/* Breadcrumb */}
     <AnimateBox animation={locale === 'ar' ? 'slideRight' : 'slideLeft'} delay={0.1}>
-      <Box sx={{ pt: 2, pb: '20px', fontSize: '13px' }}>
+      <Box sx={{ pt: {xs: "1vh",md: 2}, pb: '20px', fontSize: '13px' }}>
         {contactPage?.breadcrumb?.map((bc, i) => (
           <Box key={i} display="inline">
             {bc.href ? (
@@ -123,7 +122,7 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
         <Box
           sx={{
             flex: 6,
-            bgcolor: '#fff',
+            bgcolor: '#F1F1F1',
             borderRadius: '16px',
             p: { xs: 2, md: 5 },
             boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
@@ -151,7 +150,7 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
           {/* Call Us */}
           <Box
             sx={{
-              bgcolor: 'linear-gradient(135deg, #1e3c3b 0%, #2e5c57 100%)',
+              background:'linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)',
               borderRadius: '16px',
               p: { xs: 2, md: 4 },
               color: '#fff',
@@ -159,7 +158,7 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
-              alignItems: 'flex-start',
+              alignItems: 'center',
               gap: 2,
             }}
           >

@@ -1,5 +1,5 @@
 // fetchPracticeArea.ts
-import { client } from './client';
+import { client } from "./client";
 
 export const fetchDynamicPage = async (slug: string, locale: string) => {
   const query = `
@@ -76,9 +76,7 @@ export const fetchDynamicPageType = async (slug: string) => {
   return await client.fetch(query, { slug });
 };
 
-
-
-export const fetchAboutUs = async (locale: string = 'ar') => {
+export const fetchAboutUs = async (locale: string = "ar") => {
   const query = `
     *[_type == "aboutUs"][0]{
     breadcrumb,
@@ -136,7 +134,7 @@ export const fetchAboutUs = async (locale: string = 'ar') => {
   return await client.fetch(query, { locale });
 };
 
-export const fetchTerms = async (locale: string = 'ar') => {
+export const fetchTerms = async (locale: string = "ar") => {
   const query = `
     *[_type == "terms"][0]{
       breadcrumb,
@@ -166,7 +164,7 @@ export const fetchTerms = async (locale: string = 'ar') => {
   return await client.fetch(query, { locale });
 };
 
-export const fetchPrivacy = async (locale: string = 'ar') => {
+export const fetchPrivacy = async (locale: string = "ar") => {
   const query = `
     *[_type == "privacy"][0]{
       breadcrumb,
@@ -215,7 +213,12 @@ export const fetchBlog = async (skip: number = 0, limit: number = 4) => {
       titleAr,
       description,
       descriptionAr,
-      slug
+      slug,
+      image{
+        asset->{
+          url
+        }
+      }
     }
   `;
   return await client.fetch(query, { skip, end: skip + limit });
@@ -236,7 +239,7 @@ export const fetchBlogPage = async (locale: string) => {
   return await client.fetch(query, { locale });
 };
 
-export const fetchServices = async (locale: string = 'ar') => {
+export const fetchServices = async (locale: string = "ar") => {
   const query = `
     *[_type == "servicePage"][0]{
       breadcrumb,
@@ -247,21 +250,26 @@ export const fetchServices = async (locale: string = 'ar') => {
         subtitleAr,
         backgroundImage { asset->{url} }
       },
-      services[]{
-      pageType->{
+      services[]->{
+        description,
+        descriptionAr,
+        pageType->{
         title,
-        titleAr,
+        titleEn,
         value
-      },
-      description,
-      descriptionAr,
-      image{asset->{url}},
-    }
+          },
+          image{
+            asset->{
+              url
+            }
+          }
+        }
+      }
   `;
   return await client.fetch(query, { locale });
 };
 
-export const fetchContactPage = async (locale: string = 'ar') => {
+export const fetchContactPage = async (locale: string = "ar") => {
   const query = `
     *[_type == "contactPage"][0]{
       breadcrumb,
@@ -277,6 +285,8 @@ export const fetchContactPage = async (locale: string = 'ar') => {
         titleAr,
         subtitle,
         subtitleAr,
+        nameLabel,
+        nameLabelAr,
         emailLabel,
         emailLabelAr,
         phoneLabel,

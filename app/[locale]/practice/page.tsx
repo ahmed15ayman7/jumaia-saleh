@@ -13,7 +13,7 @@ import { urlFor } from '@/sanity/lib/image';
 interface Service {
   pageType: {
     title: string;
-    titleAr: string;
+    titleEn: string;
     value: string;
   };
   description: string;
@@ -42,6 +42,7 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
       setLoading(true);
       const res = await fetchServices(locale);
       setServices(res);
+      console.log(res);
       setLoading(false);
     };
     getData();
@@ -113,13 +114,13 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
               <Skeleton key={i} variant="rectangular" width="100%" height={320} sx={{ borderRadius: '16px' }} />
             ))
           : services?.services?.map((service, idx) => (
-              <AnimateBox animation="fadeUp" delay={0.1 + idx * 0.1} key={service.pageType.value || idx}>
+              <AnimateBox animation="fadeUp" delay={0.1 + idx * 0.1} key={service.pageType?.value || idx}>
                 <Box
                   sx={{
-                    borderRadius: '16px',
+                    borderRadius: '10px',
                     overflow: 'hidden',
                     bgcolor: '#fff',
-                    boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+                    // boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
                     display: 'flex',
                     flexDirection: 'column',
                     height: '100%',
@@ -127,42 +128,42 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                 >
                   <Box sx={{ width: '100%', aspectRatio: '1/1', position: 'relative' }}>
                     <Image
-                      src={urlFor(service.image).url() || '/images/placeholder.png'}
-                      alt={locale === 'ar' ? service.pageType.titleAr : service.pageType.title}
+                      src={service.image ? urlFor(service.image).url() : '/images/placeholder.png'}
+                      alt={locale === 'ar' ? service.pageType?.title : service.pageType?.titleEn}
                       fill
-                      style={{ objectFit: 'cover' }}
+                      style={{ objectFit: 'cover', borderRadius: '10px' }}
                     />
                   </Box>
-                  <Box sx={{ p: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
+                  <Box sx={{ py: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
                     <Typography
                       sx={{
                         fontWeight: 700,
-                        fontSize: { xs: '1.5rem', md: '2.4rem' },
+                        fontSize: { xs: '1rem', md: '1.5rem' },
                         mb: '0.5rem',
                       }}
                     >
-                      {locale === 'ar' ? service.pageType.titleAr : service.pageType.title}
+                        {locale === 'ar' ? service.pageType?.title : service.pageType?.titleEn}
                     </Typography>
                     <Typography
                       sx={{
                         color: '#888',
-                        fontSize: { xs: '1.1rem', md: '1.6rem' },
+                        fontSize: { xs: '.8rem', md: '1rem' },
                         mb: '1.2rem',
                         flex: 1,
                       }}
                     >
-                      {locale === 'ar' ? service.descriptionAr : service.description}
+                      {locale === 'ar' ? service.descriptionAr : service.description || ''}
                     </Typography>
                     <Button
                       sx={{
                         color: '#C8931C',
-                        fontSize: '1.6rem',
+                        fontSize: '1rem',
                         fontWeight: 500,
                         textTransform: 'none',
                         alignSelf: 'flex-start',
                         mt: 'auto',
                       }}
-                      href={`/${locale}/practice/${service.pageType.value}/`}
+                      href={`/${locale}/practice/${service.pageType?.value}/`}
                     >
                       {locale === 'ar' ? "اقرأ المزيد" : "Read More"}
                     </Button>

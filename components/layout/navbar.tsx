@@ -119,7 +119,7 @@ const Navbar = ({ locale }: { locale: string }) => {
       <Divider />
       <List>
         <ListItem>
-          <ListItemButton component={Link} href="/contact">
+          <ListItemButton component={Link} href={`/${locale}/contact`}>
             <ListItemText primary={t("contact")} />
             
           </ListItemButton>
@@ -128,7 +128,7 @@ const Navbar = ({ locale }: { locale: string }) => {
     </Box>
   );
   return (
-    <Box sx={{ height: "100px", position: "relative" }}>
+    <Box sx={{ height: {xs: "70px",md: "100px"}, position: "relative" }}>
       <AnimatePresence>
         {showNavbar && (
           <motion.div
@@ -299,7 +299,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                         }}
                         className="cursor-pointer"
                         onClick={() => {
-                          router.push("/contact");
+                          router.push(`/${locale}/contact`);
                         }}
                       >
                         <Typography

@@ -24,3 +24,40 @@ export async function updateMessage({ key, value, locale }: { key: string; value
     return false;
   }
 } 
+
+
+
+
+import { createClient } from '@sanity/client';
+
+const client = createClient({
+  projectId: 'cd8rkmlu', // غيّره لو عندك مشروع تاني
+  dataset: 'production',
+  apiVersion: '2023-07-01',
+  token: process.env.SANITY_API_TOKEN, // خلي التوكين في .env لو حابب
+  useCdn: false,
+});
+
+export async function deleteAllContactMessages() {
+  try {
+    const messages = await client.fetch(`*[_type == "contact"]{_id}`);
+    
+    if (!messages.length) {
+      console.log('✅ No contact messages found.');
+      return;
+    }
+
+    console.log(`🗑 Found ${messages.length} messages. Deleting...`);
+
+    for (const msg of messages) {
+      await client.delete(msg._id);
+      console.log(`✔ Deleted: ${msg._id}`);
+    }
+
+    console.log('✅ All contact messages deleted!');
+  } catch (err) {
+    console.error('❌ Error deleting messages:', err);
+  }
+}
+
+// deleteAllContactMessages();

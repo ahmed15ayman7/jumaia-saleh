@@ -51,7 +51,7 @@ const ImageHeader = ({imgHeader,title,subtitle}:{imgHeader:SanityImageSource,tit
             sx={{
               color: "#fff",
               fontWeight: 700,
-              fontSize: { xs: "6vw", md: "2.1rem" },
+              fontSize: { xs: "1rem", md: "2.1rem" },
               textAlign: "center",
               fontFamily: "'Manrope-Bold', Helvetica",
               mb: 1,
@@ -64,7 +64,7 @@ const ImageHeader = ({imgHeader,title,subtitle}:{imgHeader:SanityImageSource,tit
             sx={{
               color: "#fff",
               fontWeight: 400,
-              fontSize: { xs: "4vw", md: "1.1rem" },
+              fontSize: { xs: ".7rem", md: "1.1rem" },
               textAlign: "center",
               maxWidth: "86%",
               mx: "auto"

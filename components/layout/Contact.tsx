@@ -23,7 +23,7 @@ const Contact = ({locale}: {locale: string}) => {
     >
         <Tooltip title={phoneNumbers[0].number} placement={locale === "ar" ? "right" : "left"}>
 
-      <IconButton sx={{ width: 70, height: 70 }}>
+      <IconButton sx={{ width: {xs: 50,md: 70}, height: {xs: 50,md: 70} }}>
         <Image
         className='rotateInUpRight'
           src="/images/whatsapp.svg"
@@ -34,7 +34,7 @@ const Contact = ({locale}: {locale: string}) => {
       </IconButton>
           </Tooltip>
       <Tooltip title={phoneNumbers[1].number} placement={locale === "ar" ? "right" : "left"}>
-        <IconButton sx={{ width: 70, height: 70 }}>
+        <IconButton sx={{ width: {xs: 50,md: 70}, height: {xs: 50,md: 70} }}>
           <Image className='animate-scale' style={{animationDuration: "0.7s", animationIterationCount: "infinite"}} src="/images/call.svg" alt="call" width={70} height={70} />
         </IconButton>
       </Tooltip>

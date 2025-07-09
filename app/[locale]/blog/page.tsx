@@ -186,7 +186,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                     endIcon={<ArrowForwardIosRounded sx={{ fontSize: '1.2rem' }} />}
                     href={`/${locale}/blogs/${blog.slug.current}`}
                   >
-                    اقرأ المزيد
+                  {locale === 'ar' ? "اقرأ المزيد" : "Read More"}
                   </Button>
                 </Box>
               </Box>

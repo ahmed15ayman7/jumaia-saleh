@@ -11,9 +11,9 @@ export default {
         {
           type: "object",
           fields: [
-            { name: "label", type: "string" },
-            { name: "labelAr", type: "string" },
-            { name: "href", type: "string" },
+            { name: "label", title: "العنوان (EN)", type: "string" },
+            { name: "labelAr", title: "العنوان (AR)", type: "string" },
+            { name: "href", title: "الرابط", type: "string" },
           ],
         },
       ],

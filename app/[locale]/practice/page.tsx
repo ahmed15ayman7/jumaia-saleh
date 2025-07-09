@@ -11,12 +11,14 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/sanity/lib/image';
 
 interface Service {
-  title: string;
-  titleAr: string;
+  pageType: {
+    title: string;
+    titleAr: string;
+    value: string;
+  };
   description: string;
   descriptionAr: string;
   image: SanityImageSource;
-  slug: { current: string };
 }
 interface ServicesPage {
   breadcrumb: { label: string; labelAr: string; href: string }[];
@@ -111,7 +113,7 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
               <Skeleton key={i} variant="rectangular" width="100%" height={320} sx={{ borderRadius: '16px' }} />
             ))
           : services?.services?.map((service, idx) => (
-              <AnimateBox animation="fadeUp" delay={0.1 + idx * 0.1} key={service.slug?.current || idx}>
+              <AnimateBox animation="fadeUp" delay={0.1 + idx * 0.1} key={service.pageType.value || idx}>
                 <Box
                   sx={{
                     borderRadius: '16px',
@@ -126,7 +128,7 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                   <Box sx={{ width: '100%', aspectRatio: '1/1', position: 'relative' }}>
                     <Image
                       src={urlFor(service.image).url() || '/images/placeholder.png'}
-                      alt={locale === 'ar' ? service.titleAr : service.title}
+                      alt={locale === 'ar' ? service.pageType.titleAr : service.pageType.title}
                       fill
                       style={{ objectFit: 'cover' }}
                     />
@@ -139,7 +141,7 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                         mb: '0.5rem',
                       }}
                     >
-                      {locale === 'ar' ? service.titleAr : service.title}
+                      {locale === 'ar' ? service.pageType.titleAr : service.pageType.title}
                     </Typography>
                     <Typography
                       sx={{
@@ -160,7 +162,7 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                         alignSelf: 'flex-start',
                         mt: 'auto',
                       }}
-                      href={`/${locale}/services/${service.slug?.current}`}
+                      href={`/${locale}/practice/${service.pageType.value}/`}
                     >
                       {locale === 'ar' ? "اقرأ المزيد" : "Read More"}
                     </Button>

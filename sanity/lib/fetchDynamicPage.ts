@@ -247,13 +247,14 @@ export const fetchServices = async (locale: string = 'ar') => {
         backgroundImage { asset->{url} }
       },
       services[]{
-      title,
-      titleAr,
+      pageType->{
+        title,
+        titleAr,
+        value
+      },
       description,
       descriptionAr,
       image{asset->{url}},
-      slug,
-      order
     }
   `;
   return await client.fetch(query, { locale });

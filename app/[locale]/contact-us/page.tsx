@@ -3,20 +3,106 @@ import ImageHeader from '@/components/ui/ImageHeader';
 import ContactForm from '@/components/forms/ContactForm';
 import { Box, Typography, Button } from '@mui/material';
 import Image from 'next/image';
-
-export default function ContactUsPage() {
+import AnimateBox from '@/components/ui/AnimateBox';
+import Subscribe from '@/components/ui/Subscribe';
+import { use, useEffect, useState } from 'react';
+import { fetchContactPage } from '@/sanity/lib/fetchDynamicPage';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { urlFor } from '@/sanity/lib/image';
+interface ContactPage{
+  breadcrumb: { label: string; labelAr: string; href: string }[];
+  hero: {
+    backgroundImage: SanityImageSource;
+    title: string;
+    titleAr: string;
+    subtitle: string;
+    subtitleAr: string;
+  };
+  contactFormData: {
+    title: string;
+    titleAr: string;
+    subtitle: string;
+    subtitleAr: string;
+    nameLabel: string;
+    nameLabelAr: string;
+    emailLabel: string;
+    emailLabelAr: string;
+    phoneLabel: string;
+    phoneLabelAr: string;
+    serviceTypeLabel: string;
+    serviceTypeLabelAr: string;
+    messageLabel: string;
+    messageLabelAr: string;
+    submitButtonLabel: string;
+    submitButtonLabelAr: string;
+  };
+  lowerImage: SanityImageSource;
+  phone: string;
+  callUsLabel: string;
+  callUsLabelAr: string;
+  callUsButtonLabel: string;
+  callUsButtonLabelAr: string;
+}
+export default function ContactUsPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = use(params);
+  let [contactPage,setContactPage]=useState<ContactPage | null>(null);
+  useEffect(()=>{
+    const fetchData=async()=>{
+      const res=await fetchContactPage(locale);
+      const data=await res.json();
+      setContactPage(data);
+    }
+    fetchData();
+  },[locale]);
   return (
-    <Box sx={{ bgcolor: '#f8f8f8', minHeight: '100vh', pb: 6 }}>
-      {/* Breadcrumb */}
-      <Box sx={{ pt: 2, pb: 1, fontSize: '13px', px: { xs: '1.5rem', md: '5vw' } }}>
-        <a href="/" style={{ color: '#C8931C', textDecoration: 'none' }}>الرئيسية</a> &gt; <span style={{ color: '#C8931C' }}>تواصل معنا</span>
+    <Box>
+    <Box
+    width={"100%"}
+    sx={{
+      bgcolor: '#fff',
+      minHeight: '100vh',
+      pb: 0,
+      px: { xs: '1.5rem', md: '5vw' },
+      pt: { xs: 1, md: 3 },
+      position: 'relative',
+    }}
+  >
+    {/* Breadcrumb */}
+    <AnimateBox animation={locale === 'ar' ? 'slideRight' : 'slideLeft'} delay={0.1}>
+      <Box sx={{ pt: 2, pb: '20px', fontSize: '13px' }}>
+        {contactPage?.breadcrumb?.map((bc, i) => (
+          <Box key={i} display="inline">
+            {bc.href ? (
+              <a href={bc.href} style={{ color: '#444', textDecoration: 'none' }}>
+                <Typography
+                  component="span"
+                  sx={{ fontSize: '.8rem' }}
+                  color={i === (contactPage?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
+                >
+                  {locale === 'ar' ? bc.labelAr : bc.label}
+                </Typography>
+              </a>
+            ) : (
+              <Typography
+                component="span"
+                color={i === (contactPage?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
+              >
+                {locale === 'ar' ? bc.labelAr : bc.label}
+              </Typography>
+            )}
+            {i < (contactPage?.breadcrumb?.length || 0) - 1 && <> &gt; </>}
+          </Box>
+        ))}
       </Box>
-      {/* ImageHeader */}
+    </AnimateBox>
+    {/* Hero */}
+    <AnimateBox animation="fadeUp" delay={0.1}>
       <ImageHeader
-        title="تواصل معنا"
-        subtitle="الخيار الأمثل لمحاميك ومستشارك القانوني وأفضل طريق لحقوقك"
-        imgHeader="/images/call-center.svg"
+        title={locale === 'ar' ? contactPage?.hero?.titleAr || '' : contactPage?.hero?.title || ''}
+        subtitle={locale === 'ar' ? contactPage?.hero?.subtitleAr || '' : contactPage?.hero?.subtitle || ''}
+        imgHeader={contactPage?.hero?.backgroundImage || ''}
       />
+    </AnimateBox>
       {/* Main Content */}
       <Box
         sx={{
@@ -38,7 +124,7 @@ export default function ContactUsPage() {
             minWidth: 0,
           }}
         >
-          <ContactForm />
+            <ContactForm contactFormData={contactPage?.contactFormData || {title: 'تواصل معنا', titleAr: 'تواصل معنا', subtitle: 'اترك رسالة لنا', subtitleAr: 'اترك رسالة لنا', emailLabel: 'البريد الإلكتروني', emailLabelAr: 'البريد الإلكتروني', phoneLabel: 'رقم الهاتف', phoneLabelAr: 'رقم الهاتف', serviceTypeLabel: 'نوع الخدمة', serviceTypeLabelAr: 'نوع الخدمة', messageLabel: 'الرسالة', messageLabelAr: 'الرسالة',submitButtonLabel: 'إرسال', submitButtonLabelAr: 'إرسال',nameLabel: 'الاسم', nameLabelAr: 'الاسم'}} locale={locale}/>
         </Box>
         {/* Side Section */}
         <Box sx={{ flex: 4, display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
@@ -54,7 +140,7 @@ export default function ContactUsPage() {
               position: 'relative',
             }}
           >
-            <Image src="/images/justice-scale.png" alt="محامي" fill style={{ objectFit: 'cover' }} />
+            <Image src={contactPage?.lowerImage ? urlFor(contactPage?.lowerImage).url() : ''} alt="محامي" fill style={{ objectFit: 'cover' }} />
           </Box>
           {/* Call Us */}
           <Box
@@ -71,10 +157,10 @@ export default function ContactUsPage() {
               gap: 2,
             }}
           >
-            <Typography sx={{ fontSize: '2rem', fontWeight: 700, mb: 1 }}>اتصل بنا</Typography>
-            <Typography sx={{ fontSize: '1.4rem', mb: 2 }}>+971 4 834 5000</Typography>
+            <Typography sx={{ fontSize: '2rem', fontWeight: 700, mb: 1 }}>{locale === 'ar' ? contactPage?.callUsLabelAr : contactPage?.callUsLabel}</Typography>
+            <Typography sx={{ fontSize: '1.4rem', mb: 2 }}>{ contactPage?.phone}</Typography>
             <Button
-              href="tel:+97148345000"
+              href={`tel:${contactPage?.phone}`}
               sx={{
                 bgcolor: '#C8931C',
                 color: '#fff',
@@ -86,11 +172,13 @@ export default function ContactUsPage() {
                 '&:hover': { bgcolor: '#b07d13' },
               }}
             >
-              اتصال
+              {locale === 'ar' ? contactPage?.callUsButtonLabelAr : contactPage?.callUsButtonLabel}
             </Button>
           </Box>
         </Box>
       </Box>
+    </Box>
+    <Subscribe locale={locale} isAdmin={false}/>
     </Box>
   );
 } 

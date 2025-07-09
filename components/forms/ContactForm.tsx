@@ -19,7 +19,25 @@ const serviceTypes = [
   { value: 'أخرى', label: 'أخرى' },
 ];
 
-export default function ContactForm() {
+interface ContactFormData{
+  title: string;
+  titleAr: string;
+  subtitle: string;
+  subtitleAr: string;
+  emailLabel: string;
+  emailLabelAr: string;
+  phoneLabel: string;
+  phoneLabelAr: string;
+  serviceTypeLabel: string;
+  serviceTypeLabelAr: string;
+  messageLabel: string;
+  messageLabelAr: string;
+  submitButtonLabel: string;
+  submitButtonLabelAr: string;
+  nameLabel: string;
+  nameLabelAr: string;
+  }
+export default function ContactForm({contactFormData,locale}:{contactFormData:ContactFormData,locale:string}) {
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -67,14 +85,14 @@ export default function ContactForm() {
   return (
     <Box component="form" onSubmit={handleSubmit} sx={{ width: '100%' }}>
       <Typography variant="h4" sx={{ fontWeight: 700, fontSize: '2rem', mb: 2 }}>
-        أرسل رسالة
+        {contactFormData.title}
       </Typography>
       <Typography sx={{ color: '#666', fontSize: '1.2rem', mb: 3 }}>
-        نحن هنا لمساعدتك — سيقوم فريقنا القانوني بالرد عليك في أقرب وقت ممكن.
+        {contactFormData.subtitle}
       </Typography>
       <TextField
         name="name"
-        label="الاسم"
+        label={locale === 'ar' ? contactFormData.nameLabelAr : contactFormData.nameLabel}
         value={values.name}
         onChange={handleChange}
         error={!!errors.name}
@@ -84,7 +102,7 @@ export default function ContactForm() {
       />
       <TextField
         name="email"
-        label="البريد الإلكتروني"
+        label={locale === 'ar' ? contactFormData.emailLabelAr : contactFormData.emailLabel}
         value={values.email}
         onChange={handleChange}
         error={!!errors.email}
@@ -94,7 +112,7 @@ export default function ContactForm() {
       />
       <TextField
         name="phone"
-        label="رقم الهاتف"
+        label={locale === 'ar' ? contactFormData.phoneLabelAr : contactFormData.phoneLabel}
         value={values.phone}
         onChange={handleChange}
         error={!!errors.phone}
@@ -104,7 +122,7 @@ export default function ContactForm() {
       />
       <TextField
         name="serviceType"
-        label="نوع الخدمة"
+        label={locale === 'ar' ? contactFormData.serviceTypeLabelAr : contactFormData.serviceTypeLabel}
         value={values.serviceType}
         onChange={handleChange}
         error={!!errors.serviceType}
@@ -121,7 +139,7 @@ export default function ContactForm() {
       </TextField>
       <TextField
         name="message"
-        label="الرسالة"
+        label={locale === 'ar' ? contactFormData.messageLabelAr : contactFormData.messageLabel}
         value={values.message}
         onChange={handleChange}
         error={!!errors.message}
@@ -148,7 +166,7 @@ export default function ContactForm() {
         }}
         fullWidth
       >
-        {loading ? '...جاري الإرسال' : 'إرسال'}
+        {loading ? '...جاري الإرسال' : locale === 'ar' ? contactFormData.submitButtonLabelAr : contactFormData.submitButtonLabel}
       </Button>
       {success && (
         <Typography sx={{ color: 'green', mt: 1, textAlign: 'center' }}>

@@ -9,7 +9,9 @@ import privacy from './privacy'
 import adminAuth from './AdminAuth'
 import blog from './blog'
 import contactMessage from './contactMessage'
+import service from './service'
+import contactPage from './contactPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
-  types: [dynamicPage, pageType, sharedPageContent,aboutUs,HeroSection,terms,privacy,adminAuth,blog,contactMessage],
+  types: [dynamicPage, pageType, sharedPageContent,aboutUs,HeroSection,terms,privacy,adminAuth,blog,contactMessage,service,contactPage],
 }

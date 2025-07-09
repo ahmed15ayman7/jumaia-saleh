@@ -221,7 +221,7 @@ export const fetchBlog = async (skip: number = 0, limit: number = 4) => {
 };
 export const fetchBlogPage = async (locale: string) => {
   const query = `
-    *[_type == "blogPage"  && language == $locale][0]{
+    *[_type == "blogPage"][0]{
       breadcrumb,
       hero->{
         title,
@@ -230,6 +230,68 @@ export const fetchBlogPage = async (locale: string) => {
         subtitleAr,
         backgroundImage { asset->{url} }
       }
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchServices = async (locale: string = 'ar') => {
+  const query = `
+    *[_type == "servicePage"][0]{
+      breadcrumb,
+      hero->{
+        title,
+        titleAr,
+        subtitle,
+        subtitleAr,
+        backgroundImage { asset->{url} }
+      },
+      services[]{
+      title,
+      titleAr,
+      description,
+      descriptionAr,
+      image{asset->{url}},
+      slug,
+      order
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchContactPage = async (locale: string = 'ar') => {
+  const query = `
+    *[_type == "contactPage"][0]{
+      breadcrumb,
+      hero->{
+        title,
+        titleAr,
+        subtitle,
+        subtitleAr,
+        backgroundImage { asset->{url} }
+      },
+      contactFormData {
+        title,
+        titleAr,
+        subtitle,
+        subtitleAr,
+        emailLabel,
+        emailLabelAr,
+        phoneLabel,
+        phoneLabelAr,
+        serviceTypeLabel,
+        serviceTypeLabelAr,
+        messageLabel,
+        messageLabelAr,
+        submitButtonLabel,
+        submitButtonLabelAr
+      },
+      lowerImage { asset->{url} },
+      phone,
+      callUsLabel,
+      callUsLabelAr,
+      callUsButtonLabel,
+      callUsButtonLabelAr
     }
   `;
   return await client.fetch(query, { locale });

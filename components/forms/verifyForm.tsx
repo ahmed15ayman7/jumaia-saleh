@@ -127,6 +127,7 @@ export default function VerifyForm() {
               variant="contained"
               sx={{
                 backgroundColor: 'primary.main',
+                cursor:"pointer",
                 color: '#fff',
                 py: 1.5,
                 borderRadius: '50px',

@@ -200,7 +200,8 @@ export const fetchAdminAuth = async () => {
   const query = `
     *[_type == "adminAuth"][0]{
       email,
-      password
+      password,
+      code
     }
   `;
   return await client.fetch(query);

@@ -173,10 +173,14 @@ const aboutUs = {
   preview: {
     select: {
       title: 'title',
+      subtitle: 'hero.title',
+      media: 'hero.backgroundImage'
     },
     prepare(selection: any) {
       return {
         title: selection.title ||"من نحن",
+        subtitle: selection.subtitle ||"aboutUs",
+        media: selection.media
       }
     }
   }

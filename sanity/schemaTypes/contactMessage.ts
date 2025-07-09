@@ -10,4 +10,18 @@ export default {
     { name: 'message', title: 'الرسالة', type: 'text' },
     { name: 'createdAt', title: 'تاريخ الإرسال', type: 'datetime', initialValue: () => new Date().toISOString() },
   ],
+  preview: {
+    select: {
+      title: 'name',
+      subtitle: 'email',
+      media: 'createdAt'
+    },
+    prepare(selection: any) {
+      return {
+        title: selection.title || "رسالة",
+        subtitle: selection.subtitle || "رسالة",
+        media: selection.media
+      }
+    }
+  },
 }; 

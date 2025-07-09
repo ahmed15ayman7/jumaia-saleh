@@ -5,5 +5,6 @@ export default {
       fields: [
         { name: 'email', title: 'البريد الإلكتروني', type: 'string' },
         { name: 'password', title: 'كلمة المرور', type: 'string' },
+        { name: 'code', title: 'الكود', type: 'string' },
       ],
     }

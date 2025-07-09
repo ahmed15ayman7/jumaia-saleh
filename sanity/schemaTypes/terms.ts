@@ -66,10 +66,14 @@ const terms = {
   preview: {
     select: {
       title: 'title',
+      subtitle: 'subtitle',
+      media: 'hero.backgroundImage'
     },
     prepare(selection: any) {
       return {
-        title: selection.title ||"من نحن",
+        title: selection.title ||"الشروط والأحكام",
+        subtitle: selection.subtitle ||"terms",
+        media: selection.media
       }
     }
   }

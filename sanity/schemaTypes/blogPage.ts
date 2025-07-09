@@ -35,12 +35,14 @@ export default {
     select: {
       title: 'title',
       subtitle: 'subtitle',
+      media: 'hero.backgroundImage'
     },
     prepare(selection:any) {
-      const { title, subtitle } = selection
+      const { title, subtitle, media } = selection
       return {
         title: title || 'صفحة المدونة',
         subtitle: subtitle || 'صفحة المدونة',
+        media: media || '/images/placeholder.png'
       }
     },
   },

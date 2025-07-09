@@ -66,10 +66,14 @@ const privacy = {
   preview: {
     select: {
       title: 'title',
+      subtitle: 'subtitle',
+      media: 'hero.backgroundImage'
     },
     prepare(selection: any) {
       return {
         title: selection.title ||"الخصوصية",
+        subtitle: selection.subtitle ||"privacy",
+        media: selection.media
       }
     }
   }

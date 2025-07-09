@@ -29,10 +29,12 @@ export default {
       title: "معلومات الاتصال",
       type: "object",
       fields: [
-        { name: "title", title: "العنوان", type: "string" },
-        { name: "titleAr", title: "العنوان باللغه العربيه", type: "string" },
-        { name: "subtitle", title: "العنوان الفرعي", type: "string" },
+        { name: "title", title: " العنوان مثال Send Us A Message", type: "string" },
+        { name: "titleAr", title: "العنوان باللغه العربيه مثال ارسل لنا رسالة", type: "string" },
+        { name: "subtitle", title: " العنوان الفرعي في ال form", type: "string" },
         { name: "subtitleAr", title: "العنوان الفرعي باللغه العربيه", type: "string" },
+        { name: "nameLabel", title: "الاسم مثال Name", type: "string" },
+        { name: "nameLabelAr", title: "الاسم باللغه العربيه مثال الاسم", type: "string" },
         { name: "emailLabel", title: "البريد الإلكتروني", type: "string" },
         { name: "emailLabelAr", title: "البريد الإلكتروني باللغه العربيه", type: "string" },
         { name: "phoneLabel", title: "رقم الهاتف", type: "string" },
@@ -57,4 +59,19 @@ export default {
     { name: "callUsButtonLabel", title: "الزر اسفل صورة المحامي اتصل بنا", type: "string" },
     { name: "callUsButtonLabelAr", title: "الزر اسفل صورة المحامي اتصل بنا باللغه العربيه", type: "string" },
   ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "subtitle",
+      media: "lowerImage",
+    },
+    prepare(selection: { title: string; subtitle: string; media: any }) {
+      const { title, subtitle, media } = selection;
+      return {
+        title: title || "صفحة اتصل بنا",
+        subtitle: subtitle,
+        media: media,
+      };
+    },
+  },
 };

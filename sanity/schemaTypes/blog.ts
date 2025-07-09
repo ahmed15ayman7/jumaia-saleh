@@ -5,6 +5,12 @@ export default {
   type: 'document',
   fields: [
     {
+      name: 'image',
+      title: 'الصورة',
+      type: 'image',
+      options: { hotspot: true },
+    },
+    {
       name: 'date',
       title: 'التاريخ',
       type: 'date',

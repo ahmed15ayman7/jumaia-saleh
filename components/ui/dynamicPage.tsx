@@ -20,6 +20,8 @@ import Newsletter from "./Newsletter";
 import Subscribe from "./Subscribe";
 import { urlFor } from '@/sanity/lib/image'
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import AnimateBox from "./AnimateBox";
+import Link from "next/link";
 interface PracticeAreaProps {
   data: {
     relatedTitle?: string;
@@ -96,45 +98,34 @@ export default function DynamicPage({
           position: "relative",
         }}
       >
-        {/* Breadcrumb */}
-        <Box sx={{ pt: 2, pb: 3, fontSize: "13px" }}>
-          {data.breadcrumb?.map((bc, i) => (
-            <Box key={i} display="inline">
-              {bc.href ? (
-                <a
-                  href={bc.href}
-                  style={{ color: "#444", textDecoration: "none" }}
-                >
-                  <Typography
-                    component="span"
-                    sx={{
-                      fontSize: ".8rem",
-                    }}
-                    color={
-                      i === (data.breadcrumb?.length || 0) - 1
-                        ? "primary.main"
-                        : "#444"
-                    }
-                  >
-                    {bc.label}
-                  </Typography>
-                </a>
-              ) : (
+           {/* Breadcrumb */}
+    <AnimateBox animation={locale === 'ar' ? 'slideRight' : 'slideLeft'} delay={0.1}>
+      <Box sx={{ pt: {xs: "1vh",md: 2}, pb: '20px', fontSize: '13px' }}>
+        {data?.breadcrumb?.map((bc, i) => (
+          <Box key={i} display="inline">
+            {bc.href ? (
+              <Link href={bc.href} style={{ color: '#444', textDecoration: 'none' }}>
                 <Typography
                   component="span"
-                  color={
-                    i === (data.breadcrumb?.length || 0) - 1
-                      ? "primary.main"
-                      : "#444"
-                  }
+                  sx={{ fontSize: '.8rem' }}
+                  color={i === (data?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
                 >
-                  {bc.label}
+                  { bc.label}
                 </Typography>
-              )}
-              {i < (data.breadcrumb?.length || 0) - 1 && <> &gt; </>}
-            </Box>
-          ))}
-        </Box>
+              </Link>
+            ) : (
+              <Typography
+                component="span"
+                color={i === (data?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
+              >
+                { bc.label}
+              </Typography>
+            )}
+            {i < (data?.breadcrumb?.length || 0) - 1 && <> &gt; </>}
+          </Box>
+        ))}
+      </Box>
+    </AnimateBox>
 
         {/* Main Image */}
         <Box

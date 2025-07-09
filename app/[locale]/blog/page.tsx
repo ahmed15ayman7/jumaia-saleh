@@ -11,7 +11,7 @@ import ArrowBackIosRounded from '@mui/icons-material/ArrowBackIosRounded';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
-
+import Link from 'next/link';
 interface BlogCard {
   date: string;
   title: string;
@@ -83,8 +83,8 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
           <Box sx={{ pt: 2, pb: '20px', fontSize: '13px' }}>
             {blogPage?.breadcrumb?.map((bc, i) => (
               <Box key={i} display="inline">
-                {bc.href ? (
-                  <a href={bc.href} style={{ color: '#444', textDecoration: 'none' }}>
+                {(
+                  <Link href={bc.href || ""} style={{ color: '#444', textDecoration: 'none' }}>
                     <Typography
                       component="span"
                       sx={{ fontSize: '.8rem' }}
@@ -92,15 +92,8 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                     >
                       {locale === 'ar' ? bc.labelAr : bc.label}
                     </Typography>
-                  </a>
-                ) : (
-                  <Typography
-                    component="span"
-                    color={i === (blogPage?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
-                  >
-                    {locale === 'ar' ? bc.labelAr : bc.label}
-                  </Typography>
-                )}
+                  </Link>
+                ) }
                 {i < (blogPage?.breadcrumb?.length || 0) - 1 && <> &gt; </>}
               </Box>
             ))}

@@ -9,7 +9,7 @@ import Subscribe from '@/components/ui/Subscribe';
 import NotFound404 from '../not-found';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/sanity/lib/image';
-
+import Link from 'next/link';
 interface Service {
   pageType: {
     title: string;
@@ -68,8 +68,8 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
       <Box sx={{ pt: 2, pb: '20px', fontSize: '13px' }}>
         {services?.breadcrumb.map((bc, i) => (
           <Box key={i} display="inline">
-            {bc.href ? (
-              <a href={bc.href} style={{ color: '#444', textDecoration: 'none' }}>
+            {(
+              <Link  href={bc.href || ""} style={{ color: '#444', textDecoration: 'none' }}>
                 <Typography
                   component="span"
                   sx={{ fontSize: '.8rem' }}
@@ -77,15 +77,8 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                 >
                   {locale === 'ar' ? bc.labelAr : bc.label}
                 </Typography>
-              </a>
-            ) : (
-              <Typography
-                component="span"
-                color={i === (services?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
-              >
-                {locale === 'ar' ? bc.labelAr : bc.label}
-              </Typography>
-            )}
+              </Link>
+            ) }
             {i < (services?.breadcrumb?.length || 0) - 1 && <> &gt; </>}
           </Box>
         ))}

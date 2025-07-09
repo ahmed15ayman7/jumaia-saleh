@@ -2,6 +2,7 @@
 import ImageHeader from '@/components/ui/ImageHeader';
 import ContactForm from '@/components/forms/ContactForm';
 import { Box, Typography, Button, Skeleton } from '@mui/material';
+import Link from 'next/link';
 import Image from 'next/image';
 import AnimateBox from '@/components/ui/AnimateBox';
 import Subscribe from '@/components/ui/Subscribe';
@@ -77,8 +78,8 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
       <Box sx={{ pt: {xs: "1vh",md: 2}, pb: '20px', fontSize: '13px' }}>
         {contactPage?.breadcrumb?.map((bc, i) => (
           <Box key={i} display="inline">
-            {bc.href ? (
-              <a href={bc.href} style={{ color: '#444', textDecoration: 'none' }}>
+            {(
+              <Link  href={bc.href || ""} style={{ color: '#444', textDecoration: 'none' }}>
                 <Typography
                   component="span"
                   sx={{ fontSize: '.8rem' }}
@@ -86,15 +87,8 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
                 >
                   {locale === 'ar' ? bc.labelAr : bc.label}
                 </Typography>
-              </a>
-            ) : (
-              <Typography
-                component="span"
-                color={i === (contactPage?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
-              >
-                {locale === 'ar' ? bc.labelAr : bc.label}
-              </Typography>
-            )}
+              </Link>
+            ) }
             {i < (contactPage?.breadcrumb?.length || 0) - 1 && <> &gt; </>}
           </Box>
         ))}

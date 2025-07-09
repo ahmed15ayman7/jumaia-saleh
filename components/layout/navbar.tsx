@@ -22,7 +22,7 @@ import {
   IconButton,
   Link,
 } from "@mui/material";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import LegalServicesSection from "./LegalServicesSection";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
@@ -43,7 +43,24 @@ const Navbar = ({ locale }: { locale: string }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
+  // إغلاق الـ dropdown عند النقر خارج العنصر
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+  
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
   const t = useTranslations("navbar");
   const router = useRouter();
   const pathname = usePathname();
@@ -79,7 +96,7 @@ const Navbar = ({ locale }: { locale: string }) => {
         {navItems.map((item, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton onClick={() => {
-              router.push(item.href);
+              router.push(`/${locale}${item.href}`);
               setIsMenuOpen(false);
             }}>
               <ListItemText primary={t(item.label)} />
@@ -144,7 +161,7 @@ const Navbar = ({ locale }: { locale: string }) => {
               position="static"
               color="transparent"
               elevation={0}
-              sx={{ zIndex: 1000 }}
+              sx={{ zIndex: 1000,px: {xs: 0,md: 2} }}
             >
               <Container maxWidth="xl" sx={{ zIndex: 1000 }} disableGutters>
                 <Toolbar
@@ -189,7 +206,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                               height: "100%",
                             }}
                           >
-                            <LegalServicesSection />
+                            <LegalServicesSection ref={dropdownRef} />
                           </motion.div>
                         )}
                       </AnimatePresence>

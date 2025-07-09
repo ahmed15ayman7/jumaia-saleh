@@ -9,7 +9,7 @@ import { CheckCircleRounded } from '@mui/icons-material';
 import Advocates from '@/components/shared/Advocates'
 import Subscribe from '@/components/ui/Subscribe'
 import NotFound404 from '../not-found'
-
+import Link from 'next/link';
 interface TermsData  {
     breadcrumb: {
         label: string
@@ -75,9 +75,9 @@ const TermsPage = ({params}:{params:Promise<{locale:string}>}) => {
         <Box sx={{ pt: 2, pb: '20px', fontSize: "13px" }}>
           {data?.breadcrumb?.map((bc, i) => (
             <Box key={i} display="inline">
-              {bc.href ? (
-                <a
-                  href={bc.href}
+              {(
+                <Link
+                  href={bc.href || ""}
                   style={{ color: "#444", textDecoration: "none" }}
                 >
                   <Typography
@@ -93,19 +93,8 @@ const TermsPage = ({params}:{params:Promise<{locale:string}>}) => {
                   >
                     {locale === "ar" ? bc.labelAr : bc.label}
                   </Typography>
-                </a>
-              ) : (
-                <Typography
-                  component="span"
-                  color={
-                    i === (data.breadcrumb?.length || 0) - 1
-                      ? "primary.main"
-                      : "#444"
-                  }
-                >
-                  {locale === "ar" ? bc.labelAr :  bc.label}
-                </Typography>
-              )}
+                </Link>
+              ) }
               {i < (data.breadcrumb?.length || 0) - 1 && <> &gt; </>}
             </Box>
           ))}

@@ -7,7 +7,7 @@ import { useMemo, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { fetchDynamicPageType } from '@/sanity/lib/fetchDynamicPage';
 
-const LegalServicesSection = () => {
+const LegalServicesSection = ({ref}: {ref: React.RefObject<HTMLDivElement | null>}) => {
   const t = useTranslations('navbar.services');
   const locale = useLocale();
   let [services, setServices] = useState([
@@ -62,10 +62,11 @@ const LegalServicesSection = () => {
       transition={{ duration: 0.5, ease: 'easeOut' }}
       dir={isArabic ? 'rtl' : 'ltr'}
       className="bg-[#F5F5F5] py-4 px-4 md:px-8 rounded-xl max-w-4xl mx-auto"
-    >
+      >
       <div
         className={`grid grid-cols-3 items-center justify-between gap-10`}
-      >
+        ref={ref}
+        >
         {/* الخدمات */}
         <motion.div
           variants={containerVariants}

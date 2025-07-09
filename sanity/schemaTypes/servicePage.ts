@@ -8,6 +8,13 @@ export default {
     { name: 'services', title: 'الخدمات', type: 'array', of: [{ type: 'reference', to: [{ type: 'service' }] }] },
   ],
   preview: {
-    select: { title: 'title', media: 'image' },
+    select: { title: 'title', media: 'hero.backgroundImage' },
+    prepare(selection: { title: string; media: any }) {
+      const { title, media } = selection;
+      return {
+        title: title || "صفحة الخدمات",
+        media: media,
+      };
+    },
   },
 }; 

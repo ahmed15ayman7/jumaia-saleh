@@ -12,5 +12,12 @@ export default {
   ],
   preview: {
     select: { title: 'title', media: 'image' },
+    prepare(selection: { title: string; media: any }) {
+      const { title, media } = selection;
+      return {
+        title: title || "خدمة",
+        media: media,
+      };
+    },
   },
 }; 

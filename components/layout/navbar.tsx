@@ -20,6 +20,7 @@ import {
   ListItemText,
   Divider,
   IconButton,
+  Link,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import LegalServicesSection from "./LegalServicesSection";
@@ -34,7 +35,7 @@ const navItems = [
   { label: "about", hasDropdown: false, href: "/about" },
   { label: "practice", hasDropdown: true, href: "/practice" },
   { label: "blog", hasDropdown: false, href: "/blog" },
-  { label: "offers", hasDropdown: false, href: "/offers" },
+  // { label: "offers", hasDropdown: false, href: "/offers" },
 ];
 
 const Navbar = ({ locale }: { locale: string }) => {
@@ -118,7 +119,7 @@ const Navbar = ({ locale }: { locale: string }) => {
       <Divider />
       <List>
         <ListItem>
-          <ListItemButton>
+          <ListItemButton component={Link} href="/contact">
             <ListItemText primary={t("contact")} />
             
           </ListItemButton>

@@ -59,9 +59,8 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
     fetchData();
   }, [locale, page]);
 
-  if (isLoading)
-    return <Skeleton variant="rectangular" animation="wave" width={"100%"} height={"100vh"} />;
-  if (!blogs || blogs.length === 0) return <NotFound404 locale={locale} />;
+  // if (isLoading) return <Skeleton variant="rectangular" animation="wave" width={"100%"} height={"100vh"} />;
+  if (!blogPage) return <NotFound404 />;
 
   const pagesCount = Math.ceil(total / PAGE_SIZE);
 

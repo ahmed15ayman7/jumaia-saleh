@@ -1,7 +1,7 @@
 "use client";
 import ImageHeader from '@/components/ui/ImageHeader';
 import ContactForm from '@/components/forms/ContactForm';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Skeleton } from '@mui/material';
 import Image from 'next/image';
 import AnimateBox from '@/components/ui/AnimateBox';
 import Subscribe from '@/components/ui/Subscribe';
@@ -9,6 +9,7 @@ import { use, useEffect, useState } from 'react';
 import { fetchContactPage } from '@/sanity/lib/fetchDynamicPage';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/sanity/lib/image';
+import NotFound404 from '../not-found';
 interface ContactPage{
   breadcrumb: { label: string; labelAr: string; href: string }[];
   hero: {
@@ -46,14 +47,19 @@ interface ContactPage{
 export default function ContactUsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = use(params);
   let [contactPage,setContactPage]=useState<ContactPage | null>(null);
+  const [loading,setLoading]=useState(true);
   useEffect(()=>{
+    setLoading(true);
     const fetchData=async()=>{
       const res=await fetchContactPage(locale);
       const data=await res.json();
       setContactPage(data);
+      setLoading(false);
     }
     fetchData();
   },[locale]);
+  if(loading) return <Skeleton variant="rectangular" width="100%" height="100vh" />;
+  if(!contactPage) return <NotFound404 />;
   return (
     <Box>
     <Box

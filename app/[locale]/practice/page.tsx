@@ -6,6 +6,7 @@ import ImageHeader from '@/components/ui/ImageHeader';
 import Image from 'next/image';
 import AnimateBox from '@/components/ui/AnimateBox';
 import Subscribe from '@/components/ui/Subscribe';
+import NotFound404 from '../not-found';
 
 interface Service {
   title: string;
@@ -42,6 +43,8 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
     };
     getData();
   }, [locale]);
+  if(loading) return <Skeleton variant="rectangular" width="100%" height="100vh" />;
+  if(!services) return <NotFound404 />;
 
   return (
     <Box>

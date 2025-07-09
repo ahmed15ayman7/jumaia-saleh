@@ -73,15 +73,18 @@ const realEstate = {
     select: {
       title: 'mainTitle',
       lang: 'language',
-      slug: 'slug'
+      slug: 'sharedPageContent.value',
+      media: 'sharedPageContent.image'
     },
     prepare(value: any) {
       const title = value.title || 'No Title';
       const lang = value.lang || '';
       const slug = value.slug?.value || '';
+      const media = value.media || '/images/placeholder.png';
       return {
         title: `${title} (${lang.toUpperCase()})`,
-        subtitle: slug
+        subtitle: slug,
+        media: media
       };
     }
   }

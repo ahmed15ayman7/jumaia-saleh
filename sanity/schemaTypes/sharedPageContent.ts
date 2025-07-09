@@ -44,10 +44,12 @@ export default {
     ],preview: {
       select: {
         title: 'title',
+        media: 'image'
       },
       prepare(selection: any) {
         return {
           title: selection.title,
+          media: selection.media
         }
       }
     }

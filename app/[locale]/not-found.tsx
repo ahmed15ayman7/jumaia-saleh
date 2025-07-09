@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 const imgHeader = "/images/real-estate-img.jpg";         // غيّر المسار حسب مشروعك
 const imgDeco = "/images/image-9.svg";              // صورة ميزان العدالة الديكورية
 
-export default function NotFound404({ locale = "en" }) {
+export default function NotFound404({ locale = "ar" }) {
   const t = useTranslations("notFound");
   const router = useRouter();
   const isArabic = locale === "ar";
@@ -160,6 +160,7 @@ export default function NotFound404({ locale = "en" }) {
           bottom: 0,
           width: { xs: 80, sm: 100, md: 170 },
           height: { xs: 154, sm: 180, md: 319 },
+          transform: isArabic ? "rotate(-180deg)" : "none",
           zIndex: 0,
           pointerEvents: "none"
         }}

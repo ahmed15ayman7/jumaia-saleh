@@ -1,38 +1,38 @@
 // سكيمة Blog للـ Sanity
 export default {
   name: 'blog',
-  title: 'Blog',
+  title: 'مقالة',
   type: 'document',
   fields: [
     {
       name: 'date',
-      title: 'Date',
+      title: 'التاريخ',
       type: 'date',
       options: { dateFormat: 'DD-MM-YYYY' },
     },
     {
       name: 'title',
-      title: 'Title (EN)',
+      title: 'العنوان (EN)',
       type: 'string',
     },
     {
       name: 'titleAr',
-      title: 'Title (AR)',
+      title: 'العنوان (AR)',
       type: 'string',
     },
     {
       name: 'description',
-      title: 'Description (EN)',
+      title: 'الوصف (EN)',
       type: 'text',
     },
     {
       name: 'descriptionAr',
-      title: 'Description (AR)',
+      title: 'الوصف (AR)',
       type: 'text',
     },
     {
       name: 'slug',
-      title: 'Slug',
+      title: 'الرابط',
       type: 'slug',
       options: {
         source: 'title',

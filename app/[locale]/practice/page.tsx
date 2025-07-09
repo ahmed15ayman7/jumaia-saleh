@@ -7,15 +7,16 @@ import Image from 'next/image';
 import AnimateBox from '@/components/ui/AnimateBox';
 import Subscribe from '@/components/ui/Subscribe';
 import NotFound404 from '../not-found';
+import { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { urlFor } from '@/sanity/lib/image';
 
 interface Service {
   title: string;
   titleAr: string;
   description: string;
   descriptionAr: string;
-  image: { asset: { url: string } };
+  image: SanityImageSource;
   slug: { current: string };
-  order: number;
 }
 interface ServicesPage {
   breadcrumb: { label: string; labelAr: string; href: string }[];
@@ -24,7 +25,7 @@ interface ServicesPage {
     titleAr: string;
     subtitle: string;
     subtitleAr: string;
-    backgroundImage: { asset: { url: string } };
+    backgroundImage: SanityImageSource;
   };
   services: Service[];
 }
@@ -124,7 +125,7 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                 >
                   <Box sx={{ width: '100%', aspectRatio: '1/1', position: 'relative' }}>
                     <Image
-                      src={service.image?.asset?.url || '/images/placeholder.png'}
+                      src={urlFor(service.image).url() || '/images/placeholder.png'}
                       alt={locale === 'ar' ? service.titleAr : service.title}
                       fill
                       style={{ objectFit: 'cover' }}
@@ -161,7 +162,7 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                       }}
                       href={`/${locale}/services/${service.slug?.current}`}
                     >
-                      اقرأ المزيد
+                      {locale === 'ar' ? "اقرأ المزيد" : "Read More"}
                     </Button>
                   </Box>
                 </Box>

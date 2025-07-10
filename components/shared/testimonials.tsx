@@ -82,7 +82,7 @@ const TestimonialSection = ({
         initial={{ opacity: 0, y: 50, x: 50 }}
         animate={isInView ? { opacity: 1, y: 0, x: 0 } : {}}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="flex flex-col justify-start max-md:items-center gap-[.5rem] max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]"
+        className="flex flex-col justify-start max-md:items-center gap-[.5rem] min-xl:gap-[1.5rem] max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]"
       >
         <Typography
           style={{

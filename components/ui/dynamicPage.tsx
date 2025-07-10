@@ -22,6 +22,7 @@ import { urlFor } from '@/sanity/lib/image'
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import AnimateBox from "./AnimateBox";
 import Link from "next/link";
+import ImageHeader from "./ImageHeader";
 interface PracticeAreaProps {
   data: {
     relatedTitle?: string;
@@ -79,7 +80,7 @@ export default function DynamicPage({
         minHeight: "100vh",
         pb: 0,
         
-        pt: { xs: 1, md: 3 },
+        pt: { xs: 1, md: 0 },
         position: "relative",
       }}
     >
@@ -100,27 +101,19 @@ export default function DynamicPage({
       >
            {/* Breadcrumb */}
     <AnimateBox animation={locale === 'ar' ? 'slideRight' : 'slideLeft'} delay={0.1}>
-      <Box sx={{ pt: {xs: "1vh",md: 2}, pb: '20px', fontSize: '13px' }}>
+      <Box sx={{ pt: {xs: ".9vh",md: 2}, pb: '10px', fontSize: '13px' }}>
         {data?.breadcrumb?.map((bc, i) => (
           <Box key={i} display="inline">
-            {bc.href ? (
-              <Link href={bc.href} style={{ color: '#444', textDecoration: 'none' }}>
+              <Link href={bc.href||""} style={{ color: '#444', textDecoration: 'none' }}>
                 <Typography
                   component="span"
-                  sx={{ fontSize: '.8rem' }}
+                  sx={{ fontSize: {xs: '.7rem', md: '.8rem' }}}
                   color={i === (data?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
                 >
                   { bc.label}
                 </Typography>
               </Link>
-            ) : (
-              <Typography
-                component="span"
-                color={i === (data?.breadcrumb?.length || 0) - 1 ? 'primary.main' : '#444'}
-              >
-                { bc.label}
-              </Typography>
-            )}
+           
             {i < (data?.breadcrumb?.length || 0) - 1 && <> &gt; </>}
           </Box>
         ))}
@@ -128,7 +121,7 @@ export default function DynamicPage({
     </AnimateBox>
 
         {/* Main Image */}
-        <Box
+        {/* <Box
           sx={{
             width: { xs: "100%", md: "100%" },
             mx: "auto",
@@ -147,22 +140,33 @@ export default function DynamicPage({
             height={650}
             style={{
               width: "100%",
-              height: "auto",
+              // height: "auto",
               display: "block",
               objectFit: "cover",
             }}
             priority
           />
-        </Box>
-
+        </Box> */}
+        <ImageHeader
+          imgHeader={data.image as SanityImageSource}
+          title={""}
+          subtitle={""}
+          isService={true}
+        />
+        <Box sx={{
+          maxWidth: {xs:"100%",md:"90%"},
+          mx: "auto",
+          // px: { xs: 2, md: 0 },
+          pb: { xs: 4, md: 7 },
+          pt: { xs: 1, md: 0 },
+          position: "relative",
+        }}>
         <Box
           sx={{
-            maxWidth: "900px",
+            maxWidth: {xs:"100%",md:"90%"},
             mx: "auto",
-            px: { xs: 2, md: 0 },
-            pb: { xs: 4, md: 7 },
             position: "relative",
-            textAlign: {xs: "center", md: locale === "ar" ? "right" : "left"},
+            textAlign: locale === "ar" ? "right" : "left",
             zIndex: 2,
           }}
         >
@@ -173,13 +177,13 @@ export default function DynamicPage({
               color: "primary.main",
               fontSize: { xs: "6vw", md: "2.5rem" },
               fontWeight: 700,
-              mb: { xs: 1, md: "59px" },
+              mb: { xs: 1, md: "20px" },
             }}
           >
             {data.mainTitle}
           </Typography>
           <Divider sx={{ mb: { xs: 1, md: "20px" } }} />
-          <Typography
+          {/* <Typography
             variant="subtitle1"
             sx={{
               color: "#4d4d4d",
@@ -189,7 +193,7 @@ export default function DynamicPage({
             }}
           >
             {data.subtitle}
-          </Typography>
+          </Typography> */}
 
           {/* Description */}
           <Typography
@@ -211,7 +215,7 @@ export default function DynamicPage({
                   component="div"
                   sx={{ fontSize: {xs: ".8rem", sm: "1rem"}, color: "#627174", mb: 0.5 }}
                 >
-                  <span className="hidden md:block">&#8226;</span> {"    "}
+                  <span >&#8226;</span> {"    "}
                   <span className="text-[#627174]">{point.title}</span>
                 </Typography>
                 <Typography
@@ -241,11 +245,11 @@ export default function DynamicPage({
         {/* Read more */}
         <Box
           sx={{
-            maxWidth: "900px",
-            textAlign: {xs: "center", md: locale === "ar" ? "right" : "left"},
+            maxWidth: {xs:"100%",md:"90%"},
+            textAlign:  locale === "ar" ? "right" : "left",
             mx: "auto",
             mb: { xs: 3, md: 6 },
-            px: { xs: 2, md: 0 },
+            px: { xs: 0, md: 0 },
           }}
         >
           <Button
@@ -275,7 +279,7 @@ export default function DynamicPage({
         {/* Brochure Section */}
         <Box
           sx={{
-            maxWidth: "900px",
+            maxWidth: {xs:"100%",md:"90%"},
             textAlign: {xs: "center", md: locale === "ar" ? "right" : "left"},
             mx: "auto",
             px: { xs: 2, md: 0 },
@@ -298,7 +302,7 @@ export default function DynamicPage({
           <Typography sx={{ mb: 3, color: "#191C1E",fontWeight: 300, fontSize: {xs: ".8rem", sm: "1rem"} }}>
             {data.brochureDesc}
           </Typography>
-          <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 2, justifyContent: {xs: "center", md: "flex-start"} ,alignItems: {xs: "center", md: "flex-start"} }} className=" rtl:space-x-reverse">
+          <Box sx={{ display: "flex", flexDirection: { xs: "column", sm: "row" }, gap: 1.5, justifyContent: {xs: "center", md: "flex-start"} ,alignItems: {xs: "center", md: "flex-start"} }} className=" rtl:space-x-reverse">
             {data.brochureFiles?.map((file, i) => (
               <Button
                 key={i}
@@ -309,12 +313,12 @@ export default function DynamicPage({
                   bgcolor: i === 0 ? "#cf9425" : "#fff",
                   color: i === 0 ? "#fff" : "#cf9425",
                   border: "2px solid #cf9425",
-                  borderRadius: "25px",
+                  borderRadius: "6px",
                   fontWeight: 700,
                   fontSize: { xs: ".8rem", md: "1rem" },
-                  minWidth: { xs: 160, md: 210 },
-                  maxWidth: { xs: 160, md: 210 },
-                  py: { xs: 1, md: 1.2 },
+                  minWidth: { xs: "100%", md: 210 },
+                  maxWidth: { xs: "100%", md: 210 },
+                  py: { xs: 1.5, md: 1.2 },
                   px: { xs: 1, md: 2 },
                   "&:hover": {
                     bgcolor: "#cf9425",
@@ -330,9 +334,9 @@ export default function DynamicPage({
         </Box>
 
         {/* Why Us */}
-        <Divider sx={{ my: { xs: 4, md: 7 } }} />
+        <Divider sx={{ my: { xs: 4, md: 7 },maxWidth: {xs:"100%",md:"90%"}, mx: "auto" }} />
         <Box
-          sx={{ maxWidth: "900px", mx: "auto", px: { xs: 2, md: 0 }, pb: 6, textAlign: {xs: "center", md: locale === "ar" ? "right" : "left"} }}
+          sx={{ maxWidth: {xs:"100%",md:"90%"}, mx: "auto", px: { xs: 2, md: 0 }, pb: 6, textAlign:  locale === "ar" ? "right" : "left" }}
         >
           <Typography
             variant="h5"
@@ -350,14 +354,14 @@ export default function DynamicPage({
           </Typography>
           <List>
             {data.whyPoints?.map((whyKey, i) => (
-              <ListItem sx={{ pl: 0,textAlign: isRTL ? "right" : "left", display: "flex", alignItems: "flex-start" }} key={i} >
-                <ListItemIcon sx={{ minWidth: 36, color: "#cf9425",paddingTop: "10px" }}>
-                  <CheckCircleRoundedIcon />
+              <ListItem sx={{ pl: 0,textAlign: isRTL ? "right" : "left", display: "flex", alignItems: "flex-start",lineHeight: "1 !important" }} key={i} >
+                <ListItemIcon sx={{ minWidth: {xs: 10, md: 36}, color: "#cf9425",paddingTop: "10px",zIndex: 1000,fontSize: {xs: "1rem", md: "1.5rem"} }}>
+                  <CheckCircleRoundedIcon  sx={{fontSize: {xs: "1.2rem", md: "2rem"} }} />
                 </ListItemIcon>
                 <ListItemText
                 
                 style={{
-                  lineHeight: "1",
+                  lineHeight: "1 !important",
                 }}
                   primary={<span className="text-[#1d2327] text-[1rem] max-sm:text-[.7rem]">{whyKey}</span>}
                   primaryTypographyProps={{
@@ -365,12 +369,14 @@ export default function DynamicPage({
                       fontSize: { xs: ".8rem", sm: "1rem" },
                       color: "#1d2327",
                       fontWeight: 500,
+                      lineHeight: "1 !important",
                     },
                   }}
                 />
               </ListItem>
             ))}
           </List>
+        </Box>
         </Box>
       </motion.div>
       <Box

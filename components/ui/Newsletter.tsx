@@ -104,7 +104,7 @@ const Newsletter = ({ data, locale }: NewsletterProps) => {
                 fontSize: { xs: ".8rem", sm: ".8rem", md: "1rem" },
                 lineHeight: { xs: "1rem", sm: "1rem", md: "1rem" },
                 maxWidth: { xs: "92vw", md: "368px" },
-                mb: 2,
+                mb: 5,
               }}
             >
               {data.newsletterDesc || ""}

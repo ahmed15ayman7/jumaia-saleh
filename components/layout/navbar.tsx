@@ -34,8 +34,8 @@ const navItems = [
   { label: "home", hasDropdown: false, href: "/" },
   { label: "about", hasDropdown: false, href: "/about" },
   { label: "practice", hasDropdown: true, href: "/practice" },
+  { label: "contact", hasDropdown: false, href: "/contact" },
   { label: "blog", hasDropdown: false, href: "/blog" },
-  // { label: "offers", hasDropdown: false, href: "/offers" },
 ];
 
 const Navbar = ({ locale }: { locale: string }) => {
@@ -56,9 +56,9 @@ const Navbar = ({ locale }: { locale: string }) => {
       }
     };
   
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mouseleave", handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mouseleave", handleClickOutside);
     };
   }, [isDropdownOpen]);
   const t = useTranslations("navbar");
@@ -136,7 +136,7 @@ const Navbar = ({ locale }: { locale: string }) => {
       <Divider />
       <List>
         <ListItem>
-          <ListItemButton component={Link} href={`/${locale}/contact`}>
+          <ListItemButton component={"a"} href={`https://wa.me/966555555555`} target="_blank">
             <ListItemText primary={t("contact")} />
             
           </ListItemButton>
@@ -316,7 +316,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                         }}
                         className="cursor-pointer"
                         onClick={() => {
-                          router.push(`/${locale}/contact`);
+                          window.open(`https://wa.me/966555555555`, "_blank");
                         }}
                       >
                         <Typography
@@ -330,7 +330,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                             letterSpacing: "-0.40px",
                           }}
                         >
-                          {t("contact")}
+                          {t("quote")}
                         </Typography>
 
                         {locale === "en" ? (

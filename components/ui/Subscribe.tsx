@@ -33,12 +33,13 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
     <Box
       ref={ref}
       sx={{
-        width: "100%",
+        width: "100vw",
+        maxWidth: "100vw",
         minHeight: "70vh",
         p: 0,
         m: 0,
         bgcolor: "#fff",
-        position: "relative",
+        position: {xs:"static",md:"relative"},
         overflow: "hidden",
         display: "flex",
         alignItems: "center",
@@ -71,14 +72,17 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
         initial={{ opacity: 0, y: 40 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
-        style={{ width: "100%", zIndex: 5, display: "flex", flexDirection: "column", alignItems: "center" }}
+        className="flex flex-col items-center max-sm:items-start justify-center w-full z-50 max-w-full"
       >
-        <Stack
-          alignItems="center"
-          spacing={{ xs: 2, md: "1.5rem" }}
+        <Box
+          
           sx={{
             width: "100%",
-            maxWidth: "1050px",
+            maxWidth: {xs:"90vw",md:"1050px"},
+            display: "flex",
+            flexDirection: "column",
+            alignItems: {xs:"flex-start",md:"center"},
+            justifyContent: "center",
             gap: { xs: 2, md: "1rem" },
             px: { xs: 2, md: 0 },
             py: { xs: "10vh", md: "14vh" },
@@ -90,7 +94,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
             <Typography
               variant="h2"
               sx={{
-                fontSize: { xs: "6vw", sm: "3vw", md: "2.7vw", lg: "2vw" },
+                fontSize: { xs: "1.1rem", sm: "2.5rem", md: "3rem", lg: "3rem" },
                 fontWeight: 700,
                 color: "#16211b",
                 fontFamily: "'Manrope-Bold', Helvetica",
@@ -109,8 +113,8 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
             sx={{
               color: "#202b21",
               fontFamily: "'Manrope-Regular', Helvetica",
-              fontSize: { xs: "3.2vw", sm: "2vw", md: "1.15vw" },
-              maxWidth: "850px",
+              fontSize: { xs: ".7rem", sm: ".8rem", md: "1rem" },
+              maxWidth: {xs:"90vw",md:"850px"},
               textAlign: "center",
               mb: { xs: 2, sm: "1rem" },
             }}
@@ -126,7 +130,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
           <Box
             sx={{
               display: "flex",
-              flexDirection: { xs: "column", sm: "row" },
+              flexDirection: "row",
               mt: { xs: 4, md: 6 },
               width: { xs: "94vw", sm: "75vw", md: "680px" },
               gap: { xs: 2, sm: 2 },
@@ -142,10 +146,10 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
                 border: "1.6px solid #29463e",
                 px: 3,
                 py: 2,
-                fontSize: { xs: "3.8vw", sm: "1.2vw", md: "1vw" },
+                fontSize: { xs: "1rem", sm: "1.2rem", md: "1rem" },
                 fontFamily: "'Manrope-Regular', Helvetica",
                 borderRadius: "10px",
-                minWidth: { xs: "70vw", sm: "320px" },
+                minWidth: { xs: "50vw", sm: "320px" },
                 maxWidth: { md: "400px" },
                 mb: { xs: 2, sm: 0 },
               }}
@@ -165,7 +169,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
                 fontFamily: "'Manrope-SemiBold', Helvetica",
                 borderRadius: "10px",
                 fontWeight: 600,
-                fontSize: { xs: "3.6vw", sm: "1.25vw", md: "18px" },
+                fontSize: { xs: "1rem", sm: "1.2rem", md: "18px" },
                 letterSpacing: "0.01em",
                 textTransform: "none",
                 "&:hover": { bgcolor: "primary.dark", color: "white" },
@@ -178,7 +182,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
             
             </Button>
           </Box>
-        </Stack>
+        </Box>
       </motion.div>
     </Box>
   );

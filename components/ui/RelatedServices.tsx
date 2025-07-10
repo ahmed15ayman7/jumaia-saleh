@@ -52,13 +52,14 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
             mt: {xs: 2,md: "65px"},
             width: "100%",
             display: "flex",
-            flexDirection: {xs: "column",md: "row"},
-            justifyContent: "center",
+            flexDirection: "row",
+            justifyContent: {xs: "flex-start",md: "center"},
             alignItems: {xs: "center",md: "flex-start"},
             flexWrap: "nowrap",
+            overflowX: "auto",
             gap: {xs: "10px",md: "62px"},
             pb: 1,
-            px: {xs: "10px",md: "200px"}
+            px: {xs: "12px",md: "200px"}
           }}
         >
           {data.practiceAreas.map((area, index) => (
@@ -68,7 +69,7 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
                 flex: "0 0 auto",
                 backgroundColor: "transparent",
                 width: {
-                  xs: "80%",
+                  xs: "calc(50% - 12px)",
                   sm: "calc(50% - 12px)",
                   md: "calc(34% - 18px)",
                 },
@@ -110,7 +111,7 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
                       value={locale === "ar" ? area.titleAr : area.title}
                       onSave={(value: string) => {}}
                       isAdmin={false}
-                      className="text-center text-xl md:text-2xl font-semibold text-[#cf9425] bg-transparent"
+                      className="text-center text-[.7rem] md:text-2xl font-semibold text-[#cf9425] bg-transparent"
                     />
                   </Box>
                 </Box>

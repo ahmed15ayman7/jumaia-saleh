@@ -4,17 +4,17 @@ import React from 'react'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/sanity/lib/image';
 
-const ImageHeader = ({imgHeader,title,subtitle}:{imgHeader:SanityImageSource,title:string,subtitle:string}) => {
+const ImageHeader = ({imgHeader,title,subtitle,isService}:{imgHeader:SanityImageSource,title:string,subtitle:string,isService?:boolean}) => {
   return (
      <Box
         sx={{
           width:  "100%",
           maxWidth: "100vw",
-          height: { xs: "28vw", sm: "160px", md: "220px" },
+          height:isService ? { xs: "28vw", sm: "200px", md: "300px", lg: "400px",xl: "500px",xxl: "700px" } : { xs: "28vw", sm: "160px", md: "220px", lg: "280px", xl: "320px" },
           // mx: "auto",
           position: "relative",
           backgroundImage: `url(${urlFor(imgHeader).url()})`,
-          backgroundSize: "100% 100%",
+          backgroundSize:isService ? "cover" : "100% 100%",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           // mt: {xs: 1, md: "53px"},

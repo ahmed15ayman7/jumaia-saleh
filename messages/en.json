@@ -13,6 +13,7 @@
     "practice": "Practice Area",
     "blog": "Blog",
     "contact": "Contact Us",
+    "quote": "Get A Quote",
     "offers": "Offers",
     "services": {
       "real_estate": "Real Estate Issues",
@@ -111,13 +112,13 @@
   },
   "subscribe": {
     "title": "Subscribe to our newsletter!",
-    "description": "Our culture nurtures and strives for innovation, creativity, legal expertise and client focus. Every day we strengthen our entrepreneurial environment to be flexible and supportive, allowing our lawyers to...",
+    "description": "Comprehensive Legal Services Tailored to Your Needs Across All Sectors",
     "input": "Enter your name",
     "cta": "Subscribe Now"
   },
   "footer": {
-    "title": "Start your defense and future consultants now",
-    "about": "At Saeed Al Sharmi, we understand the seriousness... (your about text)",
+    "title": "JUMAIA SALEH\n\n\n\nADVOCATES AND LEGAL CONSULTANCY ",
+    "about": "Our experienced legal team provides strong, confidential defense in cases such as fraud, cybercrime, drug offenses, and assault—ensuring your rights are protected every step of the way.",
     "links": {
       "aboutus": "About us",
       "services": "Services",
@@ -144,12 +145,11 @@
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy"
   },
-    "notFound": {
-      "header": "404 Page Not Found",
-      "headerDescription": "The page you're looking for might have been moved or doesn't exist. Please return to the homepage or contact us for assistance.",
-      "title": "Oops! Page not found",
-      "description": "The Page You're Looking For Might Have Been Moved Or Doesn't Exist. Please Return To The Homepage Or Contact Us For Assistance.",
-      "cta": "Go to homepage"
-    }
-  
+  "notFound": {
+    "header": "404 Page Not Found",
+    "headerDescription": "The page you're looking for might have been moved or doesn't exist. Please return to the homepage or contact us for assistance.",
+    "title": "Oops! Page not found",
+    "description": "The Page You're Looking For Might Have Been Moved Or Doesn't Exist. Please Return To The Homepage Or Contact Us For Assistance.",
+    "cta": "Go to homepage"
+  }
 }

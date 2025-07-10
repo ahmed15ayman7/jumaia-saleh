@@ -129,7 +129,7 @@ const Hero = ({
                   onSave('home.hero', value);
                 }}
                 isAdmin={isAdmin}
-                className="text-[.8rem] md:text-[1.5rem] font-bold mb-4"
+                className="text-[.8rem] md:text-[1.5rem] min-xl:text-[2rem] font-bold mb-4"
               />
             </Typography>
           </motion.div>
@@ -149,7 +149,7 @@ const Hero = ({
                   color: 'white',
                   lineHeight: 1.3,
                   fontWeight: 600,
-                  fontSize: { xs: '1.5rem', sm: '2.5rem', md: '3.2rem' },
+                  fontSize: { xs: '1.5rem', sm: '2.5rem', md: '3.2rem',xl: '4rem' },
                   textAlign: {xs: "center",md: locale === "en" ? "left" : "right"}
                 }}
               >
@@ -196,7 +196,7 @@ const Hero = ({
                 maxWidth: '600px',
                 textAlign: {xs: "center",md: locale === "en" ? "left" : "right"},
                 mt: 3,
-                fontSize: { xs: '.9rem', md: '1.125rem' },
+                fontSize: { xs: '.9rem', md: '1.125rem',xl: '1.5rem' },
               }}
             >
               <EditableText
@@ -226,9 +226,9 @@ const Hero = ({
                 gap: 1,
                 color: 'white',
                 px: 4,
-                borderRadius: '25px',
+                borderRadius: {xs:'25px',md:'25px',xl:'35px'},
                 py: 1.5,
-                fontSize: { xs: '0.8rem', md: '1rem' },
+                fontSize: { xs: '0.8rem', md: '1rem',xl: '1.5rem' },
                 '&:hover': {
                   bgcolor: 'primary.dark',
                 },

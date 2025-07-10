@@ -121,12 +121,16 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
             p: { xs: 2, md: 5 },
             boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
             minWidth: 0,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
             <ContactForm contactFormData={contactPage?.contactFormData || {title: 'تواصل معنا', titleAr: 'تواصل معنا', subtitle: 'اترك رسالة لنا', subtitleAr: 'اترك رسالة لنا', emailLabel: 'البريد الإلكتروني', emailLabelAr: 'البريد الإلكتروني', phoneLabel: 'رقم الهاتف', phoneLabelAr: 'رقم الهاتف', serviceTypeLabel: 'نوع الخدمة', serviceTypeLabelAr: 'نوع الخدمة', messageLabel: 'الرسالة', messageLabelAr: 'الرسالة',submitButtonLabel: 'إرسال', submitButtonLabelAr: 'إرسال',nameLabel: 'الاسم', nameLabelAr: 'الاسم'}} locale={locale}/>
         </Box>
         {/* Side Section */}
-        <Box sx={{ flex: 4, display: 'flex', flexDirection: 'column', gap: 3, minWidth: 0 }}>
+        <Box sx={{ flex: 4, display: 'flex', flexDirection: 'column', gap: "14px", minWidth: 0 }}>
           {/* Image */}
           <Box
             sx={{
@@ -134,7 +138,7 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
               overflow: 'hidden',
               width: '100%',
               aspectRatio: '1/1.1',
-              mb: 2,
+              mb: 0,
               minHeight: '260px',
               position: 'relative',
             }}
@@ -181,9 +185,9 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
     <Box sx={{
       width: '100%',
       height: '40vh',
-      mt: 6,
-      mb: 6,
-      borderRadius: '16px',
+      mt: "60px",
+      mb: "60px",
+      // borderRadius: '16px',
       overflow: 'hidden',
     }}>
       <iframe

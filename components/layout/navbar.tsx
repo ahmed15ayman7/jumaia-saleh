@@ -32,10 +32,10 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const navItems = [
   { label: "home", hasDropdown: false, href: "/" },
-  { label: "about", hasDropdown: false, href: "/about" },
   { label: "practice", hasDropdown: true, href: "/practice" },
-  { label: "contact", hasDropdown: false, href: "/contact" },
+  { label: "about", hasDropdown: false, href: "/about" },
   { label: "blog", hasDropdown: false, href: "/blog" },
+  { label: "contact", hasDropdown: false, href: "/contact" },
 ];
 
 const Navbar = ({ locale }: { locale: string }) => {
@@ -158,7 +158,7 @@ const Navbar = ({ locale }: { locale: string }) => {
              }}
           >
             <AppBar
-              position="static"
+              position={"static"}
               color="transparent"
               elevation={0}
               sx={{ zIndex: 1000,px: {xs: 0,md: 2} }}

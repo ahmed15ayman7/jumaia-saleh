@@ -64,6 +64,8 @@ const Navbar = ({ locale }: { locale: string }) => {
   const t = useTranslations("navbar");
   const router = useRouter();
   const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+  const isHome = pathname === "/en" || pathname === "/ar" || pathname === "/";
 
   const handleDropdownClick = (label: string) => {
     setIsDropdownOpen((prev) => !prev);
@@ -82,6 +84,15 @@ const Navbar = ({ locale }: { locale: string }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+    // Handle scroll to toggle navbar background
+    useEffect(() => {
+      const handleScroll = () => {
+        setScrolled(window.scrollY > 50);
+      };
+      window.addEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+  
   const DrawerList = (
     <Box
       sx={{ width: 250 }}
@@ -125,7 +136,8 @@ const Navbar = ({ locale }: { locale: string }) => {
 
             <Box
               component="img"
-              src={locale === "en" ? "/images/sa.svg" : "/images/sh.svg"}
+              // src={locale === "en" ? "/images/sa.svg" : "/images/sh.svg"}
+              src={"/images/logo-ar-en.png"}
               alt={t("language")}
               sx={{ width: 20, height: 15 }}
               />
@@ -149,13 +161,21 @@ const Navbar = ({ locale }: { locale: string }) => {
       <AnimatePresence>
         {showNavbar && (
           <motion.div
-            initial={{ y: -80 }}
-            animate={{ y: 0 }}
-            exit={{ y: -80 }}
-            transition={{ duration: 0.3 }}
-            style={{ position: "absolute", width: "100%", top: 0, background:pathname==="/en" || pathname==="/ar"  ? "transparent" :
-              'linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)',
-             }}
+          initial={{ y: -80 }}
+          animate={{ y: 0 }}
+          exit={{ y: -80 }}
+          transition={{ duration: 0.3 }}
+          style={{
+            position: "sticky",
+            top: 0,
+            zIndex: 1000,
+            width: "100%",
+            background: isHome && !scrolled
+              ? "transparent"
+              : "linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)",
+            transition: "background 0.3s ease-in-out",
+            backdropFilter: isHome && !scrolled ? "blur(6px)" : "none",
+          }}
           >
             <AppBar
               position={"static"}
@@ -168,18 +188,19 @@ const Navbar = ({ locale }: { locale: string }) => {
                   sx={{ justifyContent: "space-between", width: "100%" }}
                 >
                   <motion.img
-                    src={
-                      locale === "en"
-                        ? "/images/logo-en.svg"
-                        : "/images/logo-ar.svg"
-                    }
+                    // src={
+                    //   locale === "en"
+                    //     ? "/images/logo-en.svg"
+                    //     : "/images/logo-ar.svg"
+                    // }
+                    src={"/images/logo-ar-en.png"}
                     alt="Logo"
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.5 }}
-                    className={`w-[120px] md:w-[200px]  ${locale === "ar" ? "md:h-[100px] h-[70px] " : "md:h-[90px] h-[60px]"} object-contain`}
+                    className={`w-[200px] md:w-[220px]  ${locale === "ar" ? "md:h-[60px] h-[50px] " : "md:h-[60px] h-[50px]"} object-cover`}
                     style={{
-                      padding: "10px",
+                      padding: "10px 0",
                       objectFit: "cover",
                     }}
                   />
@@ -392,18 +413,121 @@ const Navbar = ({ locale }: { locale: string }) => {
        
               {isMenuOpen && (
                 <Drawer
-                  anchor="right"
-                  open={isMenuOpen}
-                  onClose={() => setIsMenuOpen(false)}
-                  sx={{
-                    "& .MuiDrawer-paper": {
-                      width: "50%",
-                      height: "100%",
-                    },
-                  }}
-                >
-                  {DrawerList}
-                </Drawer>
+                anchor="right"
+                open={isMenuOpen}
+                onClose={() => setIsMenuOpen(false)}
+                sx={{
+                  background:"url('/images/Backdrop.svg') no-repeat center center",
+                  backgroundSize: 'cover',
+                  '& .MuiDrawer-paper': {
+                    width: '75%',
+                    maxWidth: 320,
+                    maxHeight: '91vh',
+                    height: '100%',
+                    background: 'linear-gradient(to left, #0c1c19 70%)',
+                    padding: '20px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                  },
+                }}
+              >
+                <Box>
+                  {/* Header (Logo + Close Button) */}
+                  <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Box
+                      component="img"
+                      src="/images/logo-ar.svg"
+                      alt="logo"
+                      sx={{ height: 50 }}
+                    />
+                    <IconButton onClick={() => setIsMenuOpen(false)}>
+                      <CloseIcon sx={{ color: '#cf9425' }} />
+                    </IconButton>
+                  </Box>
+              
+                  {/* Navigation Items */}
+                  <Box mt={4}>
+                    {navItems.map((item, index) => (
+                      <Box
+                        key={index}
+                        sx={{
+                          borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+                          py: 1.5,
+                          color: 'white',
+                          fontSize: '1rem',
+                          cursor: 'pointer',
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                        }}
+                        onClick={() => {
+                          router.push(`/${locale}${item.href}`);
+                          setIsMenuOpen(false);
+                        }}
+                      >
+                        {t(item.label)}
+                        {item.hasDropdown && <KeyboardArrowDownIcon sx={{ color: 'white' }} />}
+                      </Box>
+                    ))}
+              
+                    {/* Language Selector */}
+                    <Box
+                      mt={3}
+                      display="flex"
+                      alignItems="center"
+                      gap={1}
+                      onClick={() => {
+                        router.push(
+                          `/${locale === "en" ? "ar" : "en"}${pathname.slice(3)}`,
+                          { scroll: false }
+                        );
+                        setIsMenuOpen(false);
+                      }}
+                      sx={{ cursor: 'pointer', color: 'white' }}
+                    >
+                      {locale === 'en' ? 'العربية' : 'English'}
+                      <Box
+                        component="img"
+                        src={locale === 'en' ? '/images/sa.svg' : '/images/sh.svg'}
+                        alt="lang"
+                        sx={{ width: 20, height: 15 }}
+                      />
+                    </Box>
+                  </Box>
+                </Box>
+              
+                {/* Footer */}
+                <Box mt={4} color="white">
+                  <Typography sx={{ color: '#cf9425', fontWeight: 600, fontSize: '0.9rem' }}>
+                    Copyright 2022
+                  </Typography>
+                  <Typography variant="body2" mt={0.5} sx={{ fontSize: '0.8rem' }}>
+                    sybexdesigns@gmail.com. All Rights Reserved.
+                  </Typography>
+              
+                  {/* Social Icons */}
+                  <Box mt={2} display="flex" gap={1}>
+                    {[1, 2, 3, 4].map((i) => (
+                      <Box
+                        key={i}
+                        sx={{
+                          width: 24,
+                          height: 24,
+                          borderRadius: '50%',
+                          backgroundColor: 'white',
+                        }}
+                      />
+                    ))}
+                  </Box>
+              
+                  {/* Links */}
+                  <Box mt={2} display="flex" justifyContent="space-between" fontSize="0.75rem">
+                    <Typography sx={{ cursor: 'pointer',fontSize:"0.75rem" }}>Terms & Conditions</Typography>
+                    <Typography sx={{ cursor: 'pointer',fontSize:"0.75rem" }}>Privacy Policy</Typography>
+                  </Box>
+                </Box>
+              </Drawer>              
               )}
     </Box>
   );

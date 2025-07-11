@@ -34,8 +34,9 @@ const AnimateBox = ({ children, animation = 'fadeUp', delay = 0.1 }: AnimateBoxP
       initial={variants.initial}
       animate={isInView ? variants.animate : {}}
       transition={{ delay, duration: 0.7, ease: 'easeOut' }}
+      className='w-full'
     >
-      <Box>{children}</Box>
+      <Box className='w-full'>{children}</Box>
     </motion.div>
   );
 };

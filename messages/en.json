@@ -56,17 +56,25 @@
     "title": "Our Lawyers",
     "description": "We offer the best legal services.",
     "lawyer1": {
-      "name": "Rishabh Malhotra",
-      "title": "Founder"
+      "name": "Mohamed Asran",
+      "title": "Legal Consultant"
     },
     "lawyer2": {
-      "name": "Rishabh Malhotra",
-      "title": "Founder"
+      "name": "Asha Ashok",
+      "title": "Public Relations"
     },
-    "lawyer3": {
-      "name": "Rishabh Malhotra",
-      "title": "Founder"
-    }
+      "lawyer3": {
+        "name": "Jumayah Saleh",
+        "title": "CEO, Owner and Founder"
+      },
+      "lawyer4": {
+        "name": "Amanah Hussain",
+        "title": "Secretary"
+      },
+      "lawyer5": {
+        "name": "Ramdan Yousuf",
+        "title": "Legal Researcher"
+      }
   },
   "testimonials": {
     "title": "What Our Clients Are Saying",

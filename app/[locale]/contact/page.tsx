@@ -11,6 +11,7 @@ import { fetchContactPage } from '@/sanity/lib/fetchDynamicPage';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/sanity/lib/image';
 import NotFound404 from '../not-found';
+import OurLawyers from '@/components/shared/OurLawyers';
 interface ContactPage{
   breadcrumb: { label: string; labelAr: string; href: string }[];
   hero: {
@@ -200,6 +201,7 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
         referrerPolicy="no-referrer-when-downgrade"
       ></iframe>
     </Box>
+    <OurLawyers locale={locale} isAdmin={false}/>
     <Subscribe locale={locale} isAdmin={false}/>
     </Box>
   );

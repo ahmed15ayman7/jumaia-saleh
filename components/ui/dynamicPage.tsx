@@ -316,8 +316,8 @@ export default function DynamicPage({
                   borderRadius: "6px",
                   fontWeight: 700,
                   fontSize: { xs: ".8rem", md: "1rem" },
-                  minWidth: { xs: "100%", md: 210 },
-                  maxWidth: { xs: "100%", md: 210 },
+                  minWidth: { xs: "100%", md: 280 },
+                  maxWidth: { xs: "100%", md: 280 },
                   py: { xs: 1.5, md: 1.2 },
                   px: { xs: 1, md: 2 },
                   "&:hover": {

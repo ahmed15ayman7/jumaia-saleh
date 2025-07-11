@@ -10,6 +10,7 @@ import Advocates from '@/components/shared/Advocates'
 import Subscribe from '@/components/ui/Subscribe'
 import NotFound404 from '../not-found'
 import Link from 'next/link'
+import OurLawyers from '@/components/shared/OurLawyers'
 
 interface AboutUsData  {
     breadcrumb: {
@@ -139,7 +140,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
         {/* Content Section */}
         <Box
       sx={{
-        maxWidth: '900px',
+        maxWidth: {xs:"100%",md:"90%"},
         mx: 'auto',
         px: { xs: 2, md: 0 },
         // pb: { xs: 4, md: 7 },
@@ -183,7 +184,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
 
       {/* Divider */}
       <AnimateBox animation="scaleIn" delay={0.25}>
-        <Divider sx={{ mb: { xs: 1, md: '20px' }, mx: 0, width: "100%" }} />
+        <Divider sx={{ mb: { xs: 1, md: '20px' }, mx: 0, width: "100%",maxWidth: {xs:"100%",md:"90%"} }} />
       </AnimateBox>
 
       {/* Description */}
@@ -204,7 +205,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
     {/* Brochure Section */}
     <Box
       sx={{
-        maxWidth: "900px",
+        maxWidth: {xs:"100%",md:"90%"},
         textAlign: { xs: "center", md: locale === "ar" ? "right" : "left" },
         mx: "auto",
         px: { xs: 2, md: 0 },
@@ -271,8 +272,8 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
                   borderRadius: "25px",
                   fontWeight: 700,
                   fontSize: { xs: ".8rem", md: "1rem" },
-                  minWidth: { xs: 160, md: 210 },
-                  maxWidth: { xs: 160, md: 226 },
+                  minWidth: { xs: "100%", md: 280 },
+                  maxWidth: { xs: "100%", md: 280 },
                   py: { xs: 1, md: 1.2 },
                   px: { xs: 1, md: 2 },
                   "&:hover": {
@@ -297,7 +298,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
     <Box
       component="section"
       sx={{
-        maxWidth: "900px",
+        maxWidth: {xs:"100%",md:"90%"},
         mx: "auto",
         px: { xs: 2, md: 0 },
         my: { xs: 5, md: "40px" },
@@ -348,7 +349,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
 
       <Box
         sx={{
-          maxWidth: "900px",
+          maxWidth: {xs:"100%",md:"90%"},
           mx: "auto",
           px: { xs: 2, md: 0 },
           pb: {xs: 4, md: "80px"},
@@ -428,6 +429,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
     </Box>
 {/* Advocates */}
       <Advocates locale={locale} isAdmin={false} isbg={true} />
+      <OurLawyers locale={locale} isAdmin={false} />
       {/* Subscribe */}
       <Subscribe locale={locale} isAdmin={false} />
     </Box>

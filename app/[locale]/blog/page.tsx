@@ -1,7 +1,7 @@
 "use client";
 import ImageHeader from '@/components/ui/ImageHeader';
 import { fetchBlog, fetchBlogPage } from '@/sanity/lib/fetchDynamicPage';
-import { Box, Button, Typography, Skeleton } from '@mui/material';
+import { Box, Button, Typography, Skeleton, IconButton } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import AnimateBox from '@/components/ui/AnimateBox';
 import Subscribe from '@/components/ui/Subscribe';
@@ -202,31 +202,35 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
         {/* Pagination */}
         <Box sx={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', mt: 6 }}>
           {[...Array(pagesCount)].map((_, i) => (
-            <Button
+            <IconButton
               key={i}
               sx={{
-                minWidth: '48px',
+                minWidth: '56px',
                 minHeight: '48px',
-                border: '1.5px solid #C8931C',
-                borderRadius: '8px',
-                bgcolor: page === i + 1 ? '#C8931C' : '#fff',
-                color: page === i + 1 ? '#fff' : '#C8931C',
+                border: '1.5px solid primary.main',
+                borderRadius: '50%',
+                bgcolor: page === i + 1 ? 'primary.main' : 'primary.light',
+                color: page === i + 1 ? '#fff' : 'primary.main',
                 fontSize: '1.6rem',
                 fontWeight: 500,
+                "&:hover": {
+                  bgcolor: 'primary.dark',
+                  color: '#fff',
+                },
               }}
               onClick={() => setPage(i + 1)}
             >
               {i + 1}
-            </Button>
+            </IconButton>
           ))}
           {page < pagesCount && (
-            <Button
+            <IconButton
               sx={{
                 minWidth: '120px',
                 minHeight: '48px',
-                border: '1.5px solid #C8931C',
-                borderRadius: '8px',
-                color: '#C8931C',
+                border: '1.5px solid primary.main',
+                borderRadius: '50%',
+                color: 'primary.main',
                 fontSize: {xs:'.7rem',md:'1rem'},
                 fontWeight: 500,
                 bgcolor: '#fff',
@@ -234,7 +238,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
               onClick={() => setPage(page + 1)}
             >
               {locale === 'ar' ? "الصفحة التالية" : "Next Page"}
-            </Button>
+            </IconButton>
           )}
         </Box>
       </Box>

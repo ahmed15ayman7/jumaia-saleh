@@ -51,7 +51,7 @@ const Advocates = ({ locale, isAdmin ,isbg=false}: { locale: string; isAdmin: bo
   };
 
   return (
-    <MUIBox ref={ref} className="w-full" sx={{ position: "relative", maxWidth: "101vw", height: { xs: "70vh", md: "90vh" }, mx: "auto" }}>
+    <MUIBox ref={ref} className="w-full" sx={{ position: "relative", maxWidth: "100vw", height: { xs: "70vh", md: "90vh" }, mx: "auto" }}>
          <MUIBox style={{display: "flex",
         flexDirection: "column",
         alignItems: "center",backgroundImage: isbg ? "url('/images/pattern.svg')" : "none",backgroundColor: isbg ? "#FCF8F3" : "transparent", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", position: "absolute", top: 0, left: 0, width: "100%", height: "100%", zIndex: 0}} >

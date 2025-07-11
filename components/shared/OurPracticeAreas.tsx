@@ -88,7 +88,7 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
       sx={{
         width: "100%",
         // bgcolor: "#F9F7F5",
-        py: { xs: 3, md: 5 },
+        py: { xs: 7, md: 5 },
       }}
     >
       <Box sx={{maxWidth: "100vw",px: 0}} className="bg-[#F9F7F5]">

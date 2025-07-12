@@ -3,12 +3,13 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { fetchDynamicPageType } from '@/sanity/lib/fetchDynamicPage';
 
-const LegalServicesSection = ({ref}: {ref: React.RefObject<HTMLDivElement | null>}) => {
+const LegalServicesSection = ({ref,setIsDropdownOpen,setActiveDropdown}: {ref: React.RefObject<HTMLDivElement | null>,setIsDropdownOpen: (value: boolean) => void,setActiveDropdown: (value: string) => void}) => {
   const t = useTranslations('navbar.services');
+  const closeTimeout = useRef<NodeJS.Timeout | null>(null);
   const locale = useLocale();
   let [services, setServices] = useState([
     {title: t('real_estate'), titleEn: t('real_estate'), value: 'real-estate'},
@@ -66,6 +67,15 @@ const LegalServicesSection = ({ref}: {ref: React.RefObject<HTMLDivElement | null
       <div
         className={`grid grid-cols-3 items-center justify-between gap-10`}
         ref={ref}
+        onMouseLeave={() => {
+          if (closeTimeout.current) {
+            clearTimeout(closeTimeout.current);
+          }
+          closeTimeout.current = setTimeout(() => {
+            setIsDropdownOpen(false);
+            setActiveDropdown("");
+          }, 800);
+        }}
         >
         {/* الخدمات */}
         <motion.div

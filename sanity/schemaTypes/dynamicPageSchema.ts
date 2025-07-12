@@ -80,7 +80,7 @@ const realEstate = {
       const title = value.title || 'No Title';
       const lang = value.lang || '';
       const slug = value.slug?.value || '';
-      const media = value.media || '/images/placeholder.png';
+      const media = value.media || '';
       return {
         title: `${title} (${lang.toUpperCase()})`,
         subtitle: slug,

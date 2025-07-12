@@ -13,13 +13,14 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import EditableText from "../EditableText";
 import { toast } from "sonner";
 import { updateMessage } from "@/lib/updateMessage";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
+import { fetchDynamicPageType } from "@/sanity/lib/fetchDynamicPage";
 
 const socialMedia = [
   { icon: <FacebookIcon />, nameKey: "facebook" },
@@ -32,6 +33,16 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
   const t = useTranslations("footer");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
+  let [services, setServices] = useState([]);
+  useEffect(() => {
+    fetchDynamicPageType("real-estate").then((data) => {
+      setServices(data.map((item: any) => ({
+        label: item.title,
+        labelEn: item.titleEn,
+        href: `/practice/${item.value}`,
+      })));
+    });
+  }, []);
 
   // navigation columns as in the image
   const navigationData = [
@@ -41,15 +52,15 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
     },
     {
       titleKey: null,
-      links: ["aboutus", "services", "blog", "contactus"],
+      links: [{label: t("aboutus"), href: "/about"}, {label: t("services"), href: "/practice"}, {label: t("blog"), href: "/blog"}, {label: t("contactus"), href: "/contact"}],
     },
     {
       titleKey: null,
-      links: ["support", "knowledge", "livechat"],
+      links: services.map((item: any) => ({label: locale === "ar" ? item.label : item.labelEn, href: item.href})) as {label: string, href: string}[],
     },
     {
       titleKey: null,
-      links: ["team", "leadership", "privacy"],
+      links: [{label: t("team"), href: "/team"}, {label: t("ourteam"), href: "/contact/#our-team"}, {label: t("privacy"), href: "/privacy"}],
     },
     // {
     //   titleKey: null,
@@ -262,7 +273,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                         </Box>
                       ) : (
                         <Box className="flex flex-col gap-1 max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]  max-sm:justify-between">
-                          {column.links.map((linkKey, linkIndex) => (
+                          {column.links.map((link: {label: string, href: string}, linkIndex: number) => (
                             <Typography
                               variant="body2"
                               key={linkIndex}
@@ -274,13 +285,11 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                                 fontSize: { xs: ".5rem", md: "1rem" },
                               }}
                             >
-                              <EditableText
-                                value={t(`links.${linkKey}`)}
-                                onSave={(val) =>
-                                  onSave(`footer.links.${linkKey}`, val)
-                                }
-                                isAdmin={isAdmin}
-                              />
+                              {services.length > 0 && index === 2 ? (
+                                <Link href={link.href}>{link.label}</Link>
+                              ) : (
+                               t(`links.${link.label}`)
+                              )}
                             </Typography>
                           ))}
                         </Box>

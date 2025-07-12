@@ -47,53 +47,55 @@ const Navbar = ({ locale }: { locale: string }) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [activeDropdown, setActiveDropdown] = useState("");
   let [services, setServices] = useState([]);
+  const closeTimeout = useRef<NodeJS.Timeout | null>(null);
+
   useEffect(() => {
-    fetchDynamicPageType('real-estate').then((data) => {
+    fetchDynamicPageType("real-estate").then((data) => {
       console.log(data);
-      setServices(data.map((item: any) => ({
-        label: item.title,
-        labelEn: item.titleEn,
-        href: `/${locale}/practice/${item.value}`,
-      })));
+      setServices(
+        data.map((item: any) => ({
+          label: item.title,
+          labelEn: item.titleEn,
+          href: `/${locale}/practice/${item.value}`,
+        }))
+      );
     });
   }, []);
   console.log(services);
 
   // إغلاق الـ dropdown عند النقر خارج العنصر
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout;
-  
-    const handleMouseLeave = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        // ابدأ المؤقت
-        timeoutId = setTimeout(() => {
-          setIsDropdownOpen(false);
-        }, 3000); // 3 ثواني
-      }
-    };
-  
+    // const handleMouseLeave = (event: MouseEvent) => {
+    //   if (
+    //     dropdownRef.current &&
+    //     !dropdownRef.current.contains(event.target as Node)
+    //   ) {
+    //     // ابدأ المؤقت
+    //     timeoutId = setTimeout(() => {
+    //       setIsDropdownOpen(false);
+    //     }, 3000); // 3 ثواني
+    //   }
+    // };
+
     const handleMouseEnter = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         dropdownRef.current.contains(event.target as Node)
       ) {
-        clearTimeout(timeoutId); // إلغاء الإغلاق لو رجع المستخدم
+        setIsDropdownOpen(false);
       }
     };
-  
-    document.addEventListener("mousemove", handleMouseLeave);
+
+    // document.addEventListener("mousemove", handleMouseLeave);
     document.addEventListener("mouseenter", handleMouseEnter);
-  
+
     return () => {
-      clearTimeout(timeoutId);
-      document.removeEventListener("mousemove", handleMouseLeave);
+      // clearTimeout(timeoutId);
+      // document.removeEventListener("mousemove", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
   }, [isDropdownOpen]);
-  
+
   const t = useTranslations("navbar");
   const router = useRouter();
   const pathname = usePathname();
@@ -102,7 +104,7 @@ const Navbar = ({ locale }: { locale: string }) => {
 
   const handleDropdownClick = (label: string) => {
     setIsDropdownOpen(true);
-    setActiveDropdown(prev => prev === label ? "" : label);
+    setActiveDropdown((prev) => (prev === label ? "" : label));
   };
 
   useEffect(() => {
@@ -118,111 +120,114 @@ const Navbar = ({ locale }: { locale: string }) => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
-    // Handle scroll to toggle navbar background
-    useEffect(() => {
-      const handleScroll = () => {
-        setScrolled(window.scrollY > 50);
-      };
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-  
-  const DrawerList = (
-    <Box
-      sx={{ width: 250 }}
-      role="presentation"
-    >
-      <Box className="flex items-center justify-end">
-        <IconButton onClick={() => setIsMenuOpen(false)}>
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <List>
-        {navItems.map((item, index) => (
-          <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => {
-              router.push(`/${locale}${item.href}`);
-              setIsMenuOpen(false);
-            }}>
-              <ListItemText primary={t(item.label)} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        <ListItem className="flex items-center gap-2" disablePadding>
-          <ListItemButton sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: "10px",
-            flexDirection: "row-reverse",
-            justifyContent: "space-between",
-          }}  onClick={() => {
-            router.push(
-              `/${locale === "en" ? "ar" : "en"}${pathname.slice(3)}`,
-              { scroll: false }
-            );
-            setIsMenuOpen(false);
-          }}>
-            <ListItemText primary={t("language")} />
-            <ListItemIcon>
+  // Handle scroll to toggle navbar background
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-            <Box
-              component="img"
-              onClick={() => {
-                router.push(
-                  `/${locale === "ar" ? "ar" : "en"}`,
-                  { scroll: false }
-                );
-              }}
-              // src={locale === "en" ? "/images/sa.svg" : "/images/sh.svg"}
-              src={"/images/logo-ar-en.png"}
-              alt={t("language")}
-              sx={{ width: 20, height: 15,cursor: "pointer" }}
-              />
-              </ListItemIcon>
-              </ListItemButton>
-        </ListItem>
-      </List>
-      <Divider />
-      <List>
-        <ListItem>
-          <ListItemButton component={"a"} href={`https://wa.me/+00971565955502`} target="_blank">
-            <ListItemText primary={t("contact")} />
-            
-          </ListItemButton>
-        </ListItem>
-      </List>
-    </Box>
-  );
+  //   <Box sx={{ width: 250 }} role="presentation">
+  //     <Box className="flex items-center justify-end">
+  //       <IconButton onClick={() => setIsMenuOpen(false)}>
+  //         <CloseIcon />
+  //       </IconButton>
+  //     </Box>
+  //     <List>
+  //       {navItems.map((item, index) => (
+  //         <ListItem key={index} disablePadding>
+  //           <ListItemButton
+  //             onClick={() => {
+  //               router.push(`/${locale}${item.href}`);
+  //               setIsMenuOpen(false);
+  //             }}
+  //           >
+  //             <ListItemText primary={t(item.label)} />
+  //           </ListItemButton>
+  //         </ListItem>
+  //       ))}
+  //     </List>
+  //     <Divider />
+  //     <List>
+  //       <ListItem className="flex items-center gap-2" disablePadding>
+  //         <ListItemButton
+  //           sx={{
+  //             display: "flex",
+  //             alignItems: "center",
+  //             gap: "10px",
+  //             flexDirection: "row-reverse",
+  //             justifyContent: "space-between",
+  //           }}
+  //           onClick={() => {
+  //             router.push(
+  //               `/${locale === "en" ? "ar" : "en"}${pathname.slice(3)}`,
+  //               { scroll: false }
+  //             );
+  //             setIsMenuOpen(false);
+  //           }}
+  //         >
+  //           <ListItemText primary={t("language")} />
+  //           <ListItemIcon>
+  //             <Box
+  //               component="img"
+  //               onClick={() => {
+  //                 router.push(`/${locale === "ar" ? "ar" : "en"}`, {
+  //                   scroll: false,
+  //                 });
+  //               }}
+  //               // src={locale === "en" ? "/images/sa.svg" : "/images/sh.svg"}
+  //               src={"/images/logo-ar-en.png"}
+  //               alt={t("language")}
+  //               sx={{ width: 20, height: 15, cursor: "pointer" }}
+  //             />
+  //           </ListItemIcon>
+  //         </ListItemButton>
+  //       </ListItem>
+  //     </List>
+  //     <Divider />
+  //     <List>
+  //       <ListItem>
+  //         <ListItemButton
+  //           component={"a"}
+  //           href={`https://wa.me/+00971565955502`}
+  //           target="_blank"
+  //         >
+  //           <ListItemText primary={t("contact")} />
+  //         </ListItemButton>
+  //       </ListItem>
+  //     </List>
+  //   </Box>
+  // );
   return (
-    <Box sx={{ height: {xs: "60px",md: "70px"}, position: "relative" }}>
+    <Box sx={{ height: { xs: "60px", md: "70px" }, position: "relative" }}>
       <AnimatePresence>
         {showNavbar && (
           <motion.div
-          initial={{ y: -80 }}
-          animate={{ y: 0 }}
-          exit={{ y: -80 }}
-          transition={{ duration: 0.3 }}
-          style={{
-            position: "sticky",
-            top: 0,
-            
-            zIndex: 1000,
-            width: "100%",
-            background: isHome && !scrolled
-              ? "transparent"
-              : "linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)",
-            transition: "background 0.3s ease-in-out",
-            backdropFilter: isHome && !scrolled ? "blur(6px)" : "none",
-          }}
+            initial={{ y: -80 }}
+            animate={{ y: 0 }}
+            exit={{ y: -80 }}
+            transition={{ duration: 0.3 }}
+            style={{
+              position: "sticky",
+              top: 0,
+
+              zIndex: 1000,
+              width: "100%",
+              background:
+                isHome && !scrolled
+                  ? "transparent"
+                  : "linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)",
+              transition: "background 0.3s ease-in-out",
+              backdropFilter: isHome && !scrolled ? "blur(6px)" : "none",
+            }}
           >
             <AppBar
               position={"static"}
               color="transparent"
               elevation={0}
-              sx={{ zIndex: 1000,px: {xs: 0,md: 2},py: {xs: 0,md: 1} }}
+              sx={{ zIndex: 1000, px: { xs: 0, md: 2 }, py: { xs: 0, md: 1 } }}
             >
               <Container maxWidth="xl" sx={{ zIndex: 1000 }} disableGutters>
                 <Toolbar
@@ -235,10 +240,9 @@ const Navbar = ({ locale }: { locale: string }) => {
                     //     : "/images/logo-ar.svg"
                     // }
                     onClick={() => {
-                      router.push(
-                        `/${locale === "ar" ? "ar" : "en"}`,
-                        { scroll: false }
-                      );
+                      router.push(`/${locale === "ar" ? "ar" : "en"}`, {
+                        scroll: false,
+                      });
                     }}
                     src={"/images/logo-ar-en.png"}
                     alt="Logo"
@@ -275,7 +279,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                               height: "100%",
                             }}
                           >
-                            <LegalServicesSection ref={dropdownRef} />
+                            <LegalServicesSection ref={dropdownRef} setIsDropdownOpen={setIsDropdownOpen} setActiveDropdown={setActiveDropdown} />
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -285,10 +289,16 @@ const Navbar = ({ locale }: { locale: string }) => {
                           onMouseOver={() =>
                             item.hasDropdown && handleDropdownClick(item.label)
                           }
+                         
                           className="flex rtl:space-x-reverse items-center gap-2"
                           sx={{
                             color: "primary.main",
-                            borderBottom: `/${pathname.slice(4)}` === item.href || (pathname.slice(3).includes(item.href) && item.href !== "/") ? "2px solid #cf9425" : "none",
+                            borderBottom:
+                              `/${pathname.slice(4)}` === item.href ||
+                              (pathname.slice(3).includes(item.href) &&
+                                item.href !== "/")
+                                ? "2px solid #cf9425"
+                                : "none",
                             padding: "10px",
                             "&:hover": {
                               color: "secondary.main",
@@ -370,83 +380,83 @@ const Navbar = ({ locale }: { locale: string }) => {
                     </motion.div>
 
                     <Box
-  component="button"
-  onClick={() => {
-    window.open(`https://wa.me/+00971565955502`, "_blank");
-  }}
-  sx={{
-    position: "relative",
-    overflow: "hidden",
-    border: "none",
-    outline: "none",
-    cursor: "pointer",
-    borderRadius: "10px",
-    px: 3,
-    py: 1.5,
-    display: {md:"flex",xs:"none"},
-    alignItems: "center",
-    gap: 1,
-    backgroundColor: "transparent",
-    color: "secondary.main",
-    fontFamily: "'Manrope-Bold', Helvetica",
-    fontSize: "1.25rem",
-    fontWeight: 700,
-    letterSpacing: "-0.40px",
-    transition: "color 0.4s ease",
-    zIndex: 1,
+                      component="button"
+                      onClick={() => {
+                        window.open(`https://wa.me/+00971565955502`, "_blank");
+                      }}
+                      sx={{
+                        position: "relative",
+                        overflow: "hidden",
+                        border: "none",
+                        outline: "none",
+                        cursor: "pointer",
+                        borderRadius: "10px",
+                        px: 3,
+                        py: 1.5,
+                        display: { md: "flex", xs: "none" },
+                        alignItems: "center",
+                        gap: 1,
+                        backgroundColor: "transparent",
+                        color: "secondary.main",
+                        fontFamily: "'Manrope-Bold', Helvetica",
+                        fontSize: "1.25rem",
+                        fontWeight: 700,
+                        letterSpacing: "-0.40px",
+                        transition: "color 0.4s ease",
+                        zIndex: 1,
 
-    "&::before": {
-      content: '""',
-      position: "absolute",
-      top: 0,
-      left: 0,
-      width: "100%",
-      height: "100%",
-      backgroundColor: "#cf9425",
-      transform: "scaleX(0)",
-      transformOrigin: "center",
-      transition: "transform 0.4s ease-in-out",
-      zIndex: 0,
-    },
+                        "&::before": {
+                          content: '""',
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          backgroundColor: "#cf9425",
+                          transform: "scaleX(0)",
+                          transformOrigin: "center",
+                          transition: "transform 0.4s ease-in-out",
+                          zIndex: 0,
+                        },
 
-    "&:hover::before": {
-      transform: "scaleX(1)",
-    },
+                        "&:hover::before": {
+                          transform: "scaleX(1)",
+                        },
 
-    "&:hover": {
-      color: "#fff",
-    },
+                        "&:hover": {
+                          color: "#fff",
+                        },
 
-    "& > *": {
-      position: "relative",
-      zIndex: 1,
-    },
-  }}
->
-  <Typography variant="button" sx={{ textWrap: "nowrap" }}>
-    {t("quote")}
-  </Typography>
+                        "& > *": {
+                          position: "relative",
+                          zIndex: 1,
+                        },
+                      }}
+                    >
+                      <Typography variant="button" sx={{ textWrap: "nowrap" }}>
+                        {t("quote")}
+                      </Typography>
 
-  {locale === "en" ? (
-                          <ArrowForwardIcon
-                            className="bounce-h"
-                            sx={{
-                              color: "secondary.main",
-                              width: 24,
-                              height: 24,
-                            }}
-                          />
-                        ) : (
-                          <ArrowBackIcon
-                            className="bounce-h"
-                            sx={{
-                              color: "secondary.main",
-                              width: 24,
-                              height: 24,
-                            }}
-                          />
-                        )}
-</Box>
+                      {locale === "en" ? (
+                        <ArrowForwardIcon
+                          className="bounce-h"
+                          sx={{
+                            color: "secondary.main",
+                            width: 24,
+                            height: 24,
+                          }}
+                        />
+                      ) : (
+                        <ArrowBackIcon
+                          className="bounce-h"
+                          sx={{
+                            color: "secondary.main",
+                            width: 24,
+                            height: 24,
+                          }}
+                        />
+                      )}
+                    </Box>
 
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
@@ -483,173 +493,190 @@ const Navbar = ({ locale }: { locale: string }) => {
           </motion.div>
         )}
       </AnimatePresence>
-       
-              {isMenuOpen && (
-                <Drawer
-                anchor="right"
-                open={isMenuOpen}
-                onClose={() => setIsMenuOpen(false)}
-                sx={{
-                  background:"url('/images/Backdrop.svg') no-repeat center center",
-                  backgroundSize: 'cover',
-                  '& .MuiDrawer-paper': {
-                    width: '75%',
-                    maxWidth: 320,
-                    maxHeight: '100vh',
-                    height: '100%',
-                    background: 'linear-gradient(to left, #0c1c19 70%)',
-                    padding: '20px',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',
-                  },
-                }}
-              >
-                <Box>
-                  {/* Header (Logo + Close Button) */}
-                    <IconButton onClick={() => setIsMenuOpen(false)}>
-                      <CloseIcon sx={{ color: '#cf9425' }} />
-                    </IconButton>
-                  <Box display="flex" justifyContent="space-between" alignItems="center">
-                    <Box
-                      component="img"
-                      src="/images/logo-ar-en.png"
-                      alt="logo"
-                      sx={{ height: 50,cursor: "pointer" }}
-                      onClick={() => {
-                        router.push(
-                          `/${locale === "ar" ? "ar" : "en"}`,
-                          { scroll: false }
-                        );
-                      }}
-                    />
-                  </Box>
-              
-                  {/* Navigation Items */}
-                  <Box mt={4}>
-                  {navItems.map((item, index) => (
-  <Box key={index}>
-    {/* Main nav item */}
-    <Box
-      sx={{
-        borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-        py: 1.5,
-        color: 'white',
-        fontSize: '1rem',
-        cursor: 'pointer',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-      onClick={() => {
-        if (item.hasDropdown) {
-          handleDropdownClick(item.label);
-        } else {
-          router.push(`/${locale}${item.href}`);
-          setIsMenuOpen(false);
-        }
-      }}
-    >
-      {t(item.label)}
-      {item.hasDropdown && (
-        <KeyboardArrowDownIcon
+
+      {isMenuOpen && (
+        <Drawer
+          anchor="right"
+          open={isMenuOpen}
+          onClose={() => setIsMenuOpen(false)}
           sx={{
-            color: 'white',
-            transform:
-              activeDropdown === item.label ? 'rotate(180deg)' : 'rotate(0)',
-            transition: 'transform 0.3s ease',
+            background: "url('/images/Backdrop.svg') no-repeat center center",
+            backgroundSize: "cover",
+            "& .MuiDrawer-paper": {
+              width: "75%",
+              maxWidth: 320,
+              maxHeight: "100vh",
+              height: "100%",
+              background: "linear-gradient(to left, #0c1c19 70%)",
+              padding: "20px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            },
           }}
-        />
-      )}
-    </Box>
+        >
+          <Box>
+            {/* Header (Logo + Close Button) */}
+            <IconButton onClick={() => setIsMenuOpen(false)}>
+              <CloseIcon sx={{ color: "#cf9425" }} />
+            </IconButton>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Box
+                component="img"
+                src="/images/logo-ar-en.png"
+                alt="logo"
+                sx={{ height: 50, cursor: "pointer" }}
+                onClick={() => {
+                  router.push(`/${locale === "ar" ? "ar" : "en"}`, {
+                    scroll: false,
+                  });
+                }}
+              />
+            </Box>
 
-    {/* Sub items for dropdown */}
-    {item.hasDropdown && activeDropdown === item.label && services.length > 0 && (
-      <Box sx={{ pl: 2, py: 1, backgroundColor: '#0c1c19' }}>
-        {services.map((service: any, i: number) => (
-          <Box
-            key={i}
-            onClick={() => {
-              router.push(service.href);
-              setIsMenuOpen(false);
-            }}
-            sx={{
-              py: 1,
-              color: 'white',
-              fontSize: '0.95rem',
-              cursor: 'pointer',
-              '&:hover': {
-                color: '#cf9425',
-              },
-            }}
-          >
-            {locale === "ar" ? service.label : service.labelEn}
-          </Box>
-        ))}
-      </Box>
-    )}
-  </Box>
-))}
-
-              
-                    {/* Language Selector */}
-                    <Box
-                      mt={3}
-                      display="flex"
-                      alignItems="center"
-                      gap={1}
-                      onClick={() => {
-                        router.push(
-                          `/${locale === "en" ? "ar" : "en"}${pathname.slice(3)}`,
-                          { scroll: false }
-                        );
+            {/* Navigation Items */}
+            <Box mt={4}>
+              {navItems.map((item, index) => (
+                <Box key={index}>
+                  {/* Main nav item */}
+                  <Box
+                    sx={{
+                      borderBottom: "1px solid rgba(255, 255, 255, 0.2)",
+                      py: 1.5,
+                      color: "white",
+                      fontSize: "1rem",
+                      cursor: "pointer",
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                    onClick={() => {
+                      if (item.hasDropdown) {
+                        handleDropdownClick(item.label);
+                      } else {
+                        router.push(`/${locale}${item.href}`);
                         setIsMenuOpen(false);
-                      }}
-                      sx={{ cursor: 'pointer', color: 'white' }}
-                    >
-                      {locale === 'en' ? 'العربية' : 'English'}
-                      <Box
-                        component="img"
-                        src={locale === 'en' ? '/images/sa.svg' : '/images/sh.svg'}
-                        alt="lang"
-                        sx={{ width: 20, height: 15 }}
-                      />
-                    </Box>
-                  </Box>
-                </Box>
-              
-                {/* Footer */}
-                <Box mt={4} color="white">
-                  <Typography sx={{ color: '#cf9425', fontWeight: 600, fontSize: '0.9rem' }}>
-                    Copyright 2022
-                  </Typography>
-                  <Typography variant="body2" mt={0.5} sx={{ fontSize: '0.8rem' }}>
-                    sybexdesigns@gmail.com. All Rights Reserved.
-                  </Typography>
-              
-                  {/* Social Icons */}
-                  <Box mt={2} display="flex" gap={1}>
-                    {[1, 2, 3, 4].map((i) => (
-                      <Box
-                        key={i}
+                      }
+                    }}
+                  >
+                    {t(item.label)}
+                    {item.hasDropdown && (
+                      <KeyboardArrowDownIcon
                         sx={{
-                          width: 24,
-                          height: 24,
-                          borderRadius: '50%',
-                          backgroundColor: 'white',
+                          color: "white",
+                          transform:
+                            activeDropdown === item.label
+                              ? "rotate(180deg)"
+                              : "rotate(0)",
+                          transition: "transform 0.3s ease",
                         }}
                       />
-                    ))}
+                    )}
                   </Box>
-              
-                  {/* Links */}
-                  <Box mt={2} display="flex" justifyContent="space-between" fontSize="0.75rem">
-                    <Typography sx={{ cursor: 'pointer',fontSize:"0.75rem" }}>Terms & Conditions</Typography>
-                    <Typography sx={{ cursor: 'pointer',fontSize:"0.75rem" }}>Privacy Policy</Typography>
-                  </Box>
+
+                  {/* Sub items for dropdown */}
+                  {item.hasDropdown &&
+                    activeDropdown === item.label &&
+                    services.length > 0 && (
+                      <Box sx={{ pl: 2, py: 1, backgroundColor: "#0c1c19" }}>
+                        {services.map((service: any, i: number) => (
+                          <Box
+                            key={i}
+                            onClick={() => {
+                              router.push(service.href);
+                              setIsMenuOpen(false);
+                            }}
+                            sx={{
+                              py: 1,
+                              color: "white",
+                              fontSize: "0.95rem",
+                              cursor: "pointer",
+                              "&:hover": {
+                                color: "#cf9425",
+                              },
+                            }}
+                          >
+                            {locale === "ar" ? service.label : service.labelEn}
+                          </Box>
+                        ))}
+                      </Box>
+                    )}
                 </Box>
-              </Drawer>              
-              )}
+              ))}
+
+              {/* Language Selector */}
+              <Box
+                mt={3}
+                display="flex"
+                alignItems="center"
+                gap={1}
+                onClick={() => {
+                  router.push(
+                    `/${locale === "en" ? "ar" : "en"}${pathname.slice(3)}`,
+                    { scroll: false }
+                  );
+                  setIsMenuOpen(false);
+                }}
+                sx={{ cursor: "pointer", color: "white" }}
+              >
+                {locale === "en" ? "العربية" : "English"}
+                <Box
+                  component="img"
+                  src={locale === "en" ? "/images/sa.svg" : "/images/sh.svg"}
+                  alt="lang"
+                  sx={{ width: 20, height: 15 }}
+                />
+              </Box>
+            </Box>
+          </Box>
+
+          {/* Footer */}
+          <Box mt={4} color="white">
+            <Typography
+              sx={{ color: "#cf9425", fontWeight: 600, fontSize: "0.9rem" }}
+            >
+              Copyright 2022
+            </Typography>
+            <Typography variant="body2" mt={0.5} sx={{ fontSize: "0.8rem" }}>
+              sybexdesigns@gmail.com. All Rights Reserved.
+            </Typography>
+
+            {/* Social Icons */}
+            <Box mt={2} display="flex" gap={1}>
+              {[1, 2, 3, 4].map((i) => (
+                <Box
+                  key={i}
+                  sx={{
+                    width: 24,
+                    height: 24,
+                    borderRadius: "50%",
+                    backgroundColor: "white",
+                  }}
+                />
+              ))}
+            </Box>
+
+            {/* Links */}
+            <Box
+              mt={2}
+              display="flex"
+              justifyContent="space-between"
+              fontSize="0.75rem"
+            >
+              <Typography sx={{ cursor: "pointer", fontSize: "0.75rem" }}>
+                Terms & Conditions
+              </Typography>
+              <Typography sx={{ cursor: "pointer", fontSize: "0.75rem" }}>
+                Privacy Policy
+              </Typography>
+            </Box>
+          </Box>
+        </Drawer>
+      )}
     </Box>
   );
 };

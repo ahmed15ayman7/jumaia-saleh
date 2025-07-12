@@ -10,17 +10,8 @@ import {
   Stack,
   Toolbar,
   Typography,
-  useScrollTrigger,
-  Slide,
   Drawer,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-  Divider,
   IconButton,
-  Link,
 } from "@mui/material";
 import React, { useState, useEffect, useRef } from "react";
 import LegalServicesSection from "./LegalServicesSection";
@@ -56,7 +47,6 @@ const Navbar = ({ locale }: { locale: string }) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [activeDropdown, setActiveDropdown] = useState("");
   let [services, setServices] = useState([]);
-  const closeTimeout = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     fetchDynamicPageType("real-estate").then((data) => {
@@ -135,81 +125,10 @@ const Navbar = ({ locale }: { locale: string }) => {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  //   <Box sx={{ width: 250 }} role="presentation">
-  //     <Box className="flex items-center justify-end">
-  //       <IconButton onClick={() => setIsMenuOpen(false)}>
-  //         <CloseIcon />
-  //       </IconButton>
-  //     </Box>
-  //     <List>
-  //       {navItems.map((item, index) => (
-  //         <ListItem key={index} disablePadding>
-  //           <ListItemButton
-  //             onClick={() => {
-  //               router.push(`/${locale}${item.href}`);
-  //               setIsMenuOpen(false);
-  //             }}
-  //           >
-  //             <ListItemText primary={t(item.label)} />
-  //           </ListItemButton>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //     <Divider />
-  //     <List>
-  //       <ListItem className="flex items-center gap-2" disablePadding>
-  //         <ListItemButton
-  //           sx={{
-  //             display: "flex",
-  //             alignItems: "center",
-  //             gap: "10px",
-  //             flexDirection: "row-reverse",
-  //             justifyContent: "space-between",
-  //           }}
-  //           onClick={() => {
-  //             router.push(
-  //               `/${locale === "en" ? "ar" : "en"}${pathname.slice(3)}`,
-  //               { scroll: false }
-  //             );
-  //             setIsMenuOpen(false);
-  //           }}
-  //         >
-  //           <ListItemText primary={t("language")} />
-  //           <ListItemIcon>
-  //             <Box
-  //               component="img"
-  //               onClick={() => {
-  //                 router.push(`/${locale === "ar" ? "ar" : "en"}`, {
-  //                   scroll: false,
-  //                 });
-  //               }}
-  //               // src={locale === "en" ? "/images/sa.svg" : "/images/sh.svg"}
-  //               src={"/images/logo-ar-en.png"}
-  //               alt={t("language")}
-  //               sx={{ width: 20, height: 15, cursor: "pointer" }}
-  //             />
-  //           </ListItemIcon>
-  //         </ListItemButton>
-  //       </ListItem>
-  //     </List>
-  //     <Divider />
-  //     <List>
-  //       <ListItem>
-  //         <ListItemButton
-  //           component={"a"}
-  //           href={`https://wa.me/+00971565955502`}
-  //           target="_blank"
-  //         >
-  //           <ListItemText primary={t("contact")} />
-  //         </ListItemButton>
-  //       </ListItem>
-  //     </List>
-  //   </Box>
-  // );
-  return (
+ return (
     <Box sx={{ height: { xs: "60px", md: "70px" }, position: "relative" }}>
       <AnimatePresence>
         {showNavbar && (

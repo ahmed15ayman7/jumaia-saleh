@@ -28,7 +28,6 @@ const Page = ({ params }: { params: Promise<{ locale: string, slug: string }> })
   useEffect(() => {
     if (slug && locale) {
       fetchDynamicPage(slug, locale).then((res) => {
-        console.log("Fetched Page Data:", res);
         setData(res);
       });
     }

@@ -41,7 +41,7 @@
     "description": "We offer the best legal services.",
     "casesSolved": "Cases Solved",
     "happyClients": "Happy Clients",
-    "loreumIpsum": "Loreum Ipsum",
+    "loreumIpsum": "Contracts Reviewed",
     "workingHours": "Working Hours"
   },
   "ourExperience": {
@@ -85,18 +85,29 @@
     "button": "Contact Us",
     "tag": "TESTIMONIALS",
     "role": "CEO, Loreum Ipsum",
-    "description_1": "Working with Jumaia Saleh has been a pivotal moment for our company. From our initial formation to navigating complex commercial contracts, their legal advice has been invaluable. They are not just our lawyers; they are true strategic partners in our growth. Their professionalism and foresight are second to none.",
-    "description_2": "Working with Jumaia Saleh has been a pivotal moment for our company. From our initial formation to navigating complex commercial contracts, their legal advice has been invaluable. They are not just our lawyers; they are true strategic partners in our growth. Their professionalism and foresight are second to none.",
-    "description_3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "name_1": "John Doe",
-    "name_2": "Ritesh",
-    "name_3": "John Doe",
-    "role_1": "CEO, Loreum Ipsum",
-    "role_2": "CEO, Loreum Ipsum",
-    "role_3": "CEO, Loreum Ipsum",
-    "description_0": "Working with Jumaia Saleh has been a pivotal moment for our company. From our initial formation to navigating complex commercial contracts, their legal advice has been invaluable. They are not just our lawyers; they are true strategic partners in our growth. Their professionalism and foresight are second to none.",
-    "name_0": "Ritesh",
-    "role_0": "CEO, Loreum Ipsum"
+    "description_6": "I received exceptional legal service from Jumaia Saleh's office. Their advice was accurate and perfectly suited to our company's needs. I highly recommend working with them.",
+  "name_6": "Mohammed Al-Otaibi",
+  "role_6": "Chairman, Al-Otaibi Trading Company",
+
+  "description_1": "Since the beginning of my contract with Jumaia Saleh, I’ve experienced an unmatched attention to detail and punctuality. They’re more than just lawyers—they’re true success partners.",
+  "name_1": "Sara Al-Mansoori",
+  "role_1": "COO, Al-Mansoori Holding",
+
+  "description_2": "Working with the Jumaia Saleh team gave me confidence that my rights were protected. They offered clear and professional legal guidance throughout.",
+  "name_2": "Khaled Al-Zahrani",
+  "role_2": "Entrepreneur",
+
+  "description_3": "Jumaia Saleh are not just legal experts—they have deep insights into both local and international business environments. I truly value their contribution to my business growth.",
+  "name_3": "Noora Al-Shamsi",
+  "role_3": "Investment Consultant",
+
+  "description_4": "I was facing a complex and difficult case, but the Jumaia Saleh team handled it with confidence and strong legal knowledge, resolving it completely in our favor.",
+  "name_4": "Faisal Al-Kaabi",
+  "role_4": "Founder, Gulf Technologies",
+
+  "description_5": "Every consultation I received was thorough and well thought out. I always feel reassured working with this outstanding team.",
+  "name_5": "Reem Al-Muhairi",
+  "role_5": "Legal Affairs Manager"
   },
   "legalAdvisors": {
     "header": {

@@ -44,7 +44,6 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
       setLoading(true);
       const res = await fetchServices(locale);
       setServices(res);
-      console.log(res);
       setLoading(false);
     };
     getData();

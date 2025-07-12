@@ -1,55 +1,55 @@
 export default {
-  name: 'ourPracticeAreas',
-  title: 'مجالات ممارستنا',
-  type: 'document',
+  name: "ourPracticeAreas",
+  title: " قسم مجالات اعمالنا في الصفحة الرئيسية",
+  type: "document",
   fields: [
     {
-      name: 'title',
-      title: 'العنوان',
-      type: 'string',
-      description: 'العنوان الرئيسي لقسم مجالات الممارسة'
+      name: "title",
+      title: "العنوان",
+      type: "string",
+      description: "العنوان الرئيسي لقسم مجالات اعمالنا في الصفحة الرئيسية",
     },
     {
-      name: 'titleAr',
-      title: 'العنوان بالعربية',
-      type: 'string',
-      description: 'العنوان الرئيسي باللغة العربية'
+      name: "titleAr",
+      title: "العنوان بالعربية",
+      type: "string",
+      description: "العنوان الرئيسي لقسم مجالات اعمالنا في الصفحة الرئيسية باللغة العربية",
     },
     {
-      name: 'description',
-      title: 'الوصف',
-      type: 'text',
-      description: 'وصف قسم مجالات الممارسة'
+      name: "description",
+      title: "الوصف",
+      type: "text",
+      description: "وصف قسم مجالات اعمالنا في الصفحة الرئيسية",
     },
     {
-      name: 'descriptionAr',
-      title: 'الوصف بالعربية',
-      type: 'text',
-      description: 'وصف قسم مجالات الممارسة باللغة العربية'
+      name: "descriptionAr",
+      title: "الوصف بالعربية",
+      type: "text",
+      description: "وصف قسم خدماتنا في الصفحة الرئيسية باللغة العربية",
     },
     {
-      name: 'practiceAreas',
-      title: 'مجالات الممارسة',
-      type: 'array',
+      name: "practiceAreas",
+      title: "مجالات الممارسة",
+      type: "array",
       of: [
         {
-          type: 'object',
+          type: "object",
           fields: [
-        {
-          name: 'pageType',
-          title: 'الصفحة',
-          type: 'reference',
-          to: [{ type: 'pageType' }]
-        },
             {
-              name: 'image',
-              title: 'الصورة',
-              type: 'image',
-              description: 'صورة مجال الممارسة'
-            }
-          ]
-        }
-      ]
-    }
-  ]
-} 
+              name: "pageType",
+              title: "الصفحة",
+              type: "reference",
+              to: [{ type: "pageType" }],
+            },
+            {
+              name: "image",
+              title: "الصورة",
+              type: "image",
+              description: "صورة للخدمة ",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};

@@ -1,13 +1,13 @@
 export default {
   name: 'advocates',
-  title: 'المحامون والإحصائيات',
+  title: ' الإحصائيات',
   type: 'document',
   fields: [
     {
       name: 'title',
       title: 'العنوان',
       type: 'string',
-      description: 'العنوان الرئيسي لقسم المحامون'
+      description: 'العنوان الرئيسي لقسم الإحصائيات'
     },
     {
       name: 'titleAr',
@@ -19,13 +19,13 @@ export default {
       name: 'description',
       title: 'الوصف',
       type: 'text',
-      description: 'وصف قسم المحامون'
+      description: 'وصف قسم الإحصائيات'
     },
     {
       name: 'descriptionAr',
       title: 'الوصف بالعربية',
       type: 'text',
-      description: 'وصف قسم المحامون باللغة العربية'
+      description: 'وصف قسم الإحصائيات باللغة العربية'
     },
     {
       name: 'statistics',
@@ -59,9 +59,21 @@ export default {
               type: 'string',
               description: 'تسمية الإحصائية باللغة العربية'
             }
-          ]
+          ],
         }
-      ]
+      ],
+      preview: {
+        select: {
+          title: 'label',
+          subtitle: 'labelAr',
+        },
+        prepare(select: any) {
+          return {
+            title: select.title,
+            subtitle: select.subtitle,
+          }
+        }
+      }
     }
   ]
 } 

@@ -17,14 +17,15 @@ import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import { updateMessage } from "@/lib/updateMessage";
 import Image from "next/image";
+import { fetchTestimonials } from "@/sanity/lib/fetchDynamicPage";
 
 // Default testimonials in case Sanity data is not available
 const getDefaultTestimonials = (t: any) => [
   {
     id: 1,
-    description: t("description_0"),
-    name: t("name_0"),
-    role: t("role_0"),
+    description: t("description_6"),
+    name: t("name_6"),
+    role: t("role_6"),
   },
   {
     id: 2,
@@ -38,12 +39,29 @@ const getDefaultTestimonials = (t: any) => [
     name: t("name_2"),
     role: t("role_2"),
   },
+  {
+    id: 4,
+    description: t("description_3"),
+    name: t("name_3"),
+    role: t("role_3"),
+  },
+  {
+    id: 5,
+    description: t("description_4"),
+    name: t("name_4"),
+    role: t("role_4"),
+  },
+  {
+    id: 6,
+    description: t("description_5"),
+    name: t("name_5"),
+    role: t("role_5"),
+  },
 ];
 
 const TestimonialSection = ({
   locale,
   isAdmin,
-  sanityData = null,
 }: {
   locale: string;
   isAdmin: boolean;
@@ -53,13 +71,28 @@ const TestimonialSection = ({
   const t = useTranslations("testimonials");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.4 });
+  const [isLoading, setIsLoading] = useState(true);
+  const [testimonialsPage, setTestimonialsPage] = useState<{tag:string,tagAr:string,title:string,titleAr:string,button:string,buttonAr:string,phoneNumber:string,testimonials:{description:string,descriptionAr:string,name:string,nameAr:string,role:string,roleAr:string}[]} | null>(null);
+  useEffect(() => {
+    let fetchData = async () => {
+      let data = await fetchTestimonials();
+      setTestimonialsPage(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []);
 
   // Use Sanity data if available, otherwise use default
-  const tag = sanityData?.tag || t("tag");
-  const title = sanityData?.title || t("title");
-  const buttonText = sanityData?.button || t("button");
-  const phoneNumber = "+00971565955502";
-  const testimonials = sanityData?.testimonials || getDefaultTestimonials(t);
+  const tag = isLoading ? t("tag") : (locale==="ar"?testimonialsPage?.tagAr:testimonialsPage?.tag) || t("tag");
+  const title = isLoading ? t("title") : (locale==="ar"?testimonialsPage?.titleAr:testimonialsPage?.title) || t("title");
+  const buttonText = isLoading ? t("button") : (locale==="ar"?testimonialsPage?.buttonAr:testimonialsPage?.button) || t("button");
+  const testimonials = isLoading ? getDefaultTestimonials(t) : testimonialsPage?.testimonials.map((item: any) => ({
+    ...item,
+    description: item.description && testimonialsPage ? locale==="ar"?item.descriptionAr:item.description : t(item.descriptionKey),
+    name: item.name && testimonialsPage ? locale==="ar"?item.nameAr:item.name : t(item.nameKey),
+    role: item.role && testimonialsPage ? locale==="ar"?item.roleAr:item.role : t(item.roleKey),
+  })) || getDefaultTestimonials(t);
+  const phoneNumber = "+00971565955502"
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -73,7 +106,7 @@ useEffect(() => {
     setCurrentIndex((prevIndex) =>
       prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
     );
-  }, 3000); // 5000ms = 5 seconds
+  }, 5000); // 5000ms = 5 seconds
 
   return () => clearInterval(interval); // Clean up on unmount
 }, [testimonials.length]);

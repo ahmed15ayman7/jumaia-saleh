@@ -13,6 +13,7 @@ import EditableText from "../EditableText";
 import { updateMessage } from "@/lib/updateMessage";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
+import { fetchAdvocates } from "@/sanity/lib/fetchDynamicPage";
 
 const image9 = "/images/image-9.svg";
 const line1 = "/images/line-1.svg";
@@ -69,21 +70,29 @@ const Advocates = ({
   sanityData?: any;
 }) => {
   const t = useTranslations("advocates");
+  const [statisticsPage, setStatisticsPage] = useState<{title:string,titleAr:string,description:string,descriptionAr:string,statistics:{label:string,labelAr:string,value:number,suffix:string}[]} | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    let fetchData = async () => {
+      let data = await fetchAdvocates();
+      setStatisticsPage(data);
+      setIsLoading(false);
+    }
+    fetchData();
+  }, []); 
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.5 });
 
   // Use Sanity data if available, otherwise use default
-  const statistics = sanityData?.statistics || defaultStatistics;
-  const title = sanityData?.title || t("title");
-  const description = sanityData?.description || t("description");
+  const statistics = isLoading ? defaultStatistics : statisticsPage?.statistics.map((item: any) => ({
+    ...item,
+    value: item.value && statisticsPage  ? item.value : t(item.valueKey),
+    label: item.label && statisticsPage ? locale==="ar"?item.labelAr:item.label : t(item.labelKey),
+  })) || defaultStatistics;
+  const title = isLoading ? t("title") : (locale==="ar"?statisticsPage?.titleAr:statisticsPage?.title) || t("title");
+  const description = isLoading ? t("description") : (locale==="ar"?statisticsPage?.descriptionAr:statisticsPage?.description) || t("description");
 
-  const onSave = (key: string, value: string) => {
-    const toastId = toast.loading("جاري التحديث...");
-    updateMessage({ key, value, locale: locale as "en" | "ar" })
-      .then(() => toast.success("تم التحديث بنجاح", { id: toastId }))
-      .catch(() => toast.error("فشل التحديث", { id: toastId }));
-  };
 
   return (
     <MUIBox
@@ -204,7 +213,17 @@ const Advocates = ({
                           isInView={isInView}
                         />
                       </Typography>
-                      {sanityData ? stat.key : t(stat.key)}
+                      <Typography
+                        variant="h4"
+                        sx={{
+                          fontFamily: "Cormorant Garamond",
+                          fontWeight: "bold",
+                          color: "#0c1c19",
+                          fontSize: { xs: ".9rem", md: "1.4rem" },
+                        }}
+                      >
+                        {stat.label}
+                      </Typography>
                     </motion.div>
                   </Grid>
                 ))}

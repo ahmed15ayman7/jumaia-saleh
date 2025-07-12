@@ -433,8 +433,11 @@ export const fetchOurPracticeAreas = async (locale: string = "ar") => {
       description,
       descriptionAr,
       practiceAreas[]{
-        title,
-        titleAr,
+        pageType->{
+          title,
+          titleEn,
+          value
+        },
         image{
           asset->{
             url

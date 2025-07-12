@@ -81,7 +81,6 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
         let fetchData = async () => {
             setIsLoading(true)
             let res = await fetchAboutUs()
-            console.log(res)
             setdata(res)
             setIsLoading(false)
         }

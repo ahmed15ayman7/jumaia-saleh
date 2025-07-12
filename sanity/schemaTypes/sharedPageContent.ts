@@ -36,7 +36,8 @@ export default {
           fields: [
             { name: 'image', title: 'Image | الصورة', type: 'image', options: { hotspot: true } },
             { name: 'title', title: 'Title | العنوان', type: 'string' },
-            { name: 'titleAr', title: 'Title Arabic | العنوان باللغة العربية', type: 'string' }
+            { name: 'titleAr', title: 'Title Arabic | العنوان باللغة العربية', type: 'string' },
+            { name: 'link', title: 'Link | الرابط', type: 'string' }
           ]
         }
       ] },

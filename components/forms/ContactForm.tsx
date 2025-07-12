@@ -1,6 +1,7 @@
 "use client";
+import { fetchDynamicPageType } from '@/sanity/lib/fetchDynamicPage';
 import { Box, Button, TextField, Typography, MenuItem } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { z } from 'zod';
 
 const schema = z.object({
@@ -38,6 +39,19 @@ interface ContactFormData{
   nameLabelAr: string;
   }
 export default function ContactForm({contactFormData,locale}:{contactFormData:ContactFormData,locale:string}) {
+  let [services, setServices] = useState<{label:string,labelEn:string,value:string}[]>([]);
+  useEffect(() => {
+    fetchDynamicPageType("real-estate").then((data) => {
+      console.log(data);
+      setServices(
+        data.map((item: any) => ({
+          label: item.title,
+          labelEn: item.titleEn,
+          value: item.value,
+        }))
+      );
+    });
+  }, []); 
   const [values, setValues] = useState({
     name: '',
     email: '',
@@ -138,6 +152,7 @@ export default function ContactForm({contactFormData,locale}:{contactFormData:Co
         error={!!errors.serviceType}
         helperText={errors.serviceType}
         select
+        placeholder={locale === 'ar' ? "اختر نوع الخدمة" : "Select Service Type"}
         fullWidth
         sx={{ mb: 2,'& .MuiInputBase-input': {
             fontSize: {xs: ".8rem",md: "1rem"},
@@ -149,9 +164,9 @@ export default function ContactForm({contactFormData,locale}:{contactFormData:Co
             fontWeight: 500,
           }, }}
       >
-        {serviceTypes.map((option) => (
-          <MenuItem key={option.value} value={option.value} sx={{fontSize: {xs: ".8rem",md: "1rem"},display: 'flex',alignItems: 'center',justifyContent: locale === 'ar' ? 'flex-end' : 'flex-start'}} >
-            {option.label}
+        {services.map((service) => (
+          <MenuItem key={service.value} value={service.value} sx={{fontSize: {xs: ".8rem",md: "1rem"},display: 'flex',alignItems: 'center',justifyContent: locale === 'ar' ? 'flex-end' : 'flex-start'}} >
+            {locale === 'ar' ? service.label : service.labelEn}
           </MenuItem>
         ))}
       </TextField>

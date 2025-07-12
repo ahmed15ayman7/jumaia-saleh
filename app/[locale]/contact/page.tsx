@@ -50,6 +50,7 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
   const { locale } = use(params);
   let [contactPage,setContactPage]=useState<ContactPage | null>(null);
   const [loading,setLoading]=useState(true);
+  
   useEffect(()=>{
     setLoading(true);
     const fetchData=async()=>{

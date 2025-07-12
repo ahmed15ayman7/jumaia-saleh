@@ -234,6 +234,12 @@ const Navbar = ({ locale }: { locale: string }) => {
                     //     ? "/images/logo-en.svg"
                     //     : "/images/logo-ar.svg"
                     // }
+                    onClick={() => {
+                      router.push(
+                        `/${locale === "ar" ? "ar" : "en"}`,
+                        { scroll: false }
+                      );
+                    }}
                     src={"/images/logo-ar-en.png"}
                     alt="Logo"
                     initial={{ opacity: 0, x: -30 }}
@@ -243,6 +249,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                     style={{
                       padding: "10px 0",
                       objectFit: "cover",
+                      cursor: "pointer",
                     }}
                   />
 
@@ -508,7 +515,13 @@ const Navbar = ({ locale }: { locale: string }) => {
                       component="img"
                       src="/images/logo-ar-en.png"
                       alt="logo"
-                      sx={{ height: 50 }}
+                      sx={{ height: 50,cursor: "pointer" }}
+                      onClick={() => {
+                        router.push(
+                          `/${locale === "ar" ? "ar" : "en"}`,
+                          { scroll: false }
+                        );
+                      }}
                     />
                   </Box>
               

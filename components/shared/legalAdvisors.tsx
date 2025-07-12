@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import { updateMessage } from "@/lib/updateMessage";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 
 const contactInfo = [
   {
@@ -177,7 +178,11 @@ export default function LegalConsultation({
               <Paper
                 key={index}
                 elevation={0}
+                onClick={() => {
+                  contact.type === "whatsapp" ? window.open(`https://wa.me/${phoneNumber}`, "_blank") : window.open(`tel:${phoneNumber}`, "_blank");
+                }}
                 sx={{
+                  cursor: "pointer",
                   minWidth: { xs: "85vw", sm: "31vw", md: "20vw" },
                   maxWidth: "320px",
                   width: "100%",
@@ -225,7 +230,7 @@ export default function LegalConsultation({
                   sx={{
                     fontFamily: "'Manrope-Regular', Helvetica",
                     color: "white",
-                    fontSize: { xs: "4vw", sm: "2vw", md: "20px" },
+                    fontSize: { xs: ".9rem", sm: ".9rem", md: "1rem" },
                     wordBreak: "break-all",
                   }}
                 >
@@ -373,6 +378,8 @@ export default function LegalConsultation({
           <Box sx={{ width: "100%", display: "flex", justifyContent: "center", mt: { xs: 2, sm: 3 } }}>
             <Button
               variant="contained"
+              component={Link}
+              href={`/${locale}/contact`}
               sx={{
                 width: { xs: "70vw", sm: "45vw", md: "320px" },
                 height: { xs: "11vw", sm: "88px" },

@@ -29,6 +29,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
+import { fetchDynamicPageType } from "@/sanity/lib/fetchDynamicPage";
 
 const navItems = [
   { label: "home", hasDropdown: false, href: "/" },
@@ -44,23 +45,55 @@ const Navbar = ({ locale }: { locale: string }) => {
   const [showNavbar, setShowNavbar] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const [activeDropdown, setActiveDropdown] = useState("");
+  let [services, setServices] = useState([]);
+  useEffect(() => {
+    fetchDynamicPageType('real-estate').then((data) => {
+      console.log(data);
+      setServices(data.map((item: any) => ({
+        label: item.title,
+        labelEn: item.titleEn,
+        href: `/${locale}/practice/${item.value}`,
+      })));
+    });
+  }, []);
+  console.log(services);
 
   // إغلاق الـ dropdown عند النقر خارج العنصر
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    let timeoutId: NodeJS.Timeout;
+  
+    const handleMouseLeave = (event: MouseEvent) => {
       if (
         dropdownRef.current &&
         !dropdownRef.current.contains(event.target as Node)
       ) {
-        setIsDropdownOpen(false);
+        // ابدأ المؤقت
+        timeoutId = setTimeout(() => {
+          setIsDropdownOpen(false);
+        }, 3000); // 3 ثواني
       }
     };
   
-    document.addEventListener("mouseleave", handleClickOutside);
+    const handleMouseEnter = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        dropdownRef.current.contains(event.target as Node)
+      ) {
+        clearTimeout(timeoutId); // إلغاء الإغلاق لو رجع المستخدم
+      }
+    };
+  
+    document.addEventListener("mousemove", handleMouseLeave);
+    document.addEventListener("mouseenter", handleMouseEnter);
+  
     return () => {
-      document.removeEventListener("mouseleave", handleClickOutside);
+      clearTimeout(timeoutId);
+      document.removeEventListener("mousemove", handleMouseLeave);
+      document.removeEventListener("mouseenter", handleMouseEnter);
     };
   }, [isDropdownOpen]);
+  
   const t = useTranslations("navbar");
   const router = useRouter();
   const pathname = usePathname();
@@ -68,7 +101,8 @@ const Navbar = ({ locale }: { locale: string }) => {
   const isHome = pathname === "/en" || pathname === "/ar" || pathname === "/";
 
   const handleDropdownClick = (label: string) => {
-    setIsDropdownOpen((prev) => !prev);
+    setIsDropdownOpen(true);
+    setActiveDropdown(prev => prev === label ? "" : label);
   };
 
   useEffect(() => {
@@ -148,7 +182,7 @@ const Navbar = ({ locale }: { locale: string }) => {
       <Divider />
       <List>
         <ListItem>
-          <ListItemButton component={"a"} href={`https://wa.me/966555555555`} target="_blank">
+          <ListItemButton component={"a"} href={`https://wa.me/+00971565955502`} target="_blank">
             <ListItemText primary={t("contact")} />
             
           </ListItemButton>
@@ -157,7 +191,7 @@ const Navbar = ({ locale }: { locale: string }) => {
     </Box>
   );
   return (
-    <Box sx={{ height: {xs: "70px",md: "100px"}, position: "relative" }}>
+    <Box sx={{ height: {xs: "60px",md: "70px"}, position: "relative" }}>
       <AnimatePresence>
         {showNavbar && (
           <motion.div
@@ -168,6 +202,7 @@ const Navbar = ({ locale }: { locale: string }) => {
           style={{
             position: "sticky",
             top: 0,
+            
             zIndex: 1000,
             width: "100%",
             background: isHome && !scrolled
@@ -181,7 +216,7 @@ const Navbar = ({ locale }: { locale: string }) => {
               position={"static"}
               color="transparent"
               elevation={0}
-              sx={{ zIndex: 1000,px: {xs: 0,md: 2} }}
+              sx={{ zIndex: 1000,px: {xs: 0,md: 2},py: {xs: 0,md: 1} }}
             >
               <Container maxWidth="xl" sx={{ zIndex: 1000 }} disableGutters>
                 <Toolbar
@@ -221,7 +256,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                             transition={{ duration: 0.3 }}
                             style={{
                               position: "absolute",
-                              top: "100%",
+                              top: "120%",
                               left: 0,
                               width: "100%",
                               height: "100%",
@@ -234,9 +269,9 @@ const Navbar = ({ locale }: { locale: string }) => {
                       {navItems.map((item, index) => (
                         <Box
                           key={index}
-                          // onMouseOver={() =>
-                          //   item.hasDropdown && handleDropdownClick(item.label)
-                          // }
+                          onMouseOver={() =>
+                            item.hasDropdown && handleDropdownClick(item.label)
+                          }
                           className="flex rtl:space-x-reverse items-center gap-2"
                           sx={{
                             color: "primary.main",
@@ -321,40 +356,65 @@ const Navbar = ({ locale }: { locale: string }) => {
                       </Stack>
                     </motion.div>
 
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      className="hidden md:flex"
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.4, duration: 0.5 }}
-                    >
-                      <Stack
-                        direction="row"
-                        alignItems="center"
-                        sx={{
-                          width: 132,
-                          justifyContent: "space-between",
-                          gap: "10px",
-                        }}
-                        className="cursor-pointer"
-                        onClick={() => {
-                          window.open(`https://wa.me/966555555555`, "_blank");
-                        }}
-                      >
-                        <Typography
-                          variant="button"
-                          sx={{
-                            color: "secondary.main",
-                            textWrap: "nowrap",
-                            fontFamily: "'Manrope-Bold', Helvetica",
-                            fontSize: "1.25rem",
-                            fontWeight: 700,
-                            letterSpacing: "-0.40px",
-                          }}
-                        >
-                          {t("quote")}
-                        </Typography>
+                    <Box
+  component="button"
+  onClick={() => {
+    window.open(`https://wa.me/+00971565955502`, "_blank");
+  }}
+  sx={{
+    position: "relative",
+    overflow: "hidden",
+    border: "none",
+    outline: "none",
+    cursor: "pointer",
+    borderRadius: "10px",
+    px: 3,
+    py: 1.5,
+    display: {md:"flex",xs:"none"},
+    alignItems: "center",
+    gap: 1,
+    backgroundColor: "transparent",
+    color: "secondary.main",
+    fontFamily: "'Manrope-Bold', Helvetica",
+    fontSize: "1.25rem",
+    fontWeight: 700,
+    letterSpacing: "-0.40px",
+    transition: "color 0.4s ease",
+    zIndex: 1,
 
-                        {locale === "en" ? (
+    "&::before": {
+      content: '""',
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "#cf9425",
+      transform: "scaleX(0)",
+      transformOrigin: "center",
+      transition: "transform 0.4s ease-in-out",
+      zIndex: 0,
+    },
+
+    "&:hover::before": {
+      transform: "scaleX(1)",
+    },
+
+    "&:hover": {
+      color: "#fff",
+    },
+
+    "& > *": {
+      position: "relative",
+      zIndex: 1,
+    },
+  }}
+>
+  <Typography variant="button" sx={{ textWrap: "nowrap" }}>
+    {t("quote")}
+  </Typography>
+
+  {locale === "en" ? (
                           <ArrowForwardIcon
                             className="bounce-h"
                             sx={{
@@ -373,8 +433,8 @@ const Navbar = ({ locale }: { locale: string }) => {
                             }}
                           />
                         )}
-                      </Stack>
-                    </motion.div>
+</Box>
+
                     <motion.div
                       initial={{ opacity: 0, y: -10 }}
                       className="flex md:hidden"
@@ -422,7 +482,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                   '& .MuiDrawer-paper': {
                     width: '75%',
                     maxWidth: 320,
-                    maxHeight: '91vh',
+                    maxHeight: '100vh',
                     height: '100%',
                     background: 'linear-gradient(to left, #0c1c19 70%)',
                     padding: '20px',
@@ -434,42 +494,84 @@ const Navbar = ({ locale }: { locale: string }) => {
               >
                 <Box>
                   {/* Header (Logo + Close Button) */}
-                  <Box display="flex" justifyContent="space-between" alignItems="center">
-                    <Box
-                      component="img"
-                      src="/images/logo-ar.svg"
-                      alt="logo"
-                      sx={{ height: 50 }}
-                    />
                     <IconButton onClick={() => setIsMenuOpen(false)}>
                       <CloseIcon sx={{ color: '#cf9425' }} />
                     </IconButton>
+                  <Box display="flex" justifyContent="space-between" alignItems="center">
+                    <Box
+                      component="img"
+                      src="/images/logo-ar-en.png"
+                      alt="logo"
+                      sx={{ height: 50 }}
+                    />
                   </Box>
               
                   {/* Navigation Items */}
                   <Box mt={4}>
-                    {navItems.map((item, index) => (
-                      <Box
-                        key={index}
-                        sx={{
-                          borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
-                          py: 1.5,
-                          color: 'white',
-                          fontSize: '1rem',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center',
-                        }}
-                        onClick={() => {
-                          router.push(`/${locale}${item.href}`);
-                          setIsMenuOpen(false);
-                        }}
-                      >
-                        {t(item.label)}
-                        {item.hasDropdown && <KeyboardArrowDownIcon sx={{ color: 'white' }} />}
-                      </Box>
-                    ))}
+                  {navItems.map((item, index) => (
+  <Box key={index}>
+    {/* Main nav item */}
+    <Box
+      sx={{
+        borderBottom: '1px solid rgba(255, 255, 255, 0.2)',
+        py: 1.5,
+        color: 'white',
+        fontSize: '1rem',
+        cursor: 'pointer',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+      }}
+      onClick={() => {
+        if (item.hasDropdown) {
+          handleDropdownClick(item.label);
+        } else {
+          router.push(`/${locale}${item.href}`);
+          setIsMenuOpen(false);
+        }
+      }}
+    >
+      {t(item.label)}
+      {item.hasDropdown && (
+        <KeyboardArrowDownIcon
+          sx={{
+            color: 'white',
+            transform:
+              activeDropdown === item.label ? 'rotate(180deg)' : 'rotate(0)',
+            transition: 'transform 0.3s ease',
+          }}
+        />
+      )}
+    </Box>
+
+    {/* Sub items for dropdown */}
+    {item.hasDropdown && activeDropdown === item.label && services.length > 0 && (
+      <Box sx={{ pl: 2, py: 1, backgroundColor: '#0c1c19' }}>
+        {services.map((service: any, i: number) => (
+          <Box
+            key={i}
+            onClick={() => {
+              router.push(service.href);
+              setIsMenuOpen(false);
+            }}
+            sx={{
+              py: 1,
+              color: 'white',
+              fontSize: '0.95rem',
+              cursor: 'pointer',
+              '&:hover': {
+                color: '#cf9425',
+              },
+            }}
+          >
+            {locale === "ar" ? service.label : service.labelEn}
+          </Box>
+        ))}
+      </Box>
+    )}
+  </Box>
+))}
+
               
                     {/* Language Selector */}
                     <Box

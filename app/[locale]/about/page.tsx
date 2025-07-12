@@ -156,7 +156,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
           variant="h3"
           sx={{
             color: 'primary.main',
-            fontSize: { xs: '6vw', md: '2.5rem' },
+            fontSize: { xs: '1rem', md: '2.5rem' },
             fontWeight: 700,
             mb: { xs: 1, md: '30px' },
           }}
@@ -166,7 +166,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
       </AnimateBox>
 
       {/* Author + Date */}
-      <AnimateBox animation="fadeUp" delay={0.2}>
+      {/* <AnimateBox animation="fadeUp" delay={0.2}>
         <Typography
           variant="subtitle2"
           sx={{
@@ -180,7 +180,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
             &nbsp; {new Date(data?.content?.date || "").toLocaleDateString(locale, { year: 'numeric', month: 'long', day: 'numeric' })}
           </Typography>
         </Typography>
-      </AnimateBox>
+      </AnimateBox> */}
 
       {/* Divider */}
       <AnimateBox animation="scaleIn" delay={0.25}>

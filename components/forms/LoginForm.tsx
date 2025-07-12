@@ -45,15 +45,14 @@ export default function LoginForm() {
     let response = await signIn('credentials', {
       email: data.email,
       password: data.password,
-      redirect: true,
-      callbackUrl: '/studio',
+      redirect: false,
+      // callbackUrl: '/studio',
     })
-
-    if (response?.error) {
-      toast.error('خطأ في البيانات', { id: toastId })
-    } else {
+    if (response?.ok) {
       router.push('/studio')
       toast.success('تم تسجيل الدخول بنجاح', { id: toastId })
+    } else {
+      toast.error('خطأ في البيانات', { id: toastId })
     }
   }
 
@@ -87,7 +86,7 @@ export default function LoginForm() {
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 2, md: "30px" } }}>
             <TextField
               fullWidth
-              label="البريد الإلكتروني"
+              placeholder="البريد الإلكتروني"
               margin="normal"
               sx={{
                 '& .MuiInputLabel-root': {
@@ -102,7 +101,7 @@ export default function LoginForm() {
             />
             <TextField
               fullWidth
-              label="كلمة المرور"
+              placeholder="كلمة المرور"
               type={showPassword ? 'text' : 'password'}
               margin="normal"
               sx={{
@@ -116,15 +115,8 @@ export default function LoginForm() {
               error={!!errors.password}
               helperText={errors.password?.message}
               InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <IconButton
-                      onClick={() => setShowPassword((prev) => !prev)}
-                      edge="end"
-                      size="small"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
+                endAdornment: (
+                  <InputAdornment position="end">
                     <Typography
                       variant="caption"
                       sx={{ ml: 1, color: '#cf9425', cursor: 'pointer' }}
@@ -132,6 +124,13 @@ export default function LoginForm() {
                     >
                       {showPassword ? 'إخفاء' : 'عرض'}
                     </Typography>
+                    <IconButton
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      edge="end"
+                      size="small"
+                    >
+                      {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
                   </InputAdornment>
                 ),
               }}

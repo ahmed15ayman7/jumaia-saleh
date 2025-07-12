@@ -49,7 +49,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
     },
     {
       titleKey: null,
-      links: [ "team", "leadership", "privacy"],
+      links: ["team", "leadership", "privacy"],
     },
     // {
     //   titleKey: null,
@@ -58,13 +58,20 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
   ];
 
   const onSave = (key: string, value: string) => {
-    const toastId = toast.loading(locale === "ar" ? "جاري التحديث..." : "Updating...");
+    const toastId = toast.loading(
+      locale === "ar" ? "جاري التحديث..." : "Updating..."
+    );
     updateMessage({ key, value, locale: locale as "en" | "ar" })
       .then(() =>
-        toast.success(locale === "ar" ? "تم التحديث بنجاح" : "Updated successfully", { id: toastId })
+        toast.success(
+          locale === "ar" ? "تم التحديث بنجاح" : "Updated successfully",
+          { id: toastId }
+        )
       )
       .catch(() =>
-        toast.error(locale === "ar" ? "فشل التحديث" : "Update failed", { id: toastId })
+        toast.error(locale === "ar" ? "فشل التحديث" : "Update failed", {
+          id: toastId,
+        })
       );
   };
 
@@ -73,17 +80,20 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
       sx={{
         width: "100%",
         color: "white",
-        px: {xs: "1wv", sm: "1vw", md: "6vw"},
+        px: { xs: "1wv", sm: "1vw", md: "6vw" },
         overflow: "hidden",
         position: "relative",
-        textAlign: {xs: "center", sm: "center", md: locale === "ar" ? "right" : "left"},
+        textAlign: {
+          xs: "center",
+          sm: "center",
+          md: locale === "ar" ? "right" : "left",
+        },
         background:
-        'linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)',
-      
+          "linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)",
       }}
       ref={ref}
     >
-      <Box sx={{display: "flex",flexDirection: "column",gap: "30px"}}>
+      <Box sx={{ display: "flex", flexDirection: "column", gap: "30px" }}>
         {/* Decorative Images */}
         <Box
           sx={{
@@ -100,32 +110,40 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
           }}
         >
           {/* /images/daco4065171.svg: rotates if ar */}
-          <Box sx={{ position: "relative", width: { xs: "150px", md: "265px" }, height: "100%", ml: locale === "en" ? "auto" : 0, mr: locale === "en" ? 0 : "auto" }}>
+          <Box
+            sx={{
+              position: "relative",
+              width: { xs: "150px", md: "265px" },
+              height: "100%",
+              ml: locale === "en" ? "auto" : 0,
+              mr: locale === "en" ? 0 : "auto",
+            }}
+          >
             <motion.img
-            src="/images/daco4065171.svg"
-            alt="Decorative image"
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { }}
-            transition={{ delay: 0.4, duration: 1 }}
-            style={{
+              src="/images/daco4065171.svg"
+              alt="Decorative image"
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.4, duration: 1 }}
+              style={{
                 position: "absolute",
                 width: "65%",
                 height: "100%",
                 bottom: 0,
-                left:locale === "en" ? "auto" : "35%",
-                right:locale === "en" ? 0 : "auto",
+                left: locale === "en" ? "auto" : "35%",
+                right: locale === "en" ? 0 : "auto",
                 objectFit: "cover",
                 transform: locale === "ar" ? "rotateY(180deg)" : undefined,
                 transition: "transform 0.3s",
               }}
             />
             <motion.img
-            src="/images/pngwing1.png"
-            alt="Decorative Element"
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {  }}
-            transition={{ delay: 0.4, duration: 1 }}
-            style={{
+              src="/images/pngwing1.png"
+              alt="Decorative Element"
+              initial={{ opacity: 0, y: 50 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.4, duration: 1 }}
+              style={{
                 position: "absolute",
                 width: "100%",
                 height: "94%",
@@ -156,7 +174,9 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
             }}
           >
             {/* Upper part: Title + columns */}
-            <Box sx={{display: "flex",flexDirection: "column",gap: "100px"}}>
+            <Box
+              sx={{ display: "flex", flexDirection: "column", gap: "100px" }}
+            >
               <Box>
                 {/* Editable headline */}
                 <Typography
@@ -170,61 +190,75 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                 >
                   <EditableText
                     value={t("title")}
-                    onSave={val => onSave("footer.title", val)}
+                    onSave={(val) => onSave("footer.title", val)}
                     isAdmin={isAdmin}
                   />
                 </Typography>
 
                 <Grid
                   container
-                  spacing={3}
+                  spacing={{xs:1,md:3}}
                   sx={{ width: "100%", flexWrap: "wrap", pt: 2 }}
                 >
                   {navigationData.map((column, index) => (
                     <Grid
                       key={index}
                       component="div"
-                      size={{xs: index === 0 ? 12 : 4, sm: index === 0 ? 12 : 4, md: index === 0 ? 4 : 2.2}}
+                      size={{
+                        xs: index === 0 ? 12 : 4,
+                        sm: index === 0 ? 12 : 4,
+                        md: index === 0 ? 4 : 2.2,
+                      }}
                     >
                       {column.aboutTextKey ? (
                         <Box>
-                        <Typography variant="body2" sx={{ lineHeight: 1.5, fontSize: { xs: ".9rem", md: "1rem" }, maxWidth: "100%" }}>
-                          <EditableText
-                            value={t(`about`)}
-                            onSave={val => onSave(`footer.about`, val)}
-                            isAdmin={isAdmin}
-                          />
-                        </Typography>
-                        <Box
-          sx={{
-            maxWidth: {xs:"100%",md:"90%"},
-            textAlign:  {xs: "center",md: locale === "ar" ? "right" : "left"},
-            mx: "auto",
-            mb: { xs: 3, md: 6 },
-            px: { xs: 0, md: 0 },
-          }}
-        >
-          <Button
-            sx={{
-              color: "#cf9425",
-              fontSize: {xs: ".8rem", sm: "1rem"},
-              fontWeight: 600,
-              px: 2,
-              mt:"30px",
-              border: "2px solid transparent",
-              borderBottom: "2px solid #cf9425",
-              transition: "all .5s",
-              "&:hover": {
-                backgroundColor: "transparent",
-                borderRadius: "25px",
-                border: "2px solid #cf9425",
-              },
-            }}
-            disableRipple
-          >
-            {locale==="ar" ? "اقراء المزيد"  : "Read More"}
-          </Button>
-        </Box>
+                          <Typography
+                            variant="body2"
+                            sx={{
+                              lineHeight: 1.5,
+                              fontSize: { xs: ".9rem", md: "1rem" },
+                              maxWidth: "100%",
+                            }}
+                          >
+                            <EditableText
+                              value={t(`about`)}
+                              onSave={(val) => onSave(`footer.about`, val)}
+                              isAdmin={isAdmin}
+                            />
+                          </Typography>
+                          <Box
+                            sx={{
+                              maxWidth: { xs: "100%", md: "90%" },
+                              textAlign: {
+                                xs: "center",
+                                md: locale === "ar" ? "right" : "left",
+                              },
+                              mx: "auto",
+                              mb: { xs: 3, md: 6 },
+                              px: { xs: 0, md: 0 },
+                            }}
+                          >
+                            <Button
+                              sx={{
+                                color: "#cf9425",
+                                fontSize: { xs: ".8rem", sm: "1rem" },
+                                fontWeight: 600,
+                                px: 2,
+                                mt: "30px",
+                                border: "2px solid transparent",
+                                borderBottom: "2px solid #cf9425",
+                                transition: "all .5s",
+                                "&:hover": {
+                                  backgroundColor: "transparent",
+                                  borderRadius: "25px",
+                                  border: "2px solid #cf9425",
+                                },
+                              }}
+                              disableRipple
+                            >
+                              {locale === "ar" ? "اقراء المزيد" : "Read More"}
+                            </Button>
+                          </Box>
                         </Box>
                       ) : (
                         <Box className="flex flex-col gap-1 max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]  max-sm:justify-between">
@@ -237,12 +271,14 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                                 "&:hover": { textDecoration: "underline" },
                                 lineHeight: 2,
                                 px: "20px",
-                                fontSize: { xs: "1rem", md: "1rem" },
+                                fontSize: { xs: ".5rem", md: "1rem" },
                               }}
                             >
                               <EditableText
                                 value={t(`links.${linkKey}`)}
-                                onSave={val => onSave(`footer.links.${linkKey}`, val)}
+                                onSave={(val) =>
+                                  onSave(`footer.links.${linkKey}`, val)
+                                }
                                 isAdmin={isAdmin}
                               />
                             </Typography>
@@ -254,8 +290,20 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                 </Grid>
               </Box>
 
-                      {/* Social media icons */}
-                      <Box sx={{ display: "flex", flexDirection: "row", gap: 1.5, justifyContent: {xs: "center", sm: "center", md: "flex-start"}, alignItems: "center" }}>
+              {/* Social media icons */}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 1.5,
+                  justifyContent: {
+                    xs: "center",
+                    sm: "center",
+                    md: "flex-start",
+                  },
+                  alignItems: "center",
+                }}
+              >
                 {socialMedia.map((social, index) => (
                   <IconButton
                     key={index}
@@ -263,8 +311,8 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     sx={{
                       bgcolor: "white",
                       color: "black",
-                      width: {xs: "35px", sm: "35px", md: "41px"},
-                      height: {xs: "35px", sm: "35px", md: "41px"},
+                      width: { xs: "35px", sm: "35px", md: "41px" },
+                      height: { xs: "35px", sm: "35px", md: "41px" },
                       "&:hover": { bgcolor: "#f5f5f5" },
                     }}
                   >
@@ -275,8 +323,23 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
             </Box>
 
             {/* Divider & bottom bar */}
-              <Divider sx={{ bgcolor: "primary.main" ,width: "94%",mt: "48px",mb: "24px" }} />
-            <Box sx={{display: "flex",flexDirection: {xs: "column",md: "row"},gap: "10px",justifyContent: {xs: "center",md: "space-between"},alignItems: {xs: "center",md: "center"}}}>
+            <Divider
+              sx={{
+                bgcolor: "primary.main",
+                width: "94%",
+                mt: "48px",
+                mb: "24px",
+              }}
+            />
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: { xs: "column", md: "row" },
+                gap: "10px",
+                justifyContent: { xs: "center", md: "space-between" },
+                alignItems: { xs: "center", md: "center" },
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -284,19 +347,22 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                   justifyContent: "space-between",
                   alignItems: { xs: "center", sm: "center" },
                   gap: { xs: 1.5, sm: 0 },
-                  width: {xs: "100%",md: "90%"},
+                  width: { xs: "100%", md: "90%" },
                 }}
               >
                 <Typography
                   variant="body2"
                   sx={{
-                    textAlign: {xs: "center",md: locale === "ar" ? "right" : "left"},
+                    textAlign: {
+                      xs: "center",
+                      md: locale === "ar" ? "right" : "left",
+                    },
                     fontSize: { xs: ".7rem", sm: "1rem" },
                   }}
                 >
                   <EditableText
                     value={t("copyright")}
-                    onSave={val => onSave("footer.copyright", val)}
+                    onSave={(val) => onSave("footer.copyright", val)}
                     isAdmin={isAdmin}
                   />
                 </Typography>
@@ -306,15 +372,18 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     variant="body2"
                     sx={{
                       cursor: "pointer",
-                      textAlign: {xs: "center",md: locale === "ar" ? "right" : "left"},
+                      textAlign: {
+                        xs: "center",
+                        md: locale === "ar" ? "right" : "left",
+                      },
                       fontSize: { xs: ".7rem", sm: "1rem" },
                       "&:hover": { textDecoration: "underline" },
                     }}
                   >
-                    <Link href={"/"+locale+"/terms"}>
+                    <Link href={"/" + locale + "/terms"}>
                       <EditableText
                         value={t("terms")}
-                        onSave={val => onSave("footer.terms", val)}
+                        onSave={(val) => onSave("footer.terms", val)}
                         isAdmin={isAdmin}
                       />
                     </Link>
@@ -323,15 +392,18 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     variant="body2"
                     sx={{
                       cursor: "pointer",
-                      textAlign: {xs: "center",md: locale === "ar" ? "right" : "left"},
+                      textAlign: {
+                        xs: "center",
+                        md: locale === "ar" ? "right" : "left",
+                      },
                       fontSize: { xs: ".7rem", sm: "1rem" },
                       "&:hover": { textDecoration: "underline" },
                     }}
                   >
-                    <Link href={"/"+locale+"/privacy"}>
-                    <EditableText
-                      value={t("privacy")}
-                        onSave={val => onSave("footer.privacy", val)}
+                    <Link href={"/" + locale + "/privacy"}>
+                      <EditableText
+                        value={t("privacy")}
+                        onSave={(val) => onSave("footer.privacy", val)}
                         isAdmin={isAdmin}
                       />
                     </Link>

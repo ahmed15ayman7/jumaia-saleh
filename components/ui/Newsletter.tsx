@@ -14,6 +14,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import CustomSlider from "./CustomSlider";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { Phone } from "@mui/icons-material";
 interface NewsletterProps {
   data: {
     newsletterTitle?: string;
@@ -35,6 +36,7 @@ interface NewsletterProps {
 
 const Newsletter = ({ data, locale }: NewsletterProps) => {
   console.log("data newsletter", data);
+  const phoneNumber = "+00971565955502";
   return (
     <Box
       sx={{
@@ -127,6 +129,9 @@ const Newsletter = ({ data, locale }: NewsletterProps) => {
                 alignItems: "center",
               }}
               disableElevation
+              onClick={() => {
+                window.open(`tel:${phoneNumber}`, "_blank");
+              }}
             >
               {/* أيقونة داخل دائرة */}
               <Box
@@ -140,7 +145,7 @@ const Newsletter = ({ data, locale }: NewsletterProps) => {
                   mr: 1.2, // تباعد الأيقونة عن الرقم
                 }}
               >
-                <Box
+                {/* <Box
                   component="img"
                   src="/images/call-center.svg" // مسار الأيقونة
                   alt="Call Center"
@@ -150,7 +155,8 @@ const Newsletter = ({ data, locale }: NewsletterProps) => {
                     objectFit: "contain",
                     display: "block",
                   }}
-                />
+                /> */}
+                <Phone sx={{ color: "white" }} />
               </Box>
               {/* رقم الهاتف */}
               <Box

@@ -46,19 +46,19 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/images/favicon.ico" />
         <title>
-          {locale === "ar" ? "جميعه صالح للمحاماة والاستشارات القانونية" : "Trade Name JUMAIA SALEH ADVOCATES AND LEGAL CONSULTANCY"}
+          {locale === "ar" ? "مكتب جميعه صالح للمحاماة والاستشارات القانونية" : " JUMAIA SALEH ADVOCATES AND LEGAL CONSULTANCY"}
         </title>
         <meta
           name="description"
-          content={locale === "ar" ? "جميعه صالح للمحاماة والاستشارات القانونية" : "Trade Name JUMAIA SALEH ADVOCATES AND LEGAL CONSULTANCY"}
+          content={locale === "ar" ? "مكتب جميعه صالح للمحاماة والاستشارات القانونية" : " JUMAIA SALEH ADVOCATES AND LEGAL CONSULTANCY"}
         />
         <meta
           name="keywords"
-          content={locale === "ar" ? " جميعه صالح للمحاماة والاستشارات القانونية " : "Trade Name JUMAIA SALEH ADVOCATES AND LEGAL CONSULTANCY"}
+          content={locale === "ar" ? " مكتب جميعه صالح للمحاماة والاستشارات القانونية " : " JUMAIA SALEH ADVOCATES AND LEGAL CONSULTANCY"}
         />
         <meta
           name="author"
-          content={locale === "ar" ? "جميعه صالح للمحاماة والاستشارات القانونية" : "Trade Name JUMAIA SALEH ADVOCATES AND LEGAL CONSULTANCY"}
+          content={locale === "ar" ? "مكتب جميعه صالح للمحاماة والاستشارات القانونية " : " JUMAIA SALEH ADVOCATES AND LEGAL CONSULTANCY"}
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="robots" content="index, follow" />

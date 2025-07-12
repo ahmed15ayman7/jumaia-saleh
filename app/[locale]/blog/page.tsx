@@ -12,6 +12,7 @@ import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import Image from 'next/image';
 import { urlFor } from '@/sanity/lib/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 interface BlogCard {
   date: string;
   title: string;
@@ -41,7 +42,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
   const [blogPage, setBlogPage] = useState<BlogPage | null>(null);
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
-
+  const router = useRouter();
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
@@ -135,10 +136,13 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
               >
                 <Box sx={{ aspectRatio: '2/1', width: '100%', position: 'relative' }}>
                   <Image
+                    onClick={() => {
+                      router.push(`/${locale}/blogs/${blog.slug.current}`);
+                    }}
                     src={urlFor(blog.image).url() || '/images/placeholder.png'}
                     alt={locale === 'ar' ? blog.titleAr : blog.title}
                     fill
-                    style={{ objectFit: 'cover', borderRadius: '10px' }}
+                    style={{ objectFit: 'cover', borderRadius: '10px', cursor: 'pointer' }}
                   />
                 </Box>
                 <Box sx={{ py: '1.5rem',display:'flex',flexDirection:'column',justifyContent:'space-between',height:'100%',flexGrow:1}}>
@@ -182,6 +186,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                   <Button
                     sx={{
                       color: '#C8931C',
+                      width: 'fit-content',
                       fontSize: {xs:'.7rem',md:'1rem'},
                       fontWeight: 500,
                       display: 'flex',
@@ -189,6 +194,10 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                       justifyContent: 'flex-start',
                       gap: '0.5rem',
                       textTransform: 'none',
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      textDecorationColor: '#C8931C',
+                      textUnderlineOffset: '5px',
                     }}
                     endIcon={locale === 'en' ? <ArrowForwardIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} /> : <ArrowBackIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} />}
                     href={`/${locale}/blogs/${blog.slug.current}`}

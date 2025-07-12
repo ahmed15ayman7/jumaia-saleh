@@ -19,7 +19,7 @@ import { updateMessage } from "@/lib/updateMessage";
 import { toast } from "sonner";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 // Default practice areas in case Sanity data is not available
 const defaultPracticeAreas = [
@@ -65,6 +65,7 @@ const PracticeAreas = ({
   sanityData?: any;
 }) => {
   const t = useTranslations("ourPracticeAreas");
+  const router = useRouter();
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.5 });
@@ -72,7 +73,10 @@ const PracticeAreas = ({
   // Use Sanity data if available, otherwise use default
   const title = sanityData?.title || t("title");
   const description = sanityData?.description || t("description");
-  const practiceAreas = sanityData?.practiceAreas || defaultPracticeAreas;
+  const practiceAreas = sanityData?.practiceAreas || defaultPracticeAreas.map((item: any) => ({
+    ...item,
+    title: item.title && sanityData ? item.title : t(item.titleKey),
+  }));
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -160,12 +164,13 @@ const PracticeAreas = ({
                   position: "relative",
                   padding: 0,
                   backgroundColor: "transparent",
+                  cursor: area.id !== 0 ? "pointer" : "default",
                 }}
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.6, ease: "easeOut" }}
               >
-                <Box onClick={() => router.push(`/${locale}/practice/${area.value}`)} sx={{ height: { xs: "200px", md: 419 },borderRadius: "25px",border: "none",boxShadow: "none", position: "relative",py: 0,backgroundColor: "transparent" }} >
+                <Box onClick={() => area.id !== 0 && router.push(`/${locale}/practice/${area.value || ""}`)} sx={{ height: { xs: "200px", md: 419 },borderRadius: "25px",border: "none",boxShadow: "none", position: "relative",py: 0,backgroundColor: "transparent" }} >
                   {area.id !== 0 ? (
                     <Image src={area.image && sanityData ? urlFor(area.image).url() : area.image} alt={area.title || ""} width={100} height={100} className="w-full h-full object-cover bg-transparent rounded-2xl border-white border" />
                   ) : (
@@ -194,7 +199,7 @@ const PracticeAreas = ({
           ))}
         </Box>
 
-        <Box sx={{ display: "flex", justifyContent: "end", mt: 4 }} className="rtl:flex-row-reverse">
+        <Box sx={{ display: "flex", justifyContent: "end", mt: 4, px: {xs: 1,md: 3} }} className="rtl:flex-row-reverse">
           <IconButton
             onClick={() => scrollByItem("left")}
             className="bounce-h2"

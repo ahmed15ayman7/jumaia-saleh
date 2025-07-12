@@ -10,6 +10,8 @@ import NotFound404 from '../not-found';
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import { urlFor } from '@/sanity/lib/image';
 import Link from 'next/link';
+import { ArrowBackIosRounded, ArrowForwardIosRounded } from '@mui/icons-material';
+import { useRouter } from 'next/navigation';
 interface Service {
   pageType: {
     title: string;
@@ -36,7 +38,7 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
   const { locale } = use(params);
   const [services, setServices] = useState<ServicesPage | null>(null);
   const [loading, setLoading] = useState(true);
-
+  const router = useRouter();
   useEffect(() => {
     const getData = async () => {
       setLoading(true);
@@ -121,10 +123,13 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                 >
                   <Box sx={{ width: '100%', aspectRatio: '1/1', position: 'relative' }}>
                     <Image
+                      onClick={() => {
+                        router.push(`/${locale}/practice/${service.pageType.value}`);
+                      }}
                       src={service.image ? urlFor(service.image).url() : '/images/placeholder.png'}
                       alt={locale === 'ar' ? service.pageType?.title : service.pageType?.titleEn}
                       fill
-                      style={{ objectFit: 'cover', borderRadius: '10px' }}
+                      style={{ objectFit: 'cover', borderRadius: '10px', cursor: 'pointer' }}
                     />
                   </Box>
                   <Box sx={{ py: '1.5rem', flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -148,18 +153,26 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
                       {locale === 'ar' ? service.descriptionAr : service.description || ''}
                     </Typography>
                     <Button
-                      sx={{
-                        color: '#C8931C',
-                        fontSize: '1rem',
-                        fontWeight: 500,
-                        textTransform: 'none',
-                        alignSelf: 'flex-start',
-                        mt: 'auto',
-                      }}
-                      href={`/${locale}/practice/${service.pageType?.value}/`}
-                    >
-                      {locale === 'ar' ? "اقرأ المزيد" : "Read More"}
-                    </Button>
+                    sx={{
+                      color: '#C8931C',
+                      fontSize: {xs:'.7rem',md:'1rem'},
+                      fontWeight: 500,
+                      width: 'fit-content',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'flex-start',
+                      gap: '0.5rem',
+                      textTransform: 'none',
+                      cursor: 'pointer',
+                      textDecoration: 'underline',
+                      textDecorationColor: '#C8931C',
+                      textUnderlineOffset: '5px',
+                    }}
+                    endIcon={locale === 'en' ? <ArrowForwardIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} /> : <ArrowBackIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} />}
+                    href={`/${locale}/practice/${service.pageType.value}`}
+                  >
+                  {locale === 'ar' ? "اقرأ اكثر " : "Read More"}
+                  </Button>
                   </Box>
                 </Box>
               </AnimateBox>

@@ -183,7 +183,11 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
       </Box>
       </Box>
     {/* Google Map */}
-    <Box sx={{
+    <Box
+      onClick={() => {
+        window.open('https://www.google.com/maps/search/?api=1&query=25.40800,55.50868', '_blank');
+      }}
+     sx={{
       width: '100%',
       height: '40vh',
       mt: "60px",

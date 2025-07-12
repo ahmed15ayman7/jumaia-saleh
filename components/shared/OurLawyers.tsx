@@ -21,18 +21,6 @@ import HeadSections from "../ui/HeadSections";
 // Default lawyer data in case Sanity data is not available
 const defaultLawyerData = [
   {
-    id: 1,
-    image: "/images/mohamed-asran.jpg",
-    nameKey: "lawyer1.name",
-    titleKey: "lawyer1.title",
-  },
-  {
-    id: 2,
-    image: "/images/ashok-ashok.jpg",
-    nameKey: "lawyer2.name",
-    titleKey: "lawyer2.title",
-  },
-  {
     id: 3,
     image: "/images/jumayah-saleh.jpg",
     nameKey: "lawyer3.name",
@@ -43,6 +31,18 @@ const defaultLawyerData = [
     image: "/images/amanah-hussain.jpg",
     nameKey: "lawyer4.name",
     titleKey: "lawyer4.title",
+  },
+  {
+    id: 2,
+    image: "/images/ashok-ashok.jpg",
+    nameKey: "lawyer2.name",
+    titleKey: "lawyer2.title",
+  },
+  {
+    id: 1,
+    image: "/images/mohamed-asran.jpg",
+    nameKey: "lawyer1.name",
+    titleKey: "lawyer1.title",
   },
   {
     id: 5,
@@ -68,7 +68,11 @@ const OurLawyers = ({
   // Use Sanity data if available, otherwise use default
   const title = sanityData?.title || t("title");
   const description = sanityData?.description || t("description");
-  const lawyers = sanityData?.lawyers || defaultLawyerData;
+  const lawyers = sanityData?.lawyers || defaultLawyerData.map((item: any) => ({
+    ...item,
+    name: item.name && sanityData ? item.name : t(item.nameKey),
+    title: item.title && sanityData ? item.title : t(item.titleKey),
+  }));
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -78,7 +82,7 @@ const OurLawyers = ({
   };
 
   return (
-    <Box ref={ref} className="flex flex-col items-center gap-10 py-10">
+    <Box ref={ref} className="flex flex-col items-center gap-10 py-10 max-sm:py-4">
       <Box className="flex flex-col w-full max-w-[90vw] items-center gap-20 max-sm:gap-6">
         <HeadSections
           title={title}
@@ -91,7 +95,7 @@ const OurLawyers = ({
 
         <Grid container justifyContent="center" spacing={4}>
           {lawyers.map((lawyer: any, index: number) => (
-            <Grid key={lawyer.id} sx={{order:{xs:index%2===0?1:2,md:1}}}>
+            <Grid key={lawyer.id} >
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}

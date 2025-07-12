@@ -10,7 +10,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useInView } from "framer-motion";
 import EditableText from "../EditableText";
 import { useTranslations } from "next-intl";
@@ -58,6 +58,7 @@ const TestimonialSection = ({
   const tag = sanityData?.tag || t("tag");
   const title = sanityData?.title || t("title");
   const buttonText = sanityData?.button || t("button");
+  const phoneNumber = "+00971565955502";
   const testimonials = sanityData?.testimonials || getDefaultTestimonials(t);
 
   const onSave = (key: string, value: string) => {
@@ -66,6 +67,16 @@ const TestimonialSection = ({
       .then(() => toast.success("تم التحديث بنجاح", { id: toastId }))
       .catch(() => toast.error("فشل التحديث", { id: toastId }));
   };
+  // Auto slide every 5 seconds
+useEffect(() => {
+  const interval = setInterval(() => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+    );
+  }, 3000); // 5000ms = 5 seconds
+
+  return () => clearInterval(interval); // Clean up on unmount
+}, [testimonials.length]);
 
   return (
     <Box
@@ -124,6 +135,9 @@ const TestimonialSection = ({
         </Typography>
         <Button
           variant="contained"
+          onClick={() => 
+            window.open(`tel:${phoneNumber}`, "_blank")
+          }
           sx={{
             width: { xs: "30vw", sm: "30vw", md: "15vw" },
             borderRadius: "100px",

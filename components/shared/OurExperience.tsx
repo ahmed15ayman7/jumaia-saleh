@@ -27,7 +27,7 @@ const OurExperience = ({
   const beYourGuide = sanityData?.beYourGuide || t("beYourGuide");
   const description = sanityData?.description || t("description");
   const contactUs = sanityData?.contactUs || t("contactUs");
-
+  const phoneNumber = "+00971565955502";
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
     updateMessage({ key, value, locale: locale as "en" | "ar" })
@@ -158,7 +158,7 @@ const OurExperience = ({
                   fontWeight: 400,
                   fontSize: { xs: ".8rem", md: "1rem" },
                   color: "white",
-                  textAlign:{xs: "center",md: "left"},
+                  textAlign:{xs: "center",md: locale === "ar" ? "right" : "left"},
                   letterSpacing: "-0.5px",
                   maxWidth: {xs: "100%",md: "90%"},
                 }}
@@ -180,6 +180,9 @@ const OurExperience = ({
             >
               <Button
                 variant="contained"
+                onClick={() => {
+                  window.open(`tel:${phoneNumber}`, "_blank");
+                }}
                 sx={{
                   mt: 5,
                   bgcolor: 'primary.main',

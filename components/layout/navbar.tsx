@@ -170,10 +170,16 @@ const Navbar = ({ locale }: { locale: string }) => {
 
             <Box
               component="img"
+              onClick={() => {
+                router.push(
+                  `/${locale === "ar" ? "ar" : "en"}`,
+                  { scroll: false }
+                );
+              }}
               // src={locale === "en" ? "/images/sa.svg" : "/images/sh.svg"}
               src={"/images/logo-ar-en.png"}
               alt={t("language")}
-              sx={{ width: 20, height: 15 }}
+              sx={{ width: 20, height: 15,cursor: "pointer" }}
               />
               </ListItemIcon>
               </ListItemButton>

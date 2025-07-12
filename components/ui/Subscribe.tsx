@@ -35,7 +35,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
       sx={{
         width: "100vw",
         maxWidth: "100vw",
-        minHeight: "70vh",
+        minHeight: {xs:"40vh",md:"70vh"},
         p: 0,
         m: 0,
         bgcolor: "#fff",
@@ -85,7 +85,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
             justifyContent: "center",
             gap: { xs: 2, md: "1rem" },
             px: { xs: 2, md: 0 },
-            py: { xs: "10vh", md: "14vh" },
+            py: { xs: "2vh", md: "14vh" },
           }}
         >
           <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: { xs: 2, md: "1rem" }}}>
@@ -151,7 +151,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
                 borderRadius: "10px",
                 minWidth: { xs: "50vw", sm: "320px" },
                 maxWidth: { md: "400px" },
-                mb: { xs: 2, sm: 0 },
+                mb: { xs: 0, sm: 2 },
               }}
               value={name}
               onChange={e => setName(e.target.value)}
@@ -163,7 +163,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
               sx={{
                 px: { xs: 5, sm: 6 },
                 py: { xs: 2, sm: 4 },
-                height: { xs: "11vw", sm: "48px" },
+                height: { xs: "70px", sm: "48px" },
                 bgcolor: "primary.main",
                 color: "white",
                 fontFamily: "'Manrope-SemiBold', Helvetica",

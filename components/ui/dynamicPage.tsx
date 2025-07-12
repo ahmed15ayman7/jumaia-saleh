@@ -79,7 +79,8 @@ export default function DynamicPage({
         bgcolor: "#fff",
         minHeight: "100vh",
         pb: 0,
-        
+        maxWidth: "100vw",
+        overflowX: "hidden",
         pt: { xs: 1, md: 0 },
         position: "relative",
       }}

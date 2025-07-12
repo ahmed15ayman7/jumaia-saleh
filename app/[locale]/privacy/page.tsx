@@ -61,7 +61,10 @@ const PrivacyPage = ({params}:{params:Promise<{locale:string}>}) => {
     )
     
   return (
-    <Box>
+    <Box sx={{
+      maxWidth: "100vw",
+      overflowX: "hidden",
+    }}>
     <Box width={"100%"} height={"100%"} sx={{
         bgcolor: "#fff",
         minHeight: "100vh",

@@ -83,6 +83,8 @@ useEffect(() => {
       ref={ref}
       sx={{
         width: "100%",
+        maxWidth: "100vw",
+        overflowX: "hidden",
         height: { xs: "70vh", sm: "70vh", md: "70vh" },
         position: "relative",
         bgcolor: "#f9f7f5",

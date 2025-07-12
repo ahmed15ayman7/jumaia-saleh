@@ -21,12 +21,13 @@ import { updateMessage } from "@/lib/updateMessage";
 import { motion, useInView } from "framer-motion";
 import Link from "next/link";
 import { fetchDynamicPageType } from "@/sanity/lib/fetchDynamicPage";
+import { useRouter } from "next/navigation";
 
 const socialMedia = [
-  { icon: <FacebookIcon />, nameKey: "facebook" },
-  { icon: <InstagramIcon />, nameKey: "instagram" },
-  { icon: <TwitterIcon />, nameKey: "twitter" },
-  { icon: <LinkedInIcon />, nameKey: "linkedin" },
+  { icon: <FacebookIcon color="primary" />, nameKey: "facebook" },
+  { icon: <InstagramIcon color="primary" />, nameKey: "instagram" },
+  { icon: <TwitterIcon color="primary" />, nameKey: "twitter" },
+  { icon: <LinkedInIcon color="primary" />, nameKey: "linkedin" },
 ];
 
 const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
@@ -34,13 +35,16 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
   let [services, setServices] = useState([]);
+  const router = useRouter();
   useEffect(() => {
     fetchDynamicPageType("real-estate").then((data) => {
-      setServices(data.map((item: any) => ({
-        label: item.title,
-        labelEn: item.titleEn,
-        href: `/practice/${item.value}`,
-      })));
+      setServices(
+        data.map((item: any) => ({
+          label: item.title,
+          labelEn: item.titleEn,
+          href: `/practice/${item.value}`,
+        }))
+      );
     });
   }, []);
 
@@ -52,15 +56,27 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
     },
     {
       titleKey: null,
-      links: [{label: t("aboutus"), href: "/about"}, {label: t("services"), href: "/practice"}, {label: t("blog"), href: "/blog"}, {label: t("contactus"), href: "/contact"}],
+      links: [
+        { label: t("links.aboutus"), href: "/about" },
+        { label: t("links.services"), href: "/practice" },
+        { label: t("links.blog"), href: "/blog" },
+        { label: t("links.contactus"), href: "/contact" },
+      ],
     },
     {
       titleKey: null,
-      links: services.map((item: any) => ({label: locale === "ar" ? item.label : item.labelEn, href: item.href})) as {label: string, href: string}[],
+      links: services.map((item: any) => ({
+        label: locale === "ar" ? item.label : item.labelEn,
+        href: item.href,
+      })) as { label: string; href: string }[],
     },
     {
       titleKey: null,
-      links: [{label: t("team"), href: "/team"}, {label: t("ourteam"), href: "/contact/#our-team"}, {label: t("privacy"), href: "/privacy"}],
+      links: [
+        { label: t("links.team"), href: "#our-team" },
+        { label: t("links.terms"), href: "/terms" },
+        { label: t("links.privacy"), href: "/privacy" },
+      ],
     },
     // {
     //   titleKey: null,
@@ -208,7 +224,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
 
                 <Grid
                   container
-                  spacing={{xs:1,md:3}}
+                  spacing={{ xs: 1, md: 3 }}
                   sx={{ width: "100%", flexWrap: "wrap", pt: 2 }}
                 >
                   {navigationData.map((column, index) => (
@@ -250,6 +266,9 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                             }}
                           >
                             <Button
+                              onClick={() => {
+                                router.push(`/${locale}/about`);
+                              }}
                               sx={{
                                 color: "#cf9425",
                                 fontSize: { xs: ".8rem", sm: "1rem" },
@@ -273,25 +292,26 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                         </Box>
                       ) : (
                         <Box className="flex flex-col gap-1 max-sm:text-center max-sm:items-center max-sm:gap-[.2rem]  max-sm:justify-between">
-                          {column.links.map((link: {label: string, href: string}, linkIndex: number) => (
-                            <Typography
-                              variant="body2"
-                              key={linkIndex}
-                              sx={{
-                                cursor: "pointer",
-                                "&:hover": { textDecoration: "underline" },
-                                lineHeight: 2,
-                                px: "20px",
-                                fontSize: { xs: ".5rem", md: "1rem" },
-                              }}
-                            >
-                              {services.length > 0 && index === 2 ? (
-                                <Link href={link.href}>{link.label}</Link>
-                              ) : (
-                               t(`links.${link.label}`)
-                              )}
-                            </Typography>
-                          ))}
+                          {column.links.map(
+                            (
+                              link: { label: string; href: string },
+                              linkIndex: number
+                            ) => (
+                              <Typography
+                                variant="body2"
+                                key={linkIndex}
+                                sx={{
+                                  cursor: "pointer",
+                                  "&:hover": { textDecoration: "underline" },
+                                  lineHeight: 2,
+                                  px: "20px",
+                                  fontSize: { xs: ".5rem", md: "1rem" },
+                                }}
+                              >
+                                <Link href={`/${locale}${link.href}`}>{link.label}</Link>
+                              </Typography>
+                            )
+                          )}
                         </Box>
                       )}
                     </Grid>

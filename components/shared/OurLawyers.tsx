@@ -82,7 +82,7 @@ const OurLawyers = ({
   };
 
   return (
-    <Box ref={ref} className="flex flex-col items-center gap-10 py-10 max-sm:py-4">
+    <Box ref={ref} id="our-team" className="flex flex-col items-center gap-10 py-10 max-sm:py-4">
       <Box className="flex flex-col w-full max-w-[90vw] items-center gap-20 max-sm:gap-6">
         <HeadSections
           title={title}

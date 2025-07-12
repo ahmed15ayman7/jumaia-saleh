@@ -30,6 +30,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { fetchDynamicPageType } from "@/sanity/lib/fetchDynamicPage";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const navItems = [
   { label: "home", hasDropdown: false, href: "/" },
@@ -38,7 +42,12 @@ const navItems = [
   { label: "blog", hasDropdown: false, href: "/blog" },
   { label: "contact", hasDropdown: false, href: "/contact" },
 ];
-
+const socialMedia = [
+  { icon: <FacebookIcon sx={{width: "20px", height: "20px"}} color="primary" />, nameKey: "facebook", href: "https://www.facebook.com/profile.php?id=100063541461013" },
+  { icon: <InstagramIcon sx={{width: "20px", height: "20px"}} color="primary" />, nameKey: "instagram", href: "https://www.instagram.com/jumaiasaleh/" },
+  { icon: <TwitterIcon sx={{width: "20px", height: "20px"}} color="primary" />, nameKey: "twitter", href: "https://x.com/jumaiasaleh" },
+  { icon: <LinkedInIcon sx={{width: "20px", height: "20px"}} color="primary" />, nameKey: "linkedin", href: "https://www.linkedin.com/company/jumaiasaleh/" },
+];
 const Navbar = ({ locale }: { locale: string }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -209,19 +218,31 @@ const Navbar = ({ locale }: { locale: string }) => {
             animate={{ y: 0 }}
             exit={{ y: -80 }}
             transition={{ duration: 0.3 }}
-            style={{
-              position: "sticky",
-              top: 0,
+            // style={{
+            //   position: "sticky",
+            //   top: 0,
 
-              zIndex: 1000,
-              width: "100%",
-              background:
-                isHome && !scrolled
-                  ? "transparent"
-                  : "linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)",
-              transition: "background 0.3s ease-in-out",
-              backdropFilter: isHome && !scrolled ? "blur(6px)" : "none",
-            }}
+            //   zIndex: 1000,
+            //   width: "100%",
+            //   background:
+            //     isHome && !scrolled
+            //       ? "transparent"
+            //       : "linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)",
+            //   transition: "background 0.3s ease-in-out",
+            //   backdropFilter: isHome && !scrolled ? "blur(6px)" : "none",
+            // }}
+            style={{
+            position: "fixed", 
+            top: 0,
+            zIndex: 1000,
+            width: "100%",
+            background:
+              isHome && !scrolled
+                ? "transparent"
+                : "linear-gradient(101deg, rgba(12,28,25,1) 0%, rgba(52,89,82,1) 100%)",
+            transition: "background 0.3s ease-in-out",
+            backdropFilter: isHome && !scrolled ? "blur(6px)" : "none",
+          }}
           >
             <AppBar
               position={"static"}
@@ -646,19 +667,38 @@ const Navbar = ({ locale }: { locale: string }) => {
             </Typography>
 
             {/* Social Icons */}
-            <Box mt={2} display="flex" gap={1}>
-              {[1, 2, 3, 4].map((i) => (
-                <Box
-                  key={i}
-                  sx={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: "50%",
-                    backgroundColor: "white",
-                  }}
-                />
-              ))}
-            </Box>
+            <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  gap: 1.5,
+                  justifyContent: {
+                    xs: "center",
+                    sm: "center",
+                    md: "flex-start",
+                  },
+                  alignItems: "center",
+                }}
+              >
+                {socialMedia.map((social, index) => (
+                  <IconButton
+                    key={index}
+                    // aria-label={t(`social.${social.nameKey}`)}
+                    onClick={() => {
+                      window.open(social.href, "_blank");
+                    }}
+                    sx={{
+                      bgcolor: "white",
+                      color: "black",
+                      width: { xs: "30px", sm: "30px", md: "35px" },
+                      height: { xs: "30px", sm: "30px", md: "35px" },
+                      "&:hover": { bgcolor: "#f5f5f5" },
+                    }}
+                  >
+                    {social.icon}
+                  </IconButton>
+                ))}
+              </Box>
 
             {/* Links */}
             <Box
@@ -667,10 +707,14 @@ const Navbar = ({ locale }: { locale: string }) => {
               justifyContent="space-between"
               fontSize="0.75rem"
             >
-              <Typography sx={{ cursor: "pointer", fontSize: "0.75rem" }}>
+              <Typography sx={{ cursor: "pointer", fontSize: "0.75rem" }} onClick={() => {
+                router.push(`/${locale}/terms`);
+              }}>
                 Terms & Conditions
               </Typography>
-              <Typography sx={{ cursor: "pointer", fontSize: "0.75rem" }}>
+              <Typography sx={{ cursor: "pointer", fontSize: "0.75rem" }} onClick={() => {
+                router.push(`/${locale}/privacy`);
+              }}>
                 Privacy Policy
               </Typography>
             </Box>

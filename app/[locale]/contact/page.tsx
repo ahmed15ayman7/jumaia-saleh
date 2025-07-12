@@ -62,7 +62,10 @@ export default function ContactUsPage({ params }: { params: Promise<{ locale: st
   if(loading) return <Skeleton variant="rectangular" width="100%" height="100vh" />;
   if(!contactPage) return <NotFound404 />;
   return (
-    <Box>
+    <Box sx={{
+      maxWidth: "100vw",
+      overflowX: "hidden",
+    }}>
     <Box
     width={"100%"}
     sx={{

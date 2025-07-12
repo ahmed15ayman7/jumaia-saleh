@@ -53,7 +53,10 @@ export default function ServicesPage({ params }: { params: Promise<{ locale: str
   if(!services) return <NotFound404 />;
 
   return (
-    <Box>
+    <Box sx={{
+      maxWidth: "100vw",
+      overflowX: "hidden",
+    }}>
     <Box
     width={"100%"}
     sx={{

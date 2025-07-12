@@ -40,7 +40,7 @@ export default function RootLayout({
   if(locale !== "ar"&&locale !== "en") {
     locale = "ar";
   }
-  const isAdmin = true;
+  const isAdmin = false;
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <head>

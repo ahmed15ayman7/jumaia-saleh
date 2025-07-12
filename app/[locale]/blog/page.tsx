@@ -69,7 +69,10 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
   const pagesCount = Math.ceil(total / PAGE_SIZE);
 
   return (
-    <Box>
+    <Box sx={{
+      maxWidth: "100vw",
+      overflowX: "hidden",
+    }}>
       <Box
         width={"100%"}
         sx={{

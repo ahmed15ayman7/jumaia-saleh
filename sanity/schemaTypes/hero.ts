@@ -1,5 +1,5 @@
 export default {
-  name: 'hero',
+  name: 'heroSection',
   title: 'القسم الرئيسي',
   type: 'document',
   fields: [

@@ -18,37 +18,47 @@ import { toast } from "sonner";
 import { updateMessage } from "@/lib/updateMessage";
 import Image from "next/image";
 
+// Default testimonials in case Sanity data is not available
+const getDefaultTestimonials = (t: any) => [
+  {
+    id: 1,
+    description: t("description_0"),
+    name: t("name_0"),
+    role: t("role_0"),
+  },
+  {
+    id: 2,
+    description: t("description_1"),
+    name: t("name_1"),
+    role: t("role_1"),
+  },
+  {
+    id: 3,
+    description: t("description_2"),
+    name: t("name_2"),
+    role: t("role_2"),
+  },
+];
+
 const TestimonialSection = ({
   locale,
   isAdmin,
+  sanityData = null,
 }: {
   locale: string;
   isAdmin: boolean;
+  sanityData?: any;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const t = useTranslations("testimonials");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.4 });
-  const testimonials = [
-    {
-      id: 1,
-      description: t("description_0"),
-      name: t("name_0"),
-      role: t("role_0"),
-    },
-    {
-      id: 2,
-      description: t("description_1"),
-      name: t("name_1"),
-      role: t("role_1"),
-    },
-    {
-      id: 3,
-      description: t("description_2"),
-      name: t("name_2"),
-      role: t("role_2"),
-    },
-  ];
+
+  // Use Sanity data if available, otherwise use default
+  const tag = sanityData?.tag || t("tag");
+  const title = sanityData?.title || t("title");
+  const buttonText = sanityData?.button || t("button");
+  const testimonials = sanityData?.testimonials || getDefaultTestimonials(t);
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -94,7 +104,7 @@ const TestimonialSection = ({
             letterSpacing: "1px",
             color: "primary.main",
           }}
-        >{t("tag")}</Typography>
+        >{tag}</Typography>
 
         <Typography
           variant="h1"
@@ -107,7 +117,7 @@ const TestimonialSection = ({
           }}
         >
           <EditableText
-            value={t("title")}
+            value={title}
             onSave={(val) => onSave("testimonials.title", val)}
             isAdmin={isAdmin}
           />
@@ -131,7 +141,7 @@ const TestimonialSection = ({
               fontSize: { xs: ".8rem", sm: ".8rem", md: "1.3rem" },
             }}
           >
-            {t("button")}
+            {buttonText}
           </Typography>
         </Button>
       </motion.div>
@@ -205,7 +215,7 @@ const TestimonialSection = ({
             transition={{ delay: 0.6, duration: 0.5 }}
           >
             <Box className="flex justify-center gap-2">
-              {testimonials.map((_, index) => (
+              {testimonials.map((_: any, index: number) => (
                 <Box
                   key={index}
                   onClick={() => setCurrentIndex(index)}

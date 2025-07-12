@@ -61,7 +61,9 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
   }, [locale, page]);
 
   // if (isLoading) return <Skeleton variant="rectangular" animation="wave" width={"100%"} height={"100vh"} />;
-  if (!blogPage) return <NotFound404 />;
+  if (!blogPage || !blogs || isLoading) return <div>
+    <Skeleton variant="rectangular" animation="wave" width={"100%"} height={"100vh"} />
+    </div>;
 
   const pagesCount = Math.ceil(total / PAGE_SIZE);
 

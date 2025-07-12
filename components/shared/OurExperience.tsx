@@ -8,10 +8,25 @@ import { motion, useInView } from "framer-motion";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
-const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
+const OurExperience = ({ 
+  locale, 
+  isAdmin,
+  sanityData = null 
+}: { 
+  locale: string; 
+  isAdmin: boolean;
+  sanityData?: any;
+}) => {
   const t = useTranslations("ourExperience");
   const sectionRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.5 });
+
+  // Use Sanity data if available, otherwise use translation
+  const yourFirstAid = sanityData?.yourFirstAid || t("yourFirstAid");
+  const letOurExperience = sanityData?.letOurExperience || t("letOurExperience");
+  const beYourGuide = sanityData?.beYourGuide || t("beYourGuide");
+  const description = sanityData?.description || t("description");
+  const contactUs = sanityData?.contactUs || t("contactUs");
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -96,7 +111,7 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
                 }}
               >
                 <EditableText
-                  value={t("yourFirstAid")}
+                  value={yourFirstAid}
                   onSave={(val) => onSave("ourExperience.yourFirstAid", val)}
                   isAdmin={isAdmin}
                 />
@@ -118,14 +133,14 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
               >
                 <Box component="span" sx={{ color: "white" }}>
                   <EditableText
-                    value={t("letOurExperience")}
+                    value={letOurExperience}
                     onSave={(val) => onSave("ourExperience.letOurExperience", val)}
                     isAdmin={isAdmin}
                   />
                 </Box>{" "}
                 <Box component="span" sx={{ color: "#cf9425" }}>
                   <EditableText
-                    value={t("beYourGuide")}
+                    value={beYourGuide}
                     onSave={(val) => onSave("ourExperience.beYourGuide", val)}
                     isAdmin={isAdmin}
                   />
@@ -149,7 +164,7 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
                 }}
               >
                 <EditableText
-                  value={t("description")}
+                  value={description}
                   onSave={(val) => onSave("ourExperience.description", val)}
                   isAdmin={isAdmin}
                 />
@@ -183,7 +198,7 @@ const OurExperience = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
                   },
                 }}
               >
-                {t('contactUs')}
+                {contactUs}
                 {locale === "en" ? (
                   <ArrowForwardIcon className="bounce-h2" sx={{ color: "inherit", width: 24, height: 24 }} />
                 ) : (

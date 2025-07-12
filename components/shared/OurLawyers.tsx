@@ -18,50 +18,57 @@ import { updateMessage } from "@/lib/updateMessage";
 import { motion, useInView } from "framer-motion";
 import HeadSections from "../ui/HeadSections";
 
-let jumayahSaleh = "/images/jumayah-saleh.jpg";
-let ashokAshok = "/images/ashok-ashok.jpg";
-let amanahHussain = "/images/amanah-hussain.jpg";
-let ramdanYousuf = "/images/ramdan-yousuf.jpg";
-let mohamedAsran = "/images/mohamed-asran.jpg";
-
-
-const lawyerData = [
+// Default lawyer data in case Sanity data is not available
+const defaultLawyerData = [
   {
     id: 1,
-    image: mohamedAsran,
+    image: "/images/mohamed-asran.jpg",
     nameKey: "lawyer1.name",
     titleKey: "lawyer1.title",
   },
   {
     id: 2,
-    image: ashokAshok,
+    image: "/images/ashok-ashok.jpg",
     nameKey: "lawyer2.name",
     titleKey: "lawyer2.title",
   },
   {
     id: 3,
-    image: jumayahSaleh,
+    image: "/images/jumayah-saleh.jpg",
     nameKey: "lawyer3.name",
     titleKey: "lawyer3.title",
   },
   {
     id: 4,
-    image: amanahHussain,
+    image: "/images/amanah-hussain.jpg",
     nameKey: "lawyer4.name",
     titleKey: "lawyer4.title",
   },
   {
     id: 5,
-    image: ramdanYousuf,
+    image: "/images/ramdan-yousuf.jpg",
     nameKey: "lawyer5.name",
     titleKey: "lawyer5.title",
   },
 ];
 
-const OurLawyers = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
+const OurLawyers = ({ 
+  locale, 
+  isAdmin,
+  sanityData = null 
+}: { 
+  locale: string; 
+  isAdmin: boolean;
+  sanityData?: any;
+}) => {
   const t = useTranslations("ourLawyers");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.4 });
+
+  // Use Sanity data if available, otherwise use default
+  const title = sanityData?.title || t("title");
+  const description = sanityData?.description || t("description");
+  const lawyers = sanityData?.lawyers || defaultLawyerData;
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -74,8 +81,8 @@ const OurLawyers = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =
     <Box ref={ref} className="flex flex-col items-center gap-10 py-10">
       <Box className="flex flex-col w-full max-w-[90vw] items-center gap-20 max-sm:gap-6">
         <HeadSections
-          title={t("title")}
-          description={t("description")}
+          title={title}
+          description={description}
           locale={locale}
           keyTitle="ourLawyers.title"
           keyDescription="ourLawyers.description"
@@ -83,7 +90,7 @@ const OurLawyers = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =
         />
 
         <Grid container justifyContent="center" spacing={4}>
-          {lawyerData.map((lawyer, index) => (
+          {lawyers.map((lawyer: any, index: number) => (
             <Grid key={lawyer.id} sx={{order:{xs:index%2===0?1:2,md:1}}}>
               <motion.div
                 initial={{ opacity: 0, y: 50 }}
@@ -100,15 +107,15 @@ const OurLawyers = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) =
                   <Stack spacing={0.5} alignItems="center">
                     <Typography variant="subtitle2" color="primary" textAlign="center" sx={{fontSize: {xs: ".6rem",md: "1rem"}}}>
                       <EditableText
-                        value={t(lawyer.nameKey)}
-                        onSave={(val) => onSave(`ourLawyers.${lawyer.nameKey}`, val)}
+                        value={lawyer.name}
+                        onSave={(val) => onSave(`ourLawyers.lawyer${lawyer.id}.name`, val)}
                         isAdmin={isAdmin}
                       />
                     </Typography>
                     <Typography variant="body1" textAlign="center" sx={{fontSize: {xs: ".6rem",md: "1rem"}}}>
                       <EditableText
-                        value={t(lawyer.titleKey)}
-                        onSave={(val) => onSave(`ourLawyers.${lawyer.titleKey}`, val)}
+                        value={lawyer.title}
+                        onSave={(val) => onSave(`ourLawyers.lawyer${lawyer.id}.title`, val)}
                         isAdmin={isAdmin}
                       />
                     </Typography>

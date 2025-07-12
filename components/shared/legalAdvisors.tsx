@@ -25,10 +25,30 @@ const contactInfo = [
   },
 ];
 
-export default function LegalConsultation({ locale, isAdmin }: { locale: string; isAdmin: boolean }) {
+export default function LegalConsultation({ 
+  locale, 
+  isAdmin,
+  sanityData = null 
+}: { 
+  locale: string; 
+  isAdmin: boolean;
+  sanityData?: any;
+}) {
   const t = useTranslations("legalAdvisors");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
+
+  // Use Sanity data if available, otherwise use translation
+  const headerGet = sanityData?.header?.get || t("header.get");
+  const headerAdvisors = sanityData?.header?.advisors || t("header.advisors");
+  const headerDescription = sanityData?.header?.description || t("header.description");
+  const phoneNumber = sanityData?.contact?.phoneNumber || t("contact.phoneNumber");
+  const dividerText = sanityData?.divider || t("divider");
+  const sendUsSend = sanityData?.sendUs?.header?.send || t("sendUs.header.send");
+  const sendUsUs = sanityData?.sendUs?.header?.us || t("sendUs.header.us");
+  const sendUsInquiry = sanityData?.sendUs?.header?.inquiry || t("sendUs.header.inquiry");
+  const sendUsDescription = sanityData?.sendUs?.description || t("sendUs.description");
+  const ctaText = sanityData?.cta || t("cta");
 
   // onSave function
   const onSave = (key: string, value: string) => {
@@ -102,7 +122,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
           >
             <Box component="span" sx={{ color: "white" }}>
               <EditableText
-                value={t("header.get")}
+                value={headerGet}
                 onSave={(val) => onSave("legalAdvisors.header.get", val)}
                 isAdmin={isAdmin}
               />
@@ -110,7 +130,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
             <Box component="span" sx={{ color: "#cf9425" }}>
               {" "}
               <EditableText
-                value={t("header.advisors")}
+                value={headerAdvisors}
                 onSave={(val) => onSave("legalAdvisors.header.advisors", val)}
                 isAdmin={isAdmin}
               />
@@ -127,7 +147,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
             }}
           >
             <EditableText
-              value={t("header.description")}
+              value={headerDescription}
               onSave={(val) => onSave("legalAdvisors.header.description", val)}
               isAdmin={isAdmin}
             />
@@ -210,7 +230,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
                   }}
                 >
                   <EditableText
-                    value={t(`contact.${contact.phoneKey}`)}
+                    value={phoneNumber}
                     onSave={(val) => onSave(`legalAdvisors.contact.${contact.phoneKey}`, val)}
                     isAdmin={isAdmin}
                   />
@@ -259,7 +279,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
               }}
             >
               <EditableText
-                value={t("divider")}
+                value={dividerText}
                 onSave={(val) => onSave("legalAdvisors.divider", val)}
                 isAdmin={isAdmin}
               />
@@ -303,7 +323,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
             >
               <Box component="span" sx={{ color: "white" }}>
                 <EditableText
-                  value={t("sendUs.header.send")}
+                  value={sendUsSend}
                   onSave={(val) => onSave("legalAdvisors.sendUs.header.send", val)}
                   isAdmin={isAdmin}
                 />
@@ -311,14 +331,14 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
               <Box component="span" sx={{ color: "#cf9425" }}>
                 {" "}
                 <EditableText
-                  value={t("sendUs.header.us")}
+                  value={sendUsUs}
                   onSave={(val) => onSave("legalAdvisors.sendUs.header.us", val)}
                   isAdmin={isAdmin}
                 />
               </Box>
               <Box component="span" sx={{ color: "white" }}>
                 <EditableText
-                  value={t("sendUs.header.inquiry")}
+                  value={sendUsInquiry}
                   onSave={(val) => onSave("legalAdvisors.sendUs.header.inquiry", val)}
                   isAdmin={isAdmin}
                 />
@@ -336,7 +356,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
               }}
             >
               <EditableText
-                value={t("sendUs.description")}
+                value={sendUsDescription}
                 onSave={(val) => onSave("legalAdvisors.sendUs.description", val)}
                 isAdmin={isAdmin}
               />
@@ -370,12 +390,7 @@ export default function LegalConsultation({ locale, isAdmin }: { locale: string;
                 boxShadow: "0px 4px 20px 0px #cf942511",
               }}
             >
-              {t("cta")}
-              {/* <EditableText
-                value={t("cta")}
-                onSave={(val) => onSave("legalAdvisors.cta", val)}
-                isAdmin={isAdmin}
-              /> */}
+              {ctaText}
             </Button>
           </Box>
         </motion.div>

@@ -308,3 +308,162 @@ export const fetchContactPage = async (locale: string = "ar") => {
   `;
   return await client.fetch(query, { locale });
 };
+
+// Fetch functions for shared components
+export const fetchAdvocates = async (locale: string = "ar") => {
+  const query = `
+    *[_type == "advocates"][0]{
+      title,
+      titleAr,
+      description,
+      descriptionAr,
+      statistics[]{
+        value,
+        suffix,
+        label,
+        labelAr
+      }
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchHero = async (locale: string = "ar") => {
+  const query = `
+    *[_type == "hero"][0]{
+      hero,
+      heroAr,
+      subtitle,
+      subtitleAr,
+      subtitle2,
+      subtitle2Ar,
+      subtitle3,
+      subtitle3Ar,
+      description,
+      descriptionAr,
+      button,
+      buttonAr
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchLegalAdvisors = async (locale: string = "ar") => {
+  const query = `
+    *[_type == "legalAdvisors"][0]{
+      header{
+        get,
+        getAr,
+        advisors,
+        advisorsAr,
+        description,
+        descriptionAr
+      },
+      contact{
+        phoneNumber,
+        phoneNumberAr
+      },
+      divider,
+      dividerAr,
+      sendUs{
+        header{
+          send,
+          sendAr,
+          us,
+          usAr,
+          inquiry,
+          inquiryAr
+        },
+        description,
+        descriptionAr
+      },
+      cta,
+      ctaAr
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchOurExperience = async (locale: string = "ar") => {
+  const query = `
+    *[_type == "ourExperience"][0]{
+      yourFirstAid,
+      yourFirstAidAr,
+      letOurExperience,
+      letOurExperienceAr,
+      beYourGuide,
+      beYourGuideAr,
+      description,
+      descriptionAr,
+      contactUs,
+      contactUsAr
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchOurLawyers = async (locale: string = "ar") => {
+  const query = `
+    *[_type == "ourLawyers"][0]{
+      title,
+      titleAr,
+      description,
+      descriptionAr,
+      lawyers[]{
+        name,
+        nameAr,
+        title,
+        titleAr,
+        image{
+          asset->{
+            url
+          }
+        }
+      }
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchOurPracticeAreas = async (locale: string = "ar") => {
+  const query = `
+    *[_type == "ourPracticeAreas"][0]{
+      title,
+      titleAr,
+      description,
+      descriptionAr,
+      practiceAreas[]{
+        title,
+        titleAr,
+        image{
+          asset->{
+            url
+          }
+        }
+      }
+    }
+  `;
+  return await client.fetch(query, { locale });
+};
+
+export const fetchTestimonials = async (locale: string = "ar") => {
+  const query = `
+    *[_type == "testimonials"][0]{
+      tag,
+      tagAr,
+      title,
+      titleAr,
+      button,
+      buttonAr,
+      testimonials[]{
+        description,
+        descriptionAr,
+        name,
+        nameAr,
+        role,
+        roleAr
+      }
+    }
+  `;
+  return await client.fetch(query, { locale });
+};

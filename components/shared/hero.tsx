@@ -18,10 +18,12 @@ const Hero = ({
   isAdmin,
   t,
   locale,
+  sanityData = null,
 }: {
   isAdmin: boolean;
   t: (t: string) => string;
   locale: string;
+  sanityData?: any;
 }) => {
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading('جاري التحديث...');
@@ -36,6 +38,14 @@ const Hero = ({
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false });
+
+  // Use Sanity data if available, otherwise use translation
+  const heroText = sanityData?.hero || t('hero');
+  const subtitle = sanityData?.subtitle || t('subtitle');
+  const subtitle2 = sanityData?.subtitle2 || t('subtitle2');
+  const subtitle3 = sanityData?.subtitle3 || t('subtitle3');
+  const description = sanityData?.description || t('description');
+  const buttonText = sanityData?.button || t('button');
 
   return (
     <div className="absolute top-0 left-0 w-full h-full">
@@ -113,7 +123,7 @@ const Hero = ({
         />
 
         {/* Main Content */}
-        <Box  sx={{ position: 'relative',height: "100%",maxWidth: "xl",mx: "auto", zIndex: 2, px: {xs: 4,md: 10},display: 'flex', flexDirection: 'column',  justifyContent: 'center',alignItems:{xs: "center",md: "flex-start"} }}>
+        <Box  sx={{ position: "relative",height: "100%",maxWidth: "xl",mx: "auto", zIndex: 2, px: {xs: 4,md: 10},display: 'flex', flexDirection: 'column',  justifyContent: 'center',alignItems:{xs: "center",md: "flex-start"} }}>
           {/* Title */}
           <motion.div
             key={isInView ? 'hero-title-visible' : 'hero-title-hidden'}
@@ -124,7 +134,7 @@ const Hero = ({
           >
             <Typography variant="subtitle1" sx={{ color: 'primary.main',fontFamily: 'Manrope',textAlign: {xs: "center",md: locale === "en" ? "left" : "right"} }}>
               <EditableText
-                value={t('hero')}
+                value={heroText}
                 onSave={(value: string) => {
                   onSave('home.hero', value);
                 }}
@@ -154,13 +164,13 @@ const Hero = ({
                 }}
               >
                 <EditableText
-                  value={t('subtitle')}
+                  value={subtitle}
                   onSave={(value: string) => onSave('home.subtitle', value)}
                   isAdmin={isAdmin}
                 />
                 <br />
                 <EditableText
-                  value={t('subtitle2')}
+                  value={subtitle2}
                   onSave={(value: string) => onSave('home.subtitle2', value)}
                   isAdmin={isAdmin}
                 />{' '}
@@ -173,7 +183,7 @@ const Hero = ({
                   }}
                 >
                   <EditableText
-                    value={t('subtitle3')}
+                    value={subtitle3}
                     onSave={(value: string) => onSave('home.subtitle3', value)}
                     isAdmin={isAdmin}
                   />
@@ -200,7 +210,7 @@ const Hero = ({
               }}
             >
               <EditableText
-                value={t('description')}
+                value={description}
                 onSave={(value: string) => onSave('home.description', value)}
                 isAdmin={isAdmin}
               />
@@ -234,7 +244,7 @@ const Hero = ({
                 },
               }}
             >
-              {t('button')}
+              {buttonText}
               {locale === "en" ? (
                           <ArrowForwardIcon
                           className="bounce-h2"

@@ -13,7 +13,8 @@ const line1 = "/images/line-1.svg";
 const line2 = "/images/line-1.svg";
 const line3 = "/images/line-1.svg";
 
-const statistics = [
+// Default statistics in case Sanity data is not available
+const defaultStatistics = [
   { value: 100, suffix: "%", key: "casesSolved" },
   { value: 50, suffix: "+", key: "happyClients" },
   { value: 200, suffix: "", key: "loreumIpsum" },
@@ -37,11 +38,26 @@ const AnimatedCounter = ({ to, isInView, suffix }: { to: number; isInView: boole
   return <>{count}{suffix}</>;
 };
 
-const Advocates = ({ locale, isAdmin ,isbg=false}: { locale: string; isAdmin: boolean,isbg?:boolean }) => {
+const Advocates = ({ 
+  locale, 
+  isAdmin, 
+  isbg = false,
+  sanityData = null 
+}: { 
+  locale: string; 
+  isAdmin: boolean;
+  isbg?: boolean;
+  sanityData?: any;
+}) => {
   const t = useTranslations("advocates");
 
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.5 });
+
+  // Use Sanity data if available, otherwise use default
+  const statistics = sanityData?.statistics || defaultStatistics;
+  const title = sanityData?.title || t("title");
+  const description = sanityData?.description || t("description");
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -66,8 +82,8 @@ const Advocates = ({ locale, isAdmin ,isbg=false}: { locale: string; isAdmin: bo
         <MUIBox sx={{width: "100%",maxWidth: {xs: "70vw",md: "50vw"},mx: "auto",mb: {xs: 4,md: "70px"}}}>
 
         <HeadSections
-          title={t("title")}
-          description={t("description")}
+          title={title}
+          description={description}
           locale={locale}
           isbg={isbg}
           keyTitle="advocates.title"
@@ -87,7 +103,7 @@ const Advocates = ({ locale, isAdmin ,isbg=false}: { locale: string; isAdmin: bo
             justifyContent: "space-between",
           }}
         >
-          {statistics.map((stat, index) => (
+          {statistics.map((stat: any, index: number) => (
             <Grid component="div" size={{ xs: 6,sm: 6, md: 3 }} key={index} sx={{ textAlign: "center",[locale === "ar" ? "borderRight" : "borderLeft"]:index !== 0 ? {xs: "none",md: "1px solid #bababa"} : "none",pl: {xs: 0,md: 4} }}>
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
@@ -105,7 +121,8 @@ const Advocates = ({ locale, isAdmin ,isbg=false}: { locale: string; isAdmin: bo
                   }}
                 >
                   <AnimatedCounter to={stat.value} suffix={stat.suffix} isInView={isInView} />
-                </Typography>{t(stat.key)}
+                </Typography>
+                {sanityData ? stat.key : t(stat.key)}
                 
               </motion.div>
             </Grid>

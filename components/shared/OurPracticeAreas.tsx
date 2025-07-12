@@ -18,12 +18,61 @@ import EditableText from "../EditableText";
 import { updateMessage } from "@/lib/updateMessage";
 import { toast } from "sonner";
 import Image from "next/image";
+import { urlFor } from "@/sanity/lib/image";
+import router from "next/router";
 
-const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
+// Default practice areas in case Sanity data is not available
+const defaultPracticeAreas = [
+  {
+    id: 1,
+    titleKey: "area1",
+    image: "/images/rectangle-2.jpg",
+  },
+  {
+    id: 2,
+    titleKey: "area2",
+    image: "/images/rectangle-3.jpg",
+  },
+  {
+    id: 3,
+    titleKey: "area3",
+    image: "/images/rectangle-4.jpg",
+  },
+  {
+    id: 4,
+    titleKey: "area4",
+    image: "/images/rectangle-5.jpg",
+  },
+  {
+    id: 5,
+    titleKey: "area5",
+    image: "/images/rectangle-2.jpg",
+  },
+  {
+    id: 6,
+    titleKey: "area6",
+    image: "/images/rectangle-3.jpg",
+  },
+];
+
+const PracticeAreas = ({ 
+  locale, 
+  isAdmin,
+  sanityData = null 
+}: { 
+  locale: string; 
+  isAdmin: boolean;
+  sanityData?: any;
+}) => {
   const t = useTranslations("ourPracticeAreas");
   const scrollRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.5 });
+
+  // Use Sanity data if available, otherwise use default
+  const title = sanityData?.title || t("title");
+  const description = sanityData?.description || t("description");
+  const practiceAreas = sanityData?.practiceAreas || defaultPracticeAreas;
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
@@ -31,44 +80,6 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
       .then(() => toast.success("تم التحديث بنجاح", { id: toastId }))
       .catch(() => toast.error("فشل التحديث", { id: toastId }));
   };
-
-  const practiceAreas = [
-    {
-      id: 1,
-      titleKey: "area1",
-      image: "/images/rectangle-2.jpg",
-    },
-    {
-      id: 2,
-      titleKey: "area2",
-      image: "/images/rectangle-3.jpg",
-    },
-    {
-      id: 3,
-      titleKey: "area3",
-      image: "/images/rectangle-4.jpg",
-    },
-    {
-      id: 4,
-      titleKey: "area4",
-      image: "/images/rectangle-5.jpg",
-    },
-    {
-      id: 5,
-      titleKey: "area5",
-      image: "/images/rectangle-2.jpg",
-    },
-    {
-      id: 6,
-      titleKey: "area6",
-      image: "/images/rectangle-3.jpg",
-    },
-    {
-      id: 0,
-      titleKey: "",
-      image: "",
-    },
-  ];
 
   const scrollByItem = (direction: "left" | "right") => {
     if (scrollRef.current) {
@@ -93,8 +104,8 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
     >
       <Box sx={{maxWidth: "100vw",px: 0}} className="bg-[#F9F7F5]">
         <HeadSections
-          title={t("title")}
-          description={t("description")}
+          title={title}
+          description={description}
           locale={locale}
           keyTitle="ourPracticeAreas.title"
           keyDescription="ourPracticeAreas.description"
@@ -123,7 +134,11 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
             pr: {xs: "10px",md: "0px"},
           }}
         >
-          {practiceAreas.map((area, index) => (
+          {[...practiceAreas,  {
+    id: 0,
+    titleKey: "",
+    image: "",
+  }].map((area: any, index: number) => (
             <Box
               key={area.id}
               sx={{
@@ -150,18 +165,12 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.2, duration: 0.6, ease: "easeOut" }}
               >
-                <Box sx={{ height: { xs: "200px", md: 419 },borderRadius: "25px",border: "none",boxShadow: "none", position: "relative",py: 0,backgroundColor: "transparent" }} >
+                <Box onClick={() => router.push(`/${locale}/practice/${area.value}`)} sx={{ height: { xs: "200px", md: 419 },borderRadius: "25px",border: "none",boxShadow: "none", position: "relative",py: 0,backgroundColor: "transparent" }} >
                   {area.id !== 0 ? (
-                    <Image src={area.image} alt={t(area.titleKey)} width={100} height={100} className="w-full h-full object-cover bg-transparent rounded-2xl border-white border" />
+                    <Image src={area.image && sanityData ? urlFor(area.image).url() : area.image} alt={area.title || ""} width={100} height={100} className="w-full h-full object-cover bg-transparent rounded-2xl border-white border" />
                   ) : (
                     <div className="w-full h-full bg-transparent rounded-2xl"></div>
                   )}
-                  {/* <CardMedia
-                    component="img"
-                    image={area.image}
-                    alt={t(area.titleKey)}
-                    sx={{ height: "100%", objectFit: "cover" }}
-                  /> */}
                  {area.id !== 0 && <Box
                     sx={{
                       position: "absolute",
@@ -173,8 +182,8 @@ const PracticeAreas = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }
                     }}
                   >
                     <EditableText
-                      value={t(area.titleKey)}
-                      onSave={(value: string) => onSave(`ourPracticeAreas.${area.titleKey}`, value)}
+                      value={area.title}
+                      onSave={(value: string) => onSave(`ourPracticeAreas.area${area.id}`, value)}
                       isAdmin={isAdmin}
                       className="text-center text-xl md:text-2xl font-semibold text-[#cf9425] bg-transparent"
                     />

@@ -48,6 +48,7 @@ const Contact = ({ locale }: { locale: string }) => {
             onClick={() => setShowChat(!showChat)}
           >
             <Image
+              className='rotateInUpRight'
               src="/images/whatsapp.svg"
               alt="whatsapp"
               width={70}

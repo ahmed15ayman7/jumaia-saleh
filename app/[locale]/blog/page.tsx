@@ -19,7 +19,7 @@ interface BlogCard {
   titleAr: string;
   description: string;
   descriptionAr: string;
-  slug: { current: string };
+  blogPage: { slug: { current: string } } | null;
   image: SanityImageSource;
 }
 interface BlogPage {
@@ -49,6 +49,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
       // جلب البلوغز
       const res = await fetchBlog( (page - 1) * PAGE_SIZE, PAGE_SIZE);
       setBlogs(res);
+      console.log(res);
       const blogPage = await fetchBlogPage(locale);
       setBlogPage(blogPage);
       // جلب العدد الكلي (مرة واحدة فقط)
@@ -125,7 +126,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
           }}
         >
           {blogs.map((blog, idx) => (
-            <AnimateBox animation="fadeUp" delay={0.1 + idx * 0.1} key={blog.slug.current}>
+            <AnimateBox animation="fadeUp" delay={0.1 + idx * 0.1} key={idx}>
               <Box
                 sx={{
                   borderRadius: '10px',
@@ -140,7 +141,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                 <Box sx={{ aspectRatio: '2/1', width: '100%', position: 'relative' }}>
                   <Image
                     onClick={() => {
-                      router.push(`/${locale}/blogs/${blog.slug.current}`);
+                      router.push(`/${locale}/blog/${blog.blogPage?.slug.current || ''}`);
                     }}
                     src={urlFor(blog.image).url() || '/images/placeholder.png'}
                     alt={locale === 'ar' ? blog.titleAr : blog.title}
@@ -203,7 +204,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                       textUnderlineOffset: '5px',
                     }}
                     endIcon={locale === 'en' ? <ArrowForwardIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} /> : <ArrowBackIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} />}
-                    href={`/${locale}/blogs/${blog.slug.current}`}
+                    href={`/${locale}/blog/${blog.blogPage?.slug.current || ''}`}
                   >
                   {locale === 'ar' ? "اقرأ اكثر " : "Read More"}
                   </Button>

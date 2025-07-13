@@ -12,7 +12,7 @@ import contactMessage from './contactMessage'
 import service from './service'
 import servicePage from './servicePage'
 import contactPage from './contactPage'
-import blogPage from './blogPage'
+import blogsPage from './blogsPage'
 import advocates from './advocates'
 import hero from './hero'
 import legalAdvisors from './legalAdvisors'
@@ -20,6 +20,7 @@ import ourExperience from './ourExperience'
 import ourLawyers from './ourLawyers'
 import ourPracticeAreas from './ourPracticeAreas'
 import testimonials from './testimonials'
+import blogPage from './blogPage'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -33,6 +34,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     adminAuth,
     blog,
     blogPage,
+    blogsPage,
     contactMessage,
     service,
     contactPage,

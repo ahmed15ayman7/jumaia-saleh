@@ -1,16 +1,15 @@
 'use client'
 import ImageHeader from '@/components/ui/ImageHeader'
-import { fetchPrivacy } from '@/sanity/lib/fetchDynamicPage'
+import { fetchBlogPageSlug, fetchPrivacy } from '@/sanity/lib/fetchDynamicPage'
 import { Box, Button, Divider, ListItemText, List, ListItem, ListItemIcon, Typography, Skeleton, } from '@mui/material'
 import React, { use, useEffect, useState } from 'react'
 import { SanityImageSource } from '@sanity/image-url/lib/types/types';
 import AnimateBox from '@/components/ui/AnimateBox'
-import { CheckCircleRounded } from '@mui/icons-material';
-import Advocates from '@/components/shared/Advocates'
 import Subscribe from '@/components/ui/Subscribe'
-import NotFound404 from '../not-found'
+import NotFound404 from '../../not-found'
 import Link from 'next/link';
-interface PrivacyData  {
+interface BlogData  {
+  slug: {current: string}
     breadcrumb: {
         label: string
         labelAr: string
@@ -39,14 +38,14 @@ interface PrivacyData  {
     }
 }
 
-const PrivacyPage = ({params}:{params:Promise<{locale:string}>}) => {
-    const {locale} =  use(params)   
+const Page = ({params}:{params:Promise<{locale:string,slug:string}>}) => {
+    const {locale,slug} =  use(params)   
     let [isLoading,setIsLoading] = useState(true)
-    let [data,setdata] = useState<PrivacyData | null>(null)
+    let [data,setdata] = useState<BlogData | null>(null)
     useEffect(() => {
         let fetchData = async () => {
             setIsLoading(true)
-            let res = await fetchPrivacy()
+            let res = await fetchBlogPageSlug(slug)
             console.log(res)
             setdata(res)
             setIsLoading(false)
@@ -101,12 +100,12 @@ const PrivacyPage = ({params}:{params:Promise<{locale:string}>}) => {
         </Box>
         </AnimateBox>
         <AnimateBox animation='fadeUp' delay={0.1}>
-        <ImageHeader title={locale === "ar" ? data?.hero?.titleAr || "" : data?.hero?.title || ""} subtitle={locale === "ar" ? data?.hero?.subtitleAr || "" : data?.hero?.subtitle || ""} imgHeader={data?.hero?.backgroundImage || ""} />
+        <ImageHeader title={locale === "ar" ? data?.hero?.titleAr || "" : data?.hero?.title || ""} subtitle={locale === "ar" ? data?.hero?.subtitleAr || "" : data?.hero?.subtitle || ""} imgHeader={data?.hero?.backgroundImage || ""} isService />
         </AnimateBox>
         {/* Content Section */}
         <Box
       sx={{
-        maxWidth: '900px',
+        maxWidth: {xs:"100",md:"90%"},
         mx: 'auto',
         px: { xs: 2, md: 0 },
         // pb: { xs: 4, md: 7 },
@@ -156,7 +155,6 @@ const PrivacyPage = ({params}:{params:Promise<{locale:string}>}) => {
           sx={{
             color: '#627174',
             mb: 2,
-            fontFamily: "'Manrope-Regular', Helvetica",
             fontSize: { xs: '.85rem', sm: '1rem' },
             lineHeight: 2,
           }}
@@ -166,7 +164,7 @@ const PrivacyPage = ({params}:{params:Promise<{locale:string}>}) => {
       </AnimateBox>
       <Box
       sx={{
-        maxWidth: '900px',
+        maxWidth: {xs:"100",md:"90%"},
         mx: 'auto',
         px: { xs: 2, md: 0 },
         py: 6,
@@ -175,7 +173,7 @@ const PrivacyPage = ({params}:{params:Promise<{locale:string}>}) => {
       }}
     >
       <List component={"ul"} style={{listStyle:"decimal",textAlign: locale === "ar" ? 'right' : 'left'}}>
-        {data?.content?.items.map((item, index) => (
+        {data?.content?.items?.map((item, index) => (
           <AnimateBox
             key={index}
           >
@@ -213,4 +211,4 @@ const PrivacyPage = ({params}:{params:Promise<{locale:string}>}) => {
   )
 }
 
-export default PrivacyPage
+export default Page

@@ -37,13 +37,10 @@ export default {
       type: 'text',
     },
     {
-      name: 'slug',
-      title: 'الرابط',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96,
-      },
+      name: 'blogPageSchema',
+      title: 'صفحة المقالة كاملة',
+      type: 'reference',
+      to: [{ type: 'blogPageSchema' }],
     },
   ],
   preview: {

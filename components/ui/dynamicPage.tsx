@@ -242,7 +242,7 @@ export default function DynamicPage({
           </Typography>
         </Box>
         {/* Read more */}
-        <Box
+        {/* <Box
           sx={{
             maxWidth: {xs:"100%",md:"90%"},
             textAlign:  locale === "ar" ? "right" : "left",
@@ -273,7 +273,7 @@ export default function DynamicPage({
           >
             {data.readMore}
           </Button>
-        </Box>
+        </Box> */}
 
         {/* Brochure Section */}
         <Box

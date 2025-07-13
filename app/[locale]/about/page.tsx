@@ -158,8 +158,8 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
           variant="h3"
           sx={{
             color: 'primary.main',
-            fontSize: { xs: '1rem', md: '2.5rem' },
-            fontWeight: 700,
+            fontSize: { xs: '1rem', md: '2.3rem' },
+            fontWeight: 600,
             mb: { xs: 1, md: '30px' },
           }}
         >

@@ -264,7 +264,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                                 xs: "center",
                                 md: locale === "ar" ? "right" : "left",
                               },
-                              mx: "auto",
+                              mx: {xs: "auto", md: 0},
                               mb: { xs: 3, md: 6 },
                               px: { xs: 0, md: 0 },
                             }}

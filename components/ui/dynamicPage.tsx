@@ -326,7 +326,7 @@ export default function DynamicPage({
                   mb: { xs: i === 0 ? 1 : 0, sm: 0 },
                 }}
               >
-                {file.label}
+                {locale === "ar" ? file.labelAr : file.label}
               </Button>
             ))}
           </Box>

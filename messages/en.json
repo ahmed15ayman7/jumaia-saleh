@@ -132,7 +132,7 @@
   "subscribe": {
     "title": "Subscribe to our newsletter!",
     "description": "Comprehensive Legal Services Tailored to Your Needs Across All Sectors",
-    "input": "Enter your name",
+    "input": "Enter your email",
     "cta": "Subscribe Now"
   },
   "footer": {

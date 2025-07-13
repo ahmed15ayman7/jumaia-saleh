@@ -27,7 +27,7 @@ const OurExperience = ({
   const beYourGuide = sanityData?.beYourGuide || t("beYourGuide");
   const description = sanityData?.description || t("description");
   const contactUs = sanityData?.contactUs || t("contactUs");
-  const phoneNumber = "00971565955502";
+  const phoneNumber = "+971565955502";
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");
     updateMessage({ key, value, locale: locale as "en" | "ar" })

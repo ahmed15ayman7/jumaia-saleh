@@ -62,7 +62,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
         { label: t("links.aboutus"), href: "/about" },
         { label: t("links.blog"), href: "/blog" },
         { label: t("links.contactus"), href: "/contact" },
-        { label: t("links.quote"), href: "https://wa.me/00971565955502" },
+        { label: t("links.quote"), href: "https://wa.me/+971565955502" },
       ],
     },
     {

@@ -14,8 +14,8 @@ import Image from "next/image";
 import { LocationOn } from "@mui/icons-material";
 
 const phoneNumbers = [
-  { id: 1, number: "00971565955502", top: "5vh" },
-  { id: 2, number: "00971565955502", top: "13vh" },
+  { id: 1, number: "+971565955502", top: "5vh" },
+  { id: 2, number: "+971565955502", top: "13vh" },
 ];
 
 const Contact = ({ locale }: { locale: string }) => {
@@ -224,7 +224,7 @@ const Contact = ({ locale }: { locale: string }) => {
                     variant="text"
                     sx={{ color: "#1976d2", fontWeight: "bold" }}
                     onClick={() =>
-                      window.open("https://wa.me/00971565955502", "_blank")
+                      window.open("https://wa.me/+971565955502", "_blank")
                     }
                   >
                     {locale === "ar" ? "ابدأ الدردشة" : "Start Chat"}

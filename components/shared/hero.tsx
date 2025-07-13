@@ -46,7 +46,7 @@ const Hero = ({
   const subtitle3 = sanityData?.subtitle3 || t('subtitle3');
   const description = sanityData?.description || t('description');
   const buttonText = sanityData?.button || t('button');
-  const phoneNumber = "00971565955502";
+  const phoneNumber = "+971565955502";
   return (
     <div className="absolute top-0 left-0 w-full h-full">
       <Box

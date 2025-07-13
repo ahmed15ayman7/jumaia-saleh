@@ -36,7 +36,7 @@ interface NewsletterProps {
 
 const Newsletter = ({ data, locale }: NewsletterProps) => {
   console.log("data newsletter", data);
-  const phoneNumber = "00971565955502";
+  const phoneNumber = "+971565955502";
   return (
     <Box
       sx={{

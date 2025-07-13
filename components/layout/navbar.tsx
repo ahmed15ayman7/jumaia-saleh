@@ -334,7 +334,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                     <Box
                       component="button"
                       onClick={() => {
-                        window.open(`https://wa.me/00971565955502`, "_blank");
+                        window.open(`https://wa.me/+971565955502`, "_blank");
                       }}
                       sx={{
                         position: "relative",

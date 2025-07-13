@@ -7,7 +7,15 @@ export const fetchDynamicPage = async (slug: string, locale: string) => {
       sharedPageContent->{
         title,
         image,
-        brochureFiles,
+          brochureFiles[]{
+            label,
+            labelAr,
+            link  {
+              asset->{
+                url
+              }
+            }
+        },
         newsletterSlides,
         relatedServices
       },

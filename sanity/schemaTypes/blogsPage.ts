@@ -42,7 +42,7 @@ export default {
       return {
         title: title || 'صفحة المدونة',
         subtitle: subtitle || 'صفحة المدونة',
-        media: media || '/images/placeholder.png'
+        media: media || ''
       }
     },
   },

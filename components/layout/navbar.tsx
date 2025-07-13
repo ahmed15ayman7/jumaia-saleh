@@ -109,16 +109,28 @@ const Navbar = ({ locale }: { locale: string }) => {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
-      if (currentScrollY > lastScrollY) {
-        setShowNavbar(false); // scroll down
-      } else {
-        setShowNavbar(true); // scroll up
+  
+      // نتأكد أن الصفحة مش عند الأعلى (iOS بيعمل bounce scrollY < 0 أحيانا)
+      if (currentScrollY <= 0) {
+        setShowNavbar(true);
+        setLastScrollY(0);
+        return;
       }
+  
+      if (currentScrollY > lastScrollY) {
+        setShowNavbar(false); // scrolling down
+      } else {
+        setShowNavbar(true); // scrolling up
+      }
+  
       setLastScrollY(currentScrollY);
     };
-    window.addEventListener("scroll", handleScroll);
+  
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  
     return () => window.removeEventListener("scroll", handleScroll);
   }, [lastScrollY]);
+  
   // Handle scroll to toggle navbar background
   useEffect(() => {
     const handleScroll = () => {
@@ -322,7 +334,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                     <Box
                       component="button"
                       onClick={() => {
-                        window.open(`https://wa.me/+00971565955502`, "_blank");
+                        window.open(`https://wa.me/00971565955502`, "_blank");
                       }}
                       sx={{
                         position: "relative",

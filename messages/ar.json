@@ -106,12 +106,12 @@
   },
   "legalAdvisors": {
     "header": {
-      "get": "احصل على",
-      "advisors": "المحاميين",
-      "description": "احصل على المحاميين الأفضل"
+      "get": "احجز استشارتك",
+      "advisors": "القانونية",
+      "description": "يمتلك فريقنا معرفة عميقة ومتنوعة عبر مختلف فروع القانون."
     },
     "contact": {
-      "phoneNumber": "+00971565955502"
+      "phoneNumber": "00971565955502"
     },
     "divider": "أو",
     "sendUs": {

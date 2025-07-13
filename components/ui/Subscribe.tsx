@@ -148,10 +148,10 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
                 py: 2,
                 fontSize: { xs: "1rem", sm: "1.2rem", md: "1rem" },
                 fontFamily: "'Manrope-Regular', Helvetica",
-                borderRadius: "10px",
+                borderRadius: "35px",
                 minWidth: { xs: "50vw", sm: "320px" },
                 maxWidth: { md: "400px" },
-                mb: { xs: 0, sm: 2 },
+                mb: { xs: 0, sm: 0 },
               }}
               value={name}
               onChange={e => setName(e.target.value)}
@@ -167,7 +167,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
                 bgcolor: "primary.main",
                 color: "white",
                 fontFamily: "'Manrope-SemiBold', Helvetica",
-                borderRadius: "10px",
+                borderRadius: "35px",
                 fontWeight: 600,
                 fontSize: { xs: "1rem", sm: "1.2rem", md: "18px" },
                 letterSpacing: "0.01em",

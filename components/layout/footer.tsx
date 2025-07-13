@@ -202,9 +202,13 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
           >
             {/* Upper part: Title + columns */}
             <Box
-              sx={{ display: "flex", flexDirection: "column", gap: "100px" }}
+              sx={{ display: "flex", flexDirection: "column", gap: "60px" }}
             >
-              <Box>
+              <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "40px",
+              }}>
                 {/* Editable headline */}
                 <Typography
                   variant="h4"
@@ -212,7 +216,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                     fontWeight: 700,
                     color: "#cf9425",
                     maxWidth: { xs: "100%", md: "497px" },
-                    fontSize: { xs: "1.5rem", md: "1.5rem", lg: "2rem" },
+                    fontSize: { xs: "1.4rem", md: "1.4rem", lg: "1.8rem" },
                   }}
                 >
                   <EditableText

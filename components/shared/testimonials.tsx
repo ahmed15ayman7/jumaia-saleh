@@ -92,7 +92,7 @@ const TestimonialSection = ({
     name: item.name && testimonialsPage ? locale==="ar"?item.nameAr:item.name : t(item.nameKey),
     role: item.role && testimonialsPage ? locale==="ar"?item.roleAr:item.role : t(item.roleKey),
   })) || getDefaultTestimonials(t);
-  const phoneNumber = "+00971565955502"
+  const phoneNumber = "00971565955502"
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading("جاري التحديث...");

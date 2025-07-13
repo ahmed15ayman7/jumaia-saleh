@@ -262,7 +262,7 @@ export default function DynamicPage({
               transition: "all .5s",
               "&:hover": {
                 backgroundColor: "transparent",
-                borderRadius: "25px",
+                borderRadius: "6px",
                 border: "2px solid #cf9425",
               },
             }}

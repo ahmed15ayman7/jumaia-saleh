@@ -201,7 +201,6 @@ export default function DynamicPage({
             sx={{
               color: "#627174",
               mb: 2,
-              fontFamily: "'Manrope-Regular', Helvetica",
               fontSize: { xs: ".8rem", sm: "1rem" },
             }}
           >
@@ -236,8 +235,7 @@ export default function DynamicPage({
             sx={{
               color: "#627174",
               mb: 2,
-              fontFamily: "'Manrope-Regular', Helvetica",
-              fontSize: { xs: "3vw", md: "1.14rem" },
+              fontSize: {xs: ".8rem", sm: "1rem"}, 
             }}
           >
             {data.endDescription}

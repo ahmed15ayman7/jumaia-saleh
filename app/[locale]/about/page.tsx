@@ -271,7 +271,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
                   bgcolor: i === 0 ? "#cf9425" : "#fff",
                   color: i === 0 ? "#fff" : "#cf9425",
                   border: "2px solid #cf9425",
-                  borderRadius: "25px",
+                  borderRadius: "6px",
                   fontWeight: 700,
                   fontSize: { xs: ".8rem", md: "1rem" },
                   minWidth: { xs: "100%", md: 280 },

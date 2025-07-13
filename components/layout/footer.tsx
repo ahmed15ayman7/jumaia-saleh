@@ -57,10 +57,12 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
     {
       titleKey: null,
       links: [
-        { label: t("links.aboutus"), href: "/about" },
+        { label: t("links.home"), href: "/" },
         { label: t("links.services"), href: "/practice" },
+        { label: t("links.aboutus"), href: "/about" },
         { label: t("links.blog"), href: "/blog" },
         { label: t("links.contactus"), href: "/contact" },
+        { label: t("links.quote"), href: "https://wa.me/00971565955502" },
       ],
     },
     {
@@ -202,7 +204,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
           >
             {/* Upper part: Title + columns */}
             <Box
-              sx={{ display: "flex", flexDirection: "column", gap: "60px" }}
+              sx={{ display: "flex", flexDirection: "column", gap: "30px" }}
             >
               <Box sx={{
                 display: "flex",
@@ -242,7 +244,11 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                       }}
                     >
                       {column.aboutTextKey ? (
-                        <Box>
+                        <Box sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "20px",
+                        }}>
                           <Typography
                             variant="body2"
                             sx={{

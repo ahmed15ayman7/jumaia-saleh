@@ -11,6 +11,7 @@ import {
   Paper,
 } from "@mui/material";
 import Image from "next/image";
+import { LocationOn } from "@mui/icons-material";
 
 const phoneNumbers = [
   { id: 1, number: "00971565955502", top: "5vh" },
@@ -78,6 +79,37 @@ const Contact = ({ locale }: { locale: string }) => {
               height={70}
             />
           </IconButton>
+        </Tooltip>
+        {/* Map Button */}
+        <Tooltip
+          title={locale === "ar" ? "الموقع" : "Location"}
+          placement={locale === "ar" ? "right" : "left"}
+        >
+          <IconButton
+            sx={{ width: { xs: 50, md: 70 }, height: { xs: 50, md: 70 } }}
+            onClick={() =>
+              window.open(`https://www.google.com/maps/search/?api=1&query=25.40800,55.50868`, "_blank")
+            }
+          >
+            <Box sx={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              alignItems: "center",
+              borderRadius: "50%",
+              color: "white",
+              backgroundColor: "primary.main",
+              justifyContent: "center",
+            }}>
+           <LocationOn
+           className="rotateY-Map"
+           sx={{
+            width: "80%",
+            height: "80%",
+           }}
+           />
+           </Box>
+            </IconButton>
         </Tooltip>
 
         {/* WhatsApp Chat Widget */}

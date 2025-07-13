@@ -92,3 +92,22 @@ body {
     transform: rotate(20deg); 
  }
 }
+
+@keyframes rotateYMap {
+  0% {
+    transform: rotateY(0deg);
+    animation-timing-function: linear;
+  }
+  40% {
+    transform: rotateY(360deg); /* أول لفة */
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: rotateY(720deg); /* ثاني لفة */
+  }
+}
+
+.rotateY-Map {
+  animation: rotateYMap 1.5s infinite;
+  animation-delay: 0.4s;
+}

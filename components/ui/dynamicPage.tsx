@@ -105,7 +105,7 @@ export default function DynamicPage({
       <Box sx={{ pt: {xs: ".9vh",md: 2}, pb: '10px', fontSize: '13px' }}>
         {data?.breadcrumb?.map((bc, i) => (
           <Box key={i} display="inline">
-              <Link href={bc.href||""} style={{ color: '#444', textDecoration: 'none' }}>
+              <Link href={`/${locale}${data?.breadcrumb?.map((bc,index)=>index <= i ? bc.href?.split('/').join("") : '').join('/')}`||""} style={{ color: '#444', textDecoration: 'none' }}>
                 <Typography
                   component="span"
                   sx={{ fontSize: {xs: '.7rem', md: '.8rem' }}}

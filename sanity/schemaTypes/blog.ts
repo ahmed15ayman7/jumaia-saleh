@@ -37,7 +37,7 @@ export default {
       type: 'text',
     },
     {
-      name: 'blogPageSchema',
+      name: 'blogPage',
       title: 'صفحة المقالة كاملة',
       type: 'reference',
       to: [{ type: 'blogPageSchema' }],

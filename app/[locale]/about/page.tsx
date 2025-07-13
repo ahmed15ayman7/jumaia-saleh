@@ -113,7 +113,7 @@ const AboutUsPage = ({params}:{params:Promise<{locale:string}>}) => {
             <Box key={i} display="inline">
               {(
                 <Link
-                  href={bc.href || ""}
+                  href={`/${locale}${data?.breadcrumb.map((bc,index)=>index <= i ? bc.href.split('/').join("") : '').join('/')}` || ""}
                   style={{ color: "#444", textDecoration: "none" }}
                 >
                   <Typography

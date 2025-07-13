@@ -91,7 +91,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
             {blogPage?.breadcrumb?.map((bc, i) => (
               <Box key={i} display="inline">
                 {(
-                  <Link href={bc.href || ""} style={{ color: '#444', textDecoration: 'none' }}>
+                  <Link href={`/${locale}${blogPage?.breadcrumb.map((bc,index)=>index <= i ? bc.href.split('/').join("") : '').join('/')}` || ""} style={{ color: '#444', textDecoration: 'none' }}>
                     <Typography
                       component="span"
                       sx={{ fontSize: '.8rem' }}

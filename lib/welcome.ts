@@ -25,10 +25,10 @@ export const welcomeTemplate = `
                   <img src="https://www.jumaia-saleh.com/images/logo-ar-en.png" alt="شعار مكتب جمعة صالح" width="180" style="max-width: 200px; display: block; margin: 0 auto;"/>
                 </div>
                 <h1 style="margin: 40px 0 0 0; color: #fff; text-align: center; font-size: 32px; font-weight: bold;">
-                  مرحباً {{name}}
+                  مرحباً 
                 </h1>
                 <h2 style="margin: 10px 0 0; color: #f1f1f1; text-align: center; font-size: 22px;">
-                  شكراً لتواصلك مع مكتب <span style="color: #FFD700;">جمعة صالح للمحاماة</span>
+                  شكراً لتواصلك مع  <span style="color: #FFD700;"> مكتب جميعة صالح للمحاماة والاستشارات القانونية </span>
                 </h2>
                 <p style="color: #e1e1e1; text-align: center; font-size:18px; padding: 20px 30px 0;">
                   يسعدنا خدمتك وتقديم الاستشارات القانونية لك في مكتبنا في <b>عجمان، الإمارات العربية المتحدة</b>.
@@ -52,21 +52,12 @@ export const welcomeTemplate = `
                 </div>
 
                 <div style="text-align:center; margin: 30px 0 10px 0;">
-                  <!-- ضع روابطك الحقيقية هنا -->
-                  <a href="https://www.facebook.com/jumaia.saleh.law" target="_blank" style="margin: 0 4px;">
-                    <img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-dark-gray/facebook@2x.png" width="28" alt="Facebook"/>
-                  </a>
-                  <a href="https://www.instagram.com/jumaia.saleh.law" target="_blank" style="margin: 0 4px;">
+                 
+                  <a href="https://www.instagram.com/jumaia.saleh/" target="_blank" style="margin: 0 4px;">
                     <img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-dark-gray/instagram@2x.png" width="28" alt="Instagram"/>
                   </a>
-                  <a href="https://wa.me/+971501234567" target="_blank" style="margin: 0 4px;">
+                  <a href="https://wa.me/+971565955502" target="_blank" style="margin: 0 4px;">
                     <img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-dark-gray/whatsapp@2x.png" width="28" alt="WhatsApp"/>
-                  </a>
-                  <a href="https://www.linkedin.com/company/jumaia-saleh" target="_blank" style="margin: 0 4px;">
-                    <img src="https://app-rsrc.getbee.io/public/resources/social-networks-icon-sets/t-only-logo-dark-gray/linkedin@2x.png" width="28" alt="LinkedIn"/>
-                  </a>
-                  <a href="https://www.jumaia-saleh.com" target="_blank" style="margin: 0 4px;">
-                    <img src="https://app-rsrc.getbee.io/public/resources/bee-icons/domain.png" width="28" alt="Website"/>
                   </a>
                 </div>
                 <div style="height: 15px"></div>

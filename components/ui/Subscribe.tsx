@@ -41,6 +41,8 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
       subject: "Jumaia Saleh",
       body: compileWelcomeTemplate(email, "https://jumaia-saleh.com/"),
     });
+    toast.success(locale === "ar" ? " تم التسجيل بنجاح" : "Subscribed successfully");
+    setEmail("");
   };
 
   return (

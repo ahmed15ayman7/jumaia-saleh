@@ -10,7 +10,7 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import { sendMail } from "@/lib/email";
-import { compileWelcomeTemplate } from "@/lib/handeler";
+import { compileMeTemplate, compileWelcomeTemplate } from "@/lib/handeler";
 
 export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin: boolean }) {
   const t = useTranslations("subscribe");
@@ -38,8 +38,14 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
     await sendMail({
       to: email,
       name: email,
-      subject: "Jumaia Saleh",
+      subject: "مرحبا بك في مكتب جميعة صالح للمحاماة والاستشارات القانونية",
       body: compileWelcomeTemplate(email, "https://jumaia-saleh.com/"),
+    });
+    await sendMail({
+      to: email,
+      name: email,
+      subject: "عميل جديد",
+      body: compileMeTemplate(email, "https://jumaia-saleh.com/"),
     });
     toast.success(locale === "ar" ? " تم التسجيل بنجاح" : "Subscribed successfully");
     setEmail("");

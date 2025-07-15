@@ -71,6 +71,7 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
               key={index}
               sx={{
                 flex: "0 0 auto",
+                cursor: "pointer",
                 backgroundColor: "transparent",
                 width: {
                   xs: "calc(50% - 12px)",

@@ -1,42 +1,46 @@
-// lib/email.ts
-import nodemailer from 'nodemailer';
+"use server";
+import nodemailer from "nodemailer";
 
-// إنشاء transporter
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,       // لا تستخدم NEXT_PUBLIC لأنها ستكون مكشوفة في المتصفح
-    pass: process.env.EMAIL_PASS,
-  },
-});
+export async function sendMail({
+  to,
+  name,
+  subject,
+  body,
+}: {
+  to: string;
+  name: string;
+  subject: string;
+  body: string;
+}) {
+  const { EMAIL_USER, EMAIL_PASS } = process.env;
 
-// تعريف نوع البراميتر
-interface SendConfirmationEmailProps {
-  email: string;
-  verificationCode: string;
-}
+  const transport = nodemailer.createTransport({
+    host: "smtp.hostinger.com", // عنوان خادم SMTP الخاص بـ Hostinger
+    port: 465, // عادةً ما يكون 465 لـ SSL أو 587 لـ TLS
+    secure: true, // true إذا كنت تستخدم SSL
+    auth: {
+      user: EMAIL_USER, // الإيميل الخاص بك (info@bezrah.org)
+      pass: EMAIL_PASS, // كلمة المرور الخاصة بالإيميل
+    },
+  });
 
-// دالة إرسال الإيميل
-export const sendConfirmationEmail = async ({
-  email,
-  verificationCode,
-}: SendConfirmationEmailProps): Promise<void> => {
   try {
-    const mailOptions = {
-      from: `"Aber App" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: 'Welcome to Aber - Email Verification',
-      text: `Hi there,
-
-Thank you for joining Aber! 🎉
-
-Your verification code is: ${verificationCode}`,
-    };
-
-    await transporter.sendMail(mailOptions);
-    console.log('📧 Confirmation email sent successfully');
+    const testResult = await transport.verify();
+    console.log("SMTP Configuration Verified:", testResult);
   } catch (error) {
-    console.error('❌ Error sending confirmation email:', error);
-    throw error;
+    console.error("SMTP Verification Failed:", { error });
+    return;
   }
-};
+
+  try {
+    const sendResult = await transport.sendMail({
+      from: EMAIL_USER,
+      to,
+      subject,
+      html: body,
+    });
+    console.log("Email Sent Successfully:", sendResult);
+  } catch (error) {
+    console.error("Failed to Send Email:", error);
+  }
+}

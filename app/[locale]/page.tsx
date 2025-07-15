@@ -31,16 +31,16 @@ export default  function HomePage({params}: {params: Promise<{locale: string}>})
       <div className="bg-[#F9F7F5]">
 
       <div className='w-full md:h-[90vh] h-[60vh]'>
-      <Hero isAdmin={!isAdmin} t={t} locale={locale} />
+      <Hero isAdmin={isAdmin} t={t} locale={locale} />
       </div>
-      <PracticeAreas locale={locale} isAdmin={!isAdmin} />
+      <PracticeAreas locale={locale} isAdmin={isAdmin} />
       </div>
-      <Advocates locale={locale} isAdmin={!isAdmin} />
-      <OurExperience locale={locale} isAdmin={!isAdmin} />
-      <OurLawyers locale={locale} isAdmin={!isAdmin} />
-      <Testimonials locale={locale} isAdmin={!isAdmin} />
-      <LegalConsultation locale={locale} isAdmin={!isAdmin} />
-      <Subscribe locale={locale} isAdmin={!isAdmin} />
+      <Advocates locale={locale} isAdmin={isAdmin} />
+      <OurExperience locale={locale} isAdmin={isAdmin} />
+      <OurLawyers locale={locale} isAdmin={isAdmin} />
+      <Testimonials locale={locale} isAdmin={isAdmin} />
+      <LegalConsultation locale={locale} isAdmin={isAdmin} />
+      <Subscribe locale={locale} isAdmin={isAdmin} />
     </main>
   );
 } 

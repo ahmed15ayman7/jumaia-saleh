@@ -26,7 +26,7 @@ import { useRouter } from "next/navigation";
 
 const socialMedia = [
   { icon: <FacebookIcon color="primary" />, nameKey: "facebook" },
-  { icon: <InstagramIcon color="primary" />, nameKey: "instagram" },
+  { icon: <InstagramIcon color="primary" />, nameKey: "instagram", href: "https://www.instagram.com/jumaia.saleh/" },
   { icon: <TwitterIcon color="primary" />, nameKey: "twitter" },
   { icon: <LinkedInIcon color="primary" />, nameKey: "linkedin" },
 ];

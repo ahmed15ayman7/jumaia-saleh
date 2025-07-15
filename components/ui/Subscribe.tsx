@@ -9,14 +9,15 @@ import { updateMessage } from "@/lib/updateMessage";
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import { sendMail } from "@/lib/email";
+import { compileWelcomeTemplate } from "@/lib/handeler";
 
 export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin: boolean }) {
   const t = useTranslations("subscribe");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
+  const [email, setEmail] = useState("");
 
-  // Fake input value
-  const [name, setName] = useState("");
 
   const onSave = (key: string, value: string) => {
     const toastId = toast.loading(locale === "ar" ? "جاري التحديث..." : "Updating...");
@@ -27,6 +28,19 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
       .catch(() =>
         toast.error(locale === "ar" ? "فشل التحديث" : "Update failed", { id: toastId })
       );
+  };
+
+  const handleSubscribe = async () => {
+    if (!email) {
+      toast.error(locale === "ar" ? "يجب أن يكون لديك عنوان بريد إلكتروني" : "You must have an email address");
+      return;
+    }
+    await sendMail({
+      to: email,
+      name: email,
+      subject: "Jumaia Saleh",
+      body: compileWelcomeTemplate(email, "https://jumaia-saleh.com/"),
+    });
   };
 
   return (
@@ -153,13 +167,14 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
                 maxWidth: { md: "400px" },
                 mb: { xs: 0, sm: 0 },
               }}
-              value={name}
-              onChange={e => setName(e.target.value)}
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               inputProps={{ style: { color: "#222", textAlign: "start" } }}
               // disabled
             />
             <Button
               variant="contained"
+              onClick={() => handleSubscribe()}
               sx={{
                 px: { xs: locale === "ar" ? 3 : 2, sm: 6 },
                 py: { xs: 2, sm: 4 },

@@ -88,7 +88,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
             py: { xs: "2vh", md: "14vh" },
           }}
         >
-          <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: { xs: 2, md: "1rem" }}}>
+          <Box sx={{display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",width: "100%", gap: { xs: 2, md: "1rem" }}}>
           <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 1 }}>
             <MailOutlineIcon sx={{ color: "#cf9425", fontSize: { xs: "7vw", md: "45px" }, mr: 1 }} />
             <Typography
@@ -161,7 +161,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
             <Button
               variant="contained"
               sx={{
-                px: { xs: 5, sm: 6 },
+                px: { xs: locale === "ar" ? 3 : 2, sm: 6 },
                 py: { xs: 2, sm: 4 },
                 height: { xs: "70px", sm: "48px" },
                 bgcolor: "primary.main",
@@ -169,7 +169,7 @@ export default function Subscribe({ locale, isAdmin }: { locale: string; isAdmin
                 fontFamily: "'Manrope-SemiBold', Helvetica",
                 borderRadius: "35px",
                 fontWeight: 600,
-                fontSize: { xs: "1rem", sm: "1.2rem", md: "18px" },
+                fontSize: { xs:locale === "ar" ? "1rem" : ".8rem", sm: "1.2rem", md: "18px" },
                 letterSpacing: "0.01em",
                 textTransform: "none",
                 "&:hover": { bgcolor: "primary.dark", color: "white" },

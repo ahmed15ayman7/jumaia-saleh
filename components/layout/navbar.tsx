@@ -322,7 +322,7 @@ const Navbar = ({ locale }: { locale: string }) => {
                           component="img"
                           src={
                             locale === "en"
-                              ? "/images/sa.svg"
+                              ? "/images/uae.png"
                               : "/images/sh.svg"
                           }
                           alt={t("language")}

@@ -4,6 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import { Phone, Globe, Mail } from 'lucide-react';
 import {
   Box,
   Button,
@@ -374,6 +375,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                   </IconButton>
                 ))}
               </Box>
+              <ContactStrip />
             </Box>
 
             {/* Divider & bottom bar */}
@@ -473,3 +475,44 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
 };
 
 export default Footer;
+
+
+const contactItems = [
+  {
+    icon: <Phone className="text-white w-4 h-4" />,
+    label: '+971565955502',
+    href: 'tel:+971565955502',
+  },
+  {
+    icon: <Globe className="text-white w-4 h-4" />,
+    label: 'jumaia-saleh.com',
+    href: 'https://jumaia-saleh.com',
+  },
+  {
+    icon: <Mail className="text-white w-4 h-4" />,
+    label: 'info@jumaia-saleh.com',
+    href: 'mailto:info@jumaia-saleh.com',
+  },
+];
+
+function ContactStrip() {
+  return (
+    <div className="flex items-center gap-6 text-white max-sm:mx-auto">
+      {contactItems.map((item, index) => (
+        <motion.a
+          key={index}
+          href={item.href}
+          className="flex items-center gap-2 group max-sm:text-sm max-sm:gap-1 max-sm:flex-col "
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.2 }}
+        >
+          <div className="bg-[#ab994e] p-2 rounded-full flex items-center justify-center max-sm:text-sm">
+            {item.icon}
+          </div>
+          <span className="group-hover:underline transition max-sm:hidden">{item.label}</span>
+        </motion.a>
+      ))}
+    </div>
+  );
+}

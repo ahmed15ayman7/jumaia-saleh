@@ -14,11 +14,12 @@ import EditableText from "../EditableText";
 import Image from "next/image";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { urlFor } from "@/sanity/lib/image";
+import { useRouter } from "next/navigation";
 
-const RelatedServices = ({ data, locale }: { data: {title: string, description: string, practiceAreas: { title: string, image: SanityImageSource, titleAr: string }[]}, locale: string }) => {
+const RelatedServices = ({ data, locale }: { data: {title: string, description: string, practiceAreas: { title: string, image: SanityImageSource, titleAr: string, link: string }[]}, locale: string }) => {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.5 });
-
+  const router = useRouter();
   
 
 
@@ -64,6 +65,9 @@ const RelatedServices = ({ data, locale }: { data: {title: string, description: 
         >
           {data.practiceAreas.map((area, index) => (
             <Box
+              onClick={() => {
+                router.push(`/${locale}/practice/${area.link}`);
+              }}
               key={index}
               sx={{
                 flex: "0 0 auto",

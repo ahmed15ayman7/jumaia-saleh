@@ -591,10 +591,10 @@ const Navbar = ({ locale }: { locale: string }) => {
             <Typography
               sx={{ color: "#cf9425", fontWeight: 600, fontSize: "0.9rem" }}
             >
-              Copyright 2022
+              Copyright {new Date().getFullYear()}
             </Typography>
             <Typography variant="body2" mt={0.5} sx={{ fontSize: "0.8rem" }}>
-              sybexdesigns@gmail.com. All Rights Reserved.
+            info@jumaia-saleh.com. All Rights Reserved.
             </Typography>
 
             {/* Social Icons */}

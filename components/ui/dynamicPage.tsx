@@ -27,7 +27,7 @@ interface PracticeAreaProps {
   data: {
     relatedTitle?: string;
     relatedDesc?: string;
-    relatedServices?: { image: SanityImageSource; title: string, titleAr: string }[];
+    relatedServices?: { image: SanityImageSource; title: string, titleAr: string, link: string }[];
     breadcrumb?: { label: string; href?: string }[];
     image?: SanityImageSource;
     mainTitle?: string;
@@ -427,6 +427,7 @@ export default function DynamicPage({
               image: service.image || "",
               title: service.title || "",
               titleAr: service.titleAr || "",
+              link: service.link || "",
             })) || [],
         }}
         locale={locale}

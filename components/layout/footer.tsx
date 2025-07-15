@@ -67,7 +67,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
     },
     {
       titleKey: null,
-      links: services.map((item: any) => ({
+      links: services.slice(0, 7).map((item: any) => ({
         label: locale === "ar" ? item.label : item.labelEn,
         href: item.href,
       })) as { label: string; href: string }[],
@@ -322,6 +322,21 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                               </Typography>
                             )
                           )}
+                          {index === 2 && (
+                            <Typography
+                            variant="body2"
+                          
+                            sx={{
+                              cursor: "pointer",
+                              "&:hover": { textDecoration: "underline" },
+                              lineHeight: 2,
+                              px: "20px",
+                              fontSize: { xs: ".5rem", md: "1rem" },
+                            }}
+                          >
+                            <Link href={`/${locale}/practice`}>{locale === "ar" ? "المزيد" : "Read More"}</Link>
+                          </Typography>
+                          )}
                         </Box>
                       )}
                     </Grid>
@@ -400,7 +415,7 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                   }}
                 >
                   <EditableText
-                    value={t("copyright")}
+                    value={t("copyright", { year: new Date().getFullYear() })}
                     onSave={(val) => onSave("footer.copyright", val)}
                     isAdmin={isAdmin}
                   />

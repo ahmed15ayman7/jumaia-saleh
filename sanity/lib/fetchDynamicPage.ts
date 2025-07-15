@@ -56,7 +56,9 @@ export const fetchDynamicPage = async (slug: string, locale: string) => {
       relatedDesc,
       relatedServices[]{
         image,
-        title
+        title,
+        titleAr,
+        link
       },
         newsletterTitle,
         newsletterDesc,

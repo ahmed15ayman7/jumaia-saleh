@@ -2,8 +2,8 @@
   "home": {
     "hero": "GET FIERCE LEGAL SUPPORT",
     "subtitle": "We Provide The Best",
-    "subtitle2": "Legal Services",
-    "subtitle3": "Possible",
+    "subtitle2": "Possible",
+    "subtitle3": "Legal Services",
     "description": "We Provide The Best Legal Services Possible",
     "button": "Contact Us"
   },
@@ -162,7 +162,7 @@
       "twitter": "Twitter",
       "linkedin": "LinkedIn"
     },
-    "copyright": "Copyright 2022 sybexdesigns@gmail.com. All Rights Reserved.",
+    "copyright": "Copyright {year} info@jumaia-saleh.com. All Rights Reserved.",
     "terms": "Terms & Conditions",
     "privacy": "Privacy Policy"
   },

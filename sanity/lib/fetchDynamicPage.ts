@@ -218,13 +218,14 @@ export const fetchBlog = async (skip: number = 0, limit: number = 4) => {
       titleAr,
       description,
       descriptionAr,
-      slug,
+
       image {
         asset -> {
           url
         }
       },
-      blogPage->{
+      blogPageSchema->{
+      content,
         slug {
           current
         }

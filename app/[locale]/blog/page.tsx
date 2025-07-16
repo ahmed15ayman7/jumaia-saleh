@@ -19,7 +19,7 @@ interface BlogCard {
   titleAr: string;
   description: string;
   descriptionAr: string;
-  blogPage: { slug: { current: string } } | null;
+  blogPageSchema: { slug: { current: string } } | null;
   image: SanityImageSource;
 }
 interface BlogPage {
@@ -61,7 +61,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
     };
     fetchData();
   }, [locale, page]);
-
+console.log(blogs);
   // if (isLoading) return <Skeleton variant="rectangular" animation="wave" width={"100%"} height={"100vh"} />;
   if (!blogPage || !blogs || isLoading) return <div>
     <Skeleton variant="rectangular" animation="wave" width={"100%"} height={"100vh"} />
@@ -141,7 +141,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                 <Box sx={{ aspectRatio: '2/1', width: '100%', position: 'relative' }}>
                   <Image
                     onClick={() => {
-                      router.push(`/${locale}/blog/${blog.blogPage?.slug.current || ''}`);
+                      router.push(`/${locale}/blog/${blog.blogPageSchema?.slug.current || ''}`);
                     }}
                     src={urlFor(blog.image).url() || '/images/placeholder.png'}
                     alt={locale === 'ar' ? blog.titleAr : blog.title}
@@ -204,7 +204,7 @@ const BlogsPage = ({ params }: { params: Promise<{ locale: string }> }) => {
                       textUnderlineOffset: '5px',
                     }}
                     endIcon={locale === 'en' ? <ArrowForwardIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} /> : <ArrowBackIosRounded sx={{ fontSize: {xs:'.7rem',md:'1rem'} }} />}
-                    href={`/${locale}/blog/${blog.blogPage?.slug.current || ''}`}
+                    href={`/${locale}/blog/${blog.blogPageSchema?.slug.current || ''}`}
                   >
                   {locale === 'ar' ? "اقرأ اكثر " : "Read More"}
                   </Button>

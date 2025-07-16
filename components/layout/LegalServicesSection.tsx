@@ -19,10 +19,40 @@ const LegalServicesSection = ({ref,setIsDropdownOpen,setActiveDropdown}: {ref: R
     {title: t('criminal'), titleEn: t('criminal'), value: 'criminal'},
     {title: t('family'), titleEn: t('family'), value: 'family'},
     {title: t('civil'), titleEn: t('civil'), value: 'civil'},
+    {title: t('civil'), titleEn: t('civil'), value: 'civil'},
+    {title: t('civil'), titleEn: t('civil'), value: 'civil'},
+    {title: t('civil'), titleEn: t('civil'), value: 'civil'},
+    {title: t('civil'), titleEn: t('civil'), value: 'civil'},
+    {title: t('civil'), titleEn: t('civil'), value: 'civil'},
+    {title: t('civil'), titleEn: t('civil'), value: 'civil'},
   ]);
   useEffect(() => {
-    fetchDynamicPageType('real-estate').then((data) => {
-      setServices(data);
+    fetchDynamicPageType("real-estate").then((data) => {
+      const order = [
+        "Bankruptcy-and-Insolvency-Cases",
+        "Insurance-Cases",
+        "real-estate",
+        "INTERPOL-Cases-and-Extradition",
+        "Personal-status-issues",
+        "civil-cases",
+        "criminal-cases",
+        "Commercial-Cases",
+        "Establishing-companies-and-drafting-contracts",
+        "Legal-Consultancy-Services",
+      ];
+  
+      const sortedData = [...data].sort((a, b) => {
+        const aIndex = order.indexOf(a.value);
+        const bIndex = order.indexOf(b.value);
+        return (aIndex === -1 ? Infinity : aIndex) - (bIndex === -1 ? Infinity : bIndex);
+      });
+      setServices(
+        sortedData.map((item: any) => ({
+          title: item.title,
+          titleEn: item.titleEn,
+          value: item.value,
+        }))
+      );
     });
   }, []);
 

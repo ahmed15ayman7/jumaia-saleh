@@ -39,7 +39,7 @@ interface PracticeAreaProps {
     readMoreLink?: string;
     brochureTitle?: string;
     brochureDesc?: string;
-    brochureFiles?: { label: string; link: { asset: { url: string } }, labelAr: string }[];
+    brochureFiles?: { label: string; files: { title: string, file: { asset: { url: string } } }, labelAr: string }[];
     whyTitle?: string;
     whyDesc?: string;
     whyPoints?: string[];
@@ -306,7 +306,7 @@ export default function DynamicPage({
               <Button
                 key={i}
                 variant="outlined"
-                href={file.link?.asset?.url}
+                href={file.files?.file?.asset?.url}
                 target="_blank"
                 sx={{
                   bgcolor: i === 0 ? "#cf9425" : "#fff",

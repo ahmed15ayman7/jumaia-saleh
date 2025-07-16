@@ -4,7 +4,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { Phone, Globe, Mail } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
 import {
   Box,
   Button,
@@ -35,15 +35,34 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
   const t = useTranslations("footer");
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.2 });
-  let [services, setServices] = useState([]);
+  let [services, setServices] = useState<any[]>([]);
   const router = useRouter();
   useEffect(() => {
     fetchDynamicPageType("real-estate").then((data) => {
+      const order = [
+        "Bankruptcy-and-Insolvency-Cases",
+        "Insurance-Cases",
+        "real-estate",
+        "INTERPOL-Cases-and-Extradition",
+        "Personal-status-issues",
+        "civil-cases",
+        "criminal-cases",
+        "Commercial-Cases",
+        "Establishing-companies-and-drafting-contracts",
+        "Legal-Consultancy-Services",
+      ];
+  
+      const sortedData = [...data].sort((a, b) => {
+        const aIndex = order.indexOf(a.value);
+        const bIndex = order.indexOf(b.value);
+        return (aIndex === -1 ? Infinity : aIndex) - (bIndex === -1 ? Infinity : bIndex);
+      });
+  
       setServices(
-        data.map((item: any) => ({
+        sortedData.map((item: any) => ({
           label: item.title,
           labelEn: item.titleEn,
-          href: `/practice/${item.value}`,
+          href: `/${locale}/practice/${item.value}`,
         }))
       );
     });
@@ -362,6 +381,11 @@ const Footer = ({ locale, isAdmin }: { locale: string; isAdmin: boolean }) => {
                 {socialMedia.map((social, index) => (
                   <IconButton
                     key={index}
+                    onClick={() => {
+                      if (social.href) {
+                        window.open(social.href, "_blank");
+                      }
+                    }}
                     aria-label={t(`social.${social.nameKey}`)}
                     sx={{
                       bgcolor: "white",
@@ -482,11 +506,6 @@ const contactItems = [
     icon: <Phone className="text-white w-4 h-4" />,
     label: '+971565955502',
     href: 'tel:+971565955502',
-  },
-  {
-    icon: <Globe className="text-white w-4 h-4" />,
-    label: 'jumaia-saleh.com',
-    href: 'https://jumaia-saleh.com',
   },
   {
     icon: <Mail className="text-white w-4 h-4" />,

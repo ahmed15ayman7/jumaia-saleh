@@ -46,13 +46,30 @@ const Navbar = ({ locale }: { locale: string }) => {
   const [lastScrollY, setLastScrollY] = useState(0);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [activeDropdown, setActiveDropdown] = useState("");
-  let [services, setServices] = useState([]);
-
+  let [services, setServices] = useState<any[]>([]);
   useEffect(() => {
     fetchDynamicPageType("real-estate").then((data) => {
-      console.log(data);
+      const order = [
+        "Bankruptcy-and-Insolvency-Cases",
+        "Insurance-Cases",
+        "real-estate",
+        "INTERPOL-Cases-and-Extradition",
+        "Personal-status-issues",
+        "civil-cases",
+        "criminal-cases",
+        "Commercial-Cases",
+        "Establishing-companies-and-drafting-contracts",
+        "Legal-Consultancy-Services",
+      ];
+  
+      const sortedData = [...data].sort((a, b) => {
+        const aIndex = order.indexOf(a.value);
+        const bIndex = order.indexOf(b.value);
+        return (aIndex === -1 ? Infinity : aIndex) - (bIndex === -1 ? Infinity : bIndex);
+      });
+  
       setServices(
-        data.map((item: any) => ({
+        sortedData.map((item: any) => ({
           label: item.title,
           labelEn: item.titleEn,
           href: `/${locale}/practice/${item.value}`,

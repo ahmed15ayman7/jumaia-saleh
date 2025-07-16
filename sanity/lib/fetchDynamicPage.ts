@@ -10,9 +10,12 @@ export const fetchDynamicPage = async (slug: string, locale: string) => {
           brochureFiles[]{
             label,
             labelAr,
-            link  {
-              asset->{
-                url
+            files->{
+              title,
+              file{
+                asset->{
+                  url
+                }
               }
             }
         },
@@ -31,10 +34,6 @@ export const fetchDynamicPage = async (slug: string, locale: string) => {
       readMoreLink,
       brochureTitle,
       brochureDesc,
-      brochureFiles[]{
-        label,
-        link
-      },
       whyTitle,
       whyDesc,
       whyPoints,
@@ -44,10 +43,6 @@ export const fetchDynamicPage = async (slug: string, locale: string) => {
       },
       brochureTitle,
       brochureDesc,
-      brochureFiles[]{
-        label,
-        link
-      },
       whyTitle,
       whyDesc,
       whyPoints,

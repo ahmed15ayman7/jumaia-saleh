@@ -12,7 +12,7 @@ export default {
             fields: [
               { name: 'label', title: 'Label | العنوان', type: 'string' },
               { name: 'labelAr', title: 'Label Arabic | العنوان باللغة العربية', type: 'string' },
-              { name: 'files', title: 'Files | الملفات', type:"reference", to:[{type:"files"}] }
+              { name: 'files', title: 'Files | الملفات', type:"reference", to:[{type:"filePDF"}] }
             ]
           }
         ]

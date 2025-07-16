@@ -1,6 +1,6 @@
 export default {
-  name: 'files',
-  title: 'Files | الملفات',
+  name: 'filePDF',
+  title: 'File PDF | الملفات المرفقة',
   type: 'document',
   fields: [
     { name: 'title', title: 'Title | العنوان', type: 'string' },

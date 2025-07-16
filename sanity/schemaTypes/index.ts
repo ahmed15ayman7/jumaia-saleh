@@ -21,12 +21,14 @@ import ourLawyers from './ourLawyers'
 import ourPracticeAreas from './ourPracticeAreas'
 import testimonials from './testimonials'
 import blogPage from './blogPage'
+import filePDF from './filePDF'
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     dynamicPage, 
     pageType, 
     sharedPageContent,
+    filePDF,
     aboutUs,
     HeroSection,
     terms,

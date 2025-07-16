@@ -46,10 +46,26 @@ export default {
               title: "الصورة",
               type: "image",
               description: "صورة للخدمة ",
+              options: {
+                hotspot: true,
+              },
             },
           ],
         },
+
       ],
+      preview: {
+        select: {
+          title: "pageType.title",
+          media: "image",
+        },
+        prepare({ title, media }: { title: string; media: any }) {
+          return {
+            title: title || "بدون عنوان",
+            media,
+          };
+        },
+      },
     },
   ],
 };
